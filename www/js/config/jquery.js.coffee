@@ -13,7 +13,18 @@ do ($) ->
 
   $.fn.tagHTML = (tagName) ->
     if @find(tagName).length < 1 then return false
-    $.trim(@find(tagName).html())
+    # can't just use .html() on the element.
+    # Android 4.4 requires this hack!
+    # ### Android 4.4 compatibility hack notes ###
+    # Android 4.4 does not create innerHTML or outerHTML
+    # properties on all HTML elements, esp. when generated from XML.
+    # Must create a new div element and append the html to that element.
+    # must extract the HTML AT THE OUTER LEVEL, not at the child level,
+    # because the child innerHTML is still undefined!! (╯°□°）╯︵ ┻━┻
+    rawHTML = $(document.createElement('div')).append(@find(tagName).clone()).html()
+    # Then put the resulting (outer) HTML string in a 
+    # new $ object so the child HTML can be extracted
+    $.trim( $( rawHTML ).html() )
 
   # Selects a jQuery DOM element based on its exact contents.
   # Not case sensitive.
