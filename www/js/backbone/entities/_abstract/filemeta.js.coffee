@@ -213,3 +213,5 @@
   App.vent.on "filemeta:read:error:abort", (fileName, fileSize) ->
     App.execute "dialog:alert", "The selected file \"#{fileName}\" could not be verified. This may be caused by the file's size of #{fileSize} or network speed. Please try again later."
 
+  App.vent.on "filemeta:read:error:general", (fileName) ->
+    App.execute "dialog:alert", "The selected file \"#{fileName}\" could not be verified because of an unspecified error."
