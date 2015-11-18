@@ -16,6 +16,7 @@
         success()
         return false
 
+      # reads the end of a file before processing
     processFile: ->
       fileDOM = @$el.find('input[type=file]')[0]
       myInput = fileDOM.files[0]
