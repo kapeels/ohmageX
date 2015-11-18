@@ -41,6 +41,8 @@
         switch evt.target.error.code
           when evt.target.error.NOT_FOUND_ERR
             App.vent.trigger "filemeta:read:error:notfound", file.name
+          when evt.target.error.NOT_READABLE_ERR
+            App.vent.trigger "filemeta:read:error:unreadable", file.name
     processFile: ->
       fileDOM = @$el.find('input[type=file]')[0]
       myInput = fileDOM.files[0]
