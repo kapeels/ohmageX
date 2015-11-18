@@ -48,6 +48,8 @@
           else
             App.vent.trigger "filemeta:read:error:general", file.name
 
+      App.vent.trigger "loading:show", "Verifying file..."
+
     processFile: ->
       fileDOM = @$el.find('input[type=file]')[0]
       myInput = fileDOM.files[0]
