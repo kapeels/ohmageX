@@ -63,14 +63,17 @@
 
         if App.request("system:file:name:is:valid", myInput.name) and !App.request("system:file:name:is:video", myInput.name) and !App.request("system:file:name:is:image", myInput.name)
 
-          fileExt = myInput.name.match(/\.[0-9a-z]+$/i)[0]
+          @readFileEnd
+            file: myInput
+            success: =>
+              fileExt = myInput.name.match(/\.[0-9a-z]+$/i)[0]
 
-          @model.set 'currentValue',
-            fileObj: myInput
-            fileName: myInput.name
-            UUID: App.request('system:file:generate:uuid', fileExt)
-            # UUID: _.guid()
-            fileSize: myInput.size
+              @model.set 'currentValue',
+                fileObj: myInput
+                fileName: myInput.name
+                UUID: App.request('system:file:generate:uuid', fileExt)
+                # UUID: _.guid()
+                fileSize: myInput.size
 
         else
           App.vent.trigger "system:file:ext:invalid", myInput.name
