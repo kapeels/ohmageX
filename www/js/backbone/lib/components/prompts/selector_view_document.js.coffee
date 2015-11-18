@@ -20,6 +20,8 @@
       start = file.size - 2;
       end = file.size - 1;
       reader = new FileReader();
+      blob = file.slice start, end
+
     processFile: ->
       fileDOM = @$el.find('input[type=file]')[0]
       myInput = fileDOM.files[0]
