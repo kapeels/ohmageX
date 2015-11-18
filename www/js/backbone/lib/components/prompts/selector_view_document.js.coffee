@@ -22,6 +22,11 @@
       reader = new FileReader();
       blob = file.slice start, end
 
+      abortTimer = window.setTimeout (=>
+          # automatically abort the read operation if it takes longer than 15 seconds.
+          reader.abort()
+        ), 15000
+
     processFile: ->
       fileDOM = @$el.find('input[type=file]')[0]
       myInput = fileDOM.files[0]
