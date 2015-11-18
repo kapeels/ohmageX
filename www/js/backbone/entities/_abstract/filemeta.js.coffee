@@ -201,3 +201,6 @@
   App.vent.on "filemeta:read:complete", ->
     App.vent.trigger "loading:hide"
 
+  App.vent.on "filemeta:read:success", (file) ->
+    console.log 'filemeta:read:success', file
+
