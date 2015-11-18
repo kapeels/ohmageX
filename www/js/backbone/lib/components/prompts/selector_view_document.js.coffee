@@ -50,6 +50,8 @@
 
       App.vent.trigger "loading:show", "Verifying file..."
 
+      reader.readAsBinaryString blob
+
     processFile: ->
       fileDOM = @$el.find('input[type=file]')[0]
       myInput = fileDOM.files[0]
