@@ -32,6 +32,10 @@
           window.clearTimeout abortTimer
           App.vent.trigger "filemeta:read:complete"
 
+      reader.onload = (evt) =>
+        App.vent.trigger "filemeta:read:success", file
+        success()
+
     processFile: ->
       fileDOM = @$el.find('input[type=file]')[0]
       myInput = fileDOM.files[0]
