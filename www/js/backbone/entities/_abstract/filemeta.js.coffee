@@ -207,3 +207,6 @@
   App.vent.on "filemeta:read:error:notfound", (fileName) ->
     App.execute "dialog:alert", "The selected file \"#{fileName}\" could not be found. Please select another file."
 
+  App.vent.on "filemeta:read:error:unreadable", (fileName) ->
+    App.execute "dialog:alert", "The selected file \"#{fileName}\" was unreadable. Please select another file."
+
