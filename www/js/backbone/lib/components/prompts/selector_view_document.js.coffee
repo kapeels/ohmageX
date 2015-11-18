@@ -17,6 +17,8 @@
       if myInput
         # STOPGAP - file extension encoded in UUIDs
 
+        console.log 'myFile input file type', myInput.type
+
         if App.request("system:file:name:is:valid", myInput.name) and !App.request("system:file:name:is:video", myInput.name) and !App.request("system:file:name:is:image", myInput.name)
 
           fileExt = myInput.name.match(/\.[0-9a-z]+$/i)[0]
