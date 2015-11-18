@@ -27,6 +27,11 @@
           reader.abort()
         ), 15000
 
+      reader.onloadend = (evt) =>
+        if evt.target.readyState is FileReader.DONE
+          window.clearTimeout abortTimer
+          App.vent.trigger "filemeta:read:complete"
+
     processFile: ->
       fileDOM = @$el.find('input[type=file]')[0]
       myInput = fileDOM.files[0]
