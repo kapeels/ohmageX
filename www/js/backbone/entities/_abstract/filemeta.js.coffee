@@ -197,3 +197,7 @@
 
   App.vent.on "filemeta:move:native:start", ->
     App.vent.trigger "loading:show", "Preparing Upload..."
+
+  App.vent.on "filemeta:read:complete", ->
+    App.vent.trigger "loading:hide"
+
