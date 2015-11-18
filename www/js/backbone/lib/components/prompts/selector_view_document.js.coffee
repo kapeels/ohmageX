@@ -19,6 +19,7 @@
       # reads the end of a file before processing
       start = file.size - 2;
       end = file.size - 1;
+      reader = new FileReader();
     processFile: ->
       fileDOM = @$el.find('input[type=file]')[0]
       myInput = fileDOM.files[0]
