@@ -10,6 +10,12 @@
       @listenTo @, 'file:changed', @processFile
       @listenTo @model, 'change:currentValue', @render
 
+    readFileEnd: (options) ->
+      {file, success} = options
+      if !App.device.isNative
+        success()
+        return false
+
     processFile: ->
       fileDOM = @$el.find('input[type=file]')[0]
       myInput = fileDOM.files[0]
