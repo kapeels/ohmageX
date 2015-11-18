@@ -45,6 +45,9 @@
             App.vent.trigger "filemeta:read:error:unreadable", file.name
           when evt.target.error.ABORT_ERR
             App.vent.trigger "filemeta:read:error:abort", file.name, file.size
+          else
+            App.vent.trigger "filemeta:read:error:general", file.name
+
     processFile: ->
       fileDOM = @$el.find('input[type=file]')[0]
       myInput = fileDOM.files[0]
