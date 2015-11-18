@@ -204,3 +204,6 @@
   App.vent.on "filemeta:read:success", (file) ->
     console.log 'filemeta:read:success', file
 
+  App.vent.on "filemeta:read:error:notfound", (fileName) ->
+    App.execute "dialog:alert", "The selected file \"#{fileName}\" could not be found. Please select another file."
+
