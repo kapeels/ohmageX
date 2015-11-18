@@ -197,3 +197,21 @@
 
   App.vent.on "filemeta:move:native:start", ->
     App.vent.trigger "loading:show", "Preparing Upload..."
+
+  App.vent.on "filemeta:read:complete", ->
+    App.vent.trigger "loading:hide"
+
+  App.vent.on "filemeta:read:success", (file) ->
+    console.log 'filemeta:read:success', file
+
+  App.vent.on "filemeta:read:error:notfound", (fileName) ->
+    App.execute "dialog:alert", "The selected file \"#{fileName}\" could not be found. Please select another file."
+
+  App.vent.on "filemeta:read:error:unreadable", (fileName) ->
+    App.execute "dialog:alert", "The selected file \"#{fileName}\" was unreadable. Please select another file."
+
+  App.vent.on "filemeta:read:error:abort", (fileName, fileSize) ->
+    App.execute "dialog:alert", "The selected file \"#{fileName}\" could not be verified. This may be caused by the file's size of #{fileSize} or network speed. Please try again later."
+
+  App.vent.on "filemeta:read:error:general", (fileName) ->
+    App.execute "dialog:alert", "The selected file \"#{fileName}\" could not be verified because of an unspecified error."
