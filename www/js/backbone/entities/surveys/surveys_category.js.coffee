@@ -6,7 +6,7 @@
   API =
     getCategorySurveys: (surveys, category) ->
       surveys = surveys.filter (survey) =>
-        category_meta = survey.get('parent_meta').category_key[0]._text
+        category_meta = survey.get('parent_meta').categorykey[0]._text
         category_meta is category
 
       new Entities.SurveysSaved surveys
