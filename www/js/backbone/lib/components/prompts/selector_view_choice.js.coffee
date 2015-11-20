@@ -37,11 +37,7 @@
 
     childView: Prompts.SingleChoiceItem
 
-    childViewContainer: ->
-      if App.custom.appearance.prompt_horizontal_single_choice is true
-        ".prompt-list tr"
-      else
-        ".prompt-list"
+    childViewContainer: ".prompt-list"
 
     selectChosen: (currentValue) ->
       # activate a choice selection based on the currentValueType.
