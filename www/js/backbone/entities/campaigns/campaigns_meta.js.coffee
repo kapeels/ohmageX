@@ -5,7 +5,7 @@
 
   API =
     setMetaProperty: (campaign, $metaXML) ->
-      campaign.set "meta", App.request('xmlmeta:xml:to:json', $metaXML)
+      campaign.set "meta", App.request( 'xmlmeta:xml:to:json', "<contents>#{$metaXML}</contents>" )
 
   App.commands.setHandler "campaigns:meta:set", (urn, $metaXML) ->
     API.setMetaProperty App.request('campaign:entity', urn), $metaXML
