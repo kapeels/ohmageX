@@ -36,7 +36,10 @@
 
       if App.device.isNative
         # on some devices a max dimension larger than 800 may cause memory errors.
-        if maxDimension > 800 then maxDimension = 800
+        # Added support for max 1600, but note that devices with high resolution
+        # cameras may still crash on resolutions greater than 800. Recommended
+        # max 800 unless absolutely necessary.
+        if maxDimension > 1600 then maxDimension = 1600
 
       maxDimension
 

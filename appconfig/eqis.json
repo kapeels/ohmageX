@@ -101,7 +101,7 @@
       "max_bytes": 1000000000
     },
     "photo": {
-      "max_pixels": 800
+      "max_pixels": 1600
     },
     "video": {
       "max_seconds": 180,
