@@ -17,7 +17,7 @@
       catch domException
         if domException.name is "QuotaExceededError" or domException.name is "NS_ERROR_DOM_QUOTA_REACHED"
           if App.request("uploadqueue:length") > 0
-            errorMessage = "Local storage full, please go online and upload before continuing data collection." 
+            errorMessage = "Local storage full, please connect to WiFi and upload queued #{App.dictionary('pages','survey')}."
           else
             errorMessage = 'Local storage full, please clear some space to continue using the app.'
           App.execute "dialog:alert", errorMessage
