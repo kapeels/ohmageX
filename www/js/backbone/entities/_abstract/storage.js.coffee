@@ -16,7 +16,11 @@
         item = localStorage.setItem label, value
       catch domException
         if domException.name is "QuotaExceededError" or domException.name is "NS_ERROR_DOM_QUOTA_REACHED"
-          alert 'browser storage limit exceeded, please clear some space to continue using the app.'
+          if App.request("uploadqueue:length") > 0
+            errorMessage = "Local storage full, please go online and upload before continuing data collection." 
+          else
+            errorMessage = 'Local storage full, please clear some space to continue using the app.'
+          App.execute "dialog:alert", errorMessage
 
       callback value
 
