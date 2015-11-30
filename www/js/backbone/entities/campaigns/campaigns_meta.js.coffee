@@ -9,6 +9,7 @@
 
   App.commands.setHandler "campaigns:meta:set", (urn, $metaXML) ->
     API.setMetaProperty App.request('campaign:entity', urn), $metaXML
+    App.vent.trigger "campaigns:meta:update"
 
   App.reqres.setHandler "campaigns:meta:get", (urn) ->
     App.request('campaign:entity', urn).get('meta')
