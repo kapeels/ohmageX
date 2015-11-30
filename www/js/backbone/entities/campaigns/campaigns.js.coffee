@@ -254,3 +254,6 @@
 
   App.vent.on "credentials:cleared", ->
     API.clear()
+
+  App.vent.on "campaigns:meta:update", ->
+    API.saveLocalCampaigns currentCampaignsUser
