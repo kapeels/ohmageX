@@ -269,5 +269,5 @@
   App.vent.on "credentials:cleared", ->
     API.clear()
 
-  App.vent.on "campaigns:meta:update", ->
-    API.saveLocalCampaigns currentCampaignsUser
+  App.vent.on "campaigns:meta:update", (urn, metaJSON) ->
+    API.storeNewProperty urn, 'meta', metaJSON
