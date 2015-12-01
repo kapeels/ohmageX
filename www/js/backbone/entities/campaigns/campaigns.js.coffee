@@ -149,7 +149,7 @@
             return false
       ).filter((result) -> !!result).value()
       currentCampaignsUser.reset sync
-      @saveLocalCampaigns currentCampaignsUser
+      @saveLocalCampaigns currentCampaignsUser, false
     syncCampaigns: ->
       App.vent.trigger 'loading:show', "Syncing #{App.dictionary('pages','campaign').capitalizeFirstLetter()}..."
       myData = 
@@ -184,11 +184,11 @@
           App.vent.trigger "campaigns:sync:failure"
           App.vent.trigger "loading:hide"
       currentCampaignsUser
-    saveLocalCampaigns: (collection) ->
+    saveLocalCampaigns: (collection, triggerSyncEvent = true) ->
       # update localStorage index campaigns_user with the current version of campaignsUser entity
       App.execute "storage:save", 'campaigns_user', collection.toJSON(), =>
         console.log "campaignsUser entity saved in localStorage"
-        App.vent.trigger "campaigns:sync:success", collection
+        if triggerSyncEvent then App.vent.trigger "campaigns:sync:success", collection
 
     getCampaigns: ->
       if currentCampaignsUser.length < 1
@@ -215,7 +215,21 @@
           myCampaign.set('status', 'available')
         else
           currentCampaignsUser.remove myCampaign
-          @saveLocalCampaigns currentCampaignsUser
+          @saveLocalCampaigns currentCampaignsUser, false
+    storeNewProperty: (urn, property, value) ->
+      # this essentially modifies the local storage directly
+      # to set a new property. Doing it with other methods
+      # creates strange errors where the campaign `status`
+      # fails to update or save to local storage, even though
+      # the `status` was set when the campaign was synced within the
+      # sync method.
+
+      console.log 'store new property'
+      App.request "storage:get", 'campaigns_user', (result) =>
+        tempCampaigns = new Entities.CampaignsUser result
+        tempCampaigns.get(urn).set(property, value)
+        App.execute "storage:save", 'campaigns_user', tempCampaigns.toJSON(), =>
+          console.log "meta property #{property} added to campaign #{urn}"
     clear: ->
       currentCampaignsUser = new Entities.CampaignsUser
 
@@ -255,5 +269,5 @@
   App.vent.on "credentials:cleared", ->
     API.clear()
 
-  App.vent.on "campaigns:meta:update", ->
-    API.saveLocalCampaigns currentCampaignsUser
+  App.vent.on "campaigns:meta:update", (urn, metaJSON) ->
+    API.storeNewProperty urn, 'meta', metaJSON
