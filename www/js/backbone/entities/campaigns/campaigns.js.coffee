@@ -149,7 +149,7 @@
             return false
       ).filter((result) -> !!result).value()
       currentCampaignsUser.reset sync
-      @saveLocalCampaigns currentCampaignsUser
+      @saveLocalCampaigns currentCampaignsUser, false
     syncCampaigns: ->
       App.vent.trigger 'loading:show', "Syncing #{App.dictionary('pages','campaign').capitalizeFirstLetter()}..."
       myData = 
@@ -184,11 +184,11 @@
           App.vent.trigger "campaigns:sync:failure"
           App.vent.trigger "loading:hide"
       currentCampaignsUser
-    saveLocalCampaigns: (collection) ->
+    saveLocalCampaigns: (collection, triggerSyncEvent = true) ->
       # update localStorage index campaigns_user with the current version of campaignsUser entity
       App.execute "storage:save", 'campaigns_user', collection.toJSON(), =>
         console.log "campaignsUser entity saved in localStorage"
-        App.vent.trigger "campaigns:sync:success", collection
+        if triggerSyncEvent then App.vent.trigger "campaigns:sync:success", collection
 
     getCampaigns: ->
       if currentCampaignsUser.length < 1
@@ -215,7 +215,7 @@
           myCampaign.set('status', 'available')
         else
           currentCampaignsUser.remove myCampaign
-          @saveLocalCampaigns currentCampaignsUser
+          @saveLocalCampaigns currentCampaignsUser, false
     clear: ->
       currentCampaignsUser = new Entities.CampaignsUser
 
