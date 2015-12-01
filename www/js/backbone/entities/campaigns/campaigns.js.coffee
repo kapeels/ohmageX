@@ -216,6 +216,20 @@
         else
           currentCampaignsUser.remove myCampaign
           @saveLocalCampaigns currentCampaignsUser, false
+    storeNewProperty: (urn, property, value) ->
+      # this essentially modifies the local storage directly
+      # to set a new property. Doing it with other methods
+      # creates strange errors where the campaign `status`
+      # fails to update or save to local storage, even though
+      # the `status` was set when the campaign was synced within the
+      # sync method.
+
+      console.log 'store new property'
+      App.request "storage:get", 'campaigns_user', (result) =>
+        tempCampaigns = new Entities.CampaignsUser result
+        tempCampaigns.get(urn).set(property, value)
+        App.execute "storage:save", 'campaigns_user', tempCampaigns.toJSON(), =>
+          console.log "meta property #{property} added to campaign #{urn}"
     clear: ->
       currentCampaignsUser = new Entities.CampaignsUser
 
