@@ -137,6 +137,10 @@ The `mobile_firstrun` task executes in the root folder without issues, and avoid
   - Fix choice prompt parsing
   - Fix message condition parsing
 
+- Prompts support Markdown
+  - Parses standard markdown in prompt XML to HTML
+  - Applied to prompt messages, prompt questions, choice prompts
+
 ### 3.0.3 - Mobilize Android Release
 
 - Prompt Conditional Parser
