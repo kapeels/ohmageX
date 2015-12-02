@@ -1,0 +1,1 @@
+Latest Installed <%= @dictionary('page','campaign').capitalizeFirstLetter() %>: <%= @name %>

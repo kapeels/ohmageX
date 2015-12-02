@@ -1,0 +1,9 @@
+#page-title {
+  .survey.icon { display: none; }
+}
+
+// hide the header and hamburger menu while survey is active
+// prevents fixed elements from breaking UI
+body.survey-active > header {
+  display: none;
+}

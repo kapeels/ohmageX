@@ -3,7 +3,7 @@
   <i class="fa fa-<%= @icon %>"></i>
 </header>
 <ul>
-<% for response in @responses: %>
+<% for response in @response.labels: %>
   <li><%= response %></li>
 <% end %>
 </ul>

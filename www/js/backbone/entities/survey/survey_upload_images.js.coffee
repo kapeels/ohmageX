@@ -14,7 +14,12 @@
       console.log 'generateImgUUID'
       # generate a UUID and put it into a group of UUIDs in this format:
       # { UUID: base64EncodedImage }
-      lastUUID = _.guid()
+      # STOPGAP - encoding file extensions in UUIDs
+      # temp: encode all images UUIDs with a jpg file extension
+      # to ensure compatibility. The file extension should be ignored
+      # when rendering images.
+      # lastUUID = _.guid()
+      lastUUID = App.request('system:file:generate:uuid', '.jpg')
       if !currentImages then currentImages = {}
       # truncate encoding prefix, if it exists
       truncatePrefixIndex = if img64.indexOf('base64,') isnt -1 then img64.indexOf('base64,')+7 else 0

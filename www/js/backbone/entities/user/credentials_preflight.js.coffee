@@ -5,7 +5,9 @@
 
   API =
     isParsedAuthValid: (response) ->
-      response.result isnt "failure"
+      # if there's a failure that's not auth-related,
+      # try the result and let its error handlers deal with it.
+      !(response.result is "failure" and response.errors[0].code in ['0200','0201','0202'])
 
     preflightCheck: (path, callback) ->
       App.vent.trigger "loading:show", "Loading..."

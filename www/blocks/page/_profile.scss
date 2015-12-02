@@ -1,3 +1,10 @@
+$profile-item-switch-width: 80px;
+$profile-item-switch-spacing: 1px;
+$profile-item-switch-height: 32px;
+$profile-item-switch-font-size: 14px;
+$profile-item-switch-switch-font-size: 10px;
+$profile-item-switch-border-width: 1px;
+
 #profile-region {
   .text-container {
     position: relative;
@@ -24,6 +31,88 @@
       background: $modal-activate-background;
       color: $modal-activate-font-color;
       padding: $global-form-control-padding*1.5;
+    }
+  }
+  //TODO: abstract this switch as a base app component.
+  .profile-item-switch {
+    cursor: pointer;
+    position: relative;
+  
+    .enable-switch-container {
+      float: right;
+      width: $profile-item-switch-width;
+      text-align: right;
+    }
+  
+    .enable-switch {
+  
+      width: $profile-item-switch-width;
+      height: $profile-item-switch-height;
+      position: relative;
+      font-size: $profile-item-switch-switch-font-size;
+      margin: 0;
+      text-transform: uppercase;
+      font-weight: bold;
+  
+      input {
+        position: absolute;
+        margin-left: -9999px;
+        visibility: hidden;
+      }
+  
+      input + label {
+        display: block;
+        position: relative;
+        cursor: pointer;
+        outline: none;
+        user-select: none;
+        padding: $profile-item-switch-spacing;
+        width: $profile-item-switch-width;
+        height: $profile-item-switch-height;
+        background-color: #fff; // change this to same as input + label:after color to get a border the same color as the button
+        border: $profile-item-switch-border-width solid #ddd;
+        transition: background 0.4s;
+      }
+  
+      input + label:before,
+      input + label:after {
+        display: block;
+        position: absolute;
+        content: "";
+      }
+  
+      input + label:before {
+        top: $profile-item-switch-spacing;
+        left: $profile-item-switch-spacing;
+        bottom: $profile-item-switch-spacing;
+        right: $profile-item-switch-spacing;
+        background-color: #fff;
+        transition: background 0.4s;
+      }
+  
+      input + label:after {
+        top: $profile-item-switch-spacing;
+        left: $profile-item-switch-spacing;
+        bottom: $profile-item-switch-spacing;
+        width: ($profile-item-switch-width / 2) - ($profile-item-switch-spacing * 2) - ($profile-item-switch-border-width * 2);
+        text-align: center;
+        background-color: #b00;
+        padding-top: ($profile-item-switch-height - $profile-item-switch-spacing * 4 - $profile-item-switch-switch-font-size) / 2 - 1;
+        color: #fff;
+        transition: margin 0.4s, background 0.4s;
+        content: 'Off';
+      }
+  
+      input:checked + label {
+        background-color: #fff; // change this to same as input:checked + label:after color to get a border the same color as the button
+      }
+  
+      input:checked + label:after {
+        margin-left: $profile-item-switch-width / 2;
+        background-color: #00aeff;
+        color: #fff;
+        content: 'On';
+      }
     }
   }
 }

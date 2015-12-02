@@ -1,0 +1,5 @@
+<header>
+  <h5><%= @prompt_text %></h5>
+  <i class="fa fa-<%= @icon %>"></i>
+</header>
+<p><%= @prompt_response %></p>

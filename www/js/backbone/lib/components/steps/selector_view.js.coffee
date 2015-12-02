@@ -9,12 +9,33 @@
       data
 
   class Steps.Message extends App.Views.ItemView
-    className: "text-container"
+    className: "step-message"
     template: "steps/message"
+    openLink: (e) ->
+      e.preventDefault()
+      targetHref = $(e.currentTarget).attr('href')
+      console.log "openLink to #{targetHref}"
+
+      if App.device.isNative
+        window.open targetHref, '_system'
+      else
+        window.open targetHref, '_blank'
+
     serializeData: ->
       data = @model.toJSON()
       console.log 'Steps.Message data', data
       data
+
+    events: ->
+      # Any prompts that extend this base prompt must take
+      # into account this `events` property, otherwise they
+      # could easily overwrite the `events`.
+
+      if App.device.isNative
+        "touchstart a": "openLink"
+      else
+        "click a": "openLink"
+
 
   class Steps.BeforeSubmission extends App.Views.ItemView
     className: "text-container"
@@ -71,5 +92,5 @@
       data = @model.toJSON()
       console.log 'Steps.AfterSubmission data', data
       data.completeTitle = "#{App.dictionary('page','survey').capitalizeFirstLetter()} Complete"
-      data.summary = "#{App.dictionary('page','survey').capitalizeFirstLetter()} submitted."
+      data.summary = "#{App.dictionary('page','survey').capitalizeFirstLetter()} successfully uploaded or stored in the #{App.dictionary('page','queue')}."
       data

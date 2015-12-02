@@ -34,7 +34,7 @@
         if permissions.get('localNotification') is true
 
           if surveys.length is 0
-            @noticeRegion "No saved #{App.dictionary('pages','survey')}! You must have saved #{App.dictionary('pages','survey')} in order to create reminders."
+            @noticeRegion "No saved #{App.dictionary('pages','survey')}! Download #{App.dictionary('pages','campaign')} from the #{App.dictionary('pages','campaign').capitalizeFirstLetter()} Menu section to create new #{App.dictionary('pages','reminder')}."
           else
             @initBlockerView()
             @listRegion reminders

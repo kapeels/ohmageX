@@ -273,18 +273,18 @@
       # update localStorage index reminders with the current version of campaignsSaved entity
       App.execute "storage:save", 'reminders', currentReminders.toJSON(), callback
 
-    clear: ->
+    clear: (options = {}) ->
       currentReminders = new Entities.Reminders
 
       App.execute "storage:clear", 'reminders', ->
         console.log 'saved reminders erased'
-        App.vent.trigger "reminders:saved:cleared"
+        App.vent.trigger "reminders:all:clear:complete", options
 
   App.vent.on "surveys:saved:load:complete", ->
     API.init()
 
-  App.commands.setHandler "reminders:saved:clear", ->
-    API.clear()
+  App.commands.setHandler "reminders:all:clear", (options) ->
+    API.clear options
 
   App.vent.on "credentials:cleared", ->
     API.clear()

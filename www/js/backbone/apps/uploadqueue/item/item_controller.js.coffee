@@ -8,7 +8,7 @@
       @queue_id = queue_id
 
       @listenTo App.vent, 'uploadqueue:remove:success', (queue_id) =>
-        if queue_id is @queue_id then App.historyBack()
+        if queue_id is @queue_id then App.vent.trigger("fullmodal:close")
 
       item = App.request "uploadqueue:item", @queue_id
 
@@ -21,7 +21,11 @@
         @responsesRegion responses
         @noticeRegion()
 
-      @show @layout, loading: false
+      @show @layout,
+        loading: false
+        modal:
+          closeCallback: =>
+            App.vent.trigger "uploadqueue:item:fullmodal:close"
 
     noticeRegion: ->
       App.execute "notice:region:set", @layout.noticeRegion

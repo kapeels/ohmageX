@@ -13,6 +13,19 @@
     triggers:
       "click": "button:clicked"
 
+  class Navbutton.History extends App.Views.ItemView
+    template: "navbutton/history"
+    tagName: "button"
+    className: "sync icon"
+    initialize: ->
+      # TODO: Add handlers for disabling the button
+      # when sync is happening
+      @listenTo @, "button:clicked", ->
+        @trigger "button:history"
+
+    triggers:
+      "click": "button:clicked"
+
   class Navbutton.Upload extends App.Views.ItemView
     template: "navbutton/upload"
     tagName: "button"

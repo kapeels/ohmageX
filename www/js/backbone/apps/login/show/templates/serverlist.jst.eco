@@ -1,4 +1,4 @@
 <div class="select-block">
   <select name="server-chooser"></select>
 </div>
-<input data-visible="false" class="custom-server" type="text" value="" name="server" placeholder="Enter a custom server URL" />
+<input data-visible="false" class="custom-server" type="text" value="" name="server" autocapitalize="off" autocorrect="off" placeholder="Enter a custom server URL" />

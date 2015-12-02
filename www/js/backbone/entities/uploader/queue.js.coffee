@@ -15,6 +15,12 @@
     model: Entities.UploadQueueItem
     comparator: (item) ->
       -(item.get 'timestamp')
+    initialize: (options) ->
+      @listenTo @, "add remove", =>
+        if @length isnt 0
+          App.execute "nav:marker:set", "queue", "(#{@length})"
+        else
+          App.execute "nav:marker:set", "queue", false
 
   API =
     init: ->
@@ -22,6 +28,8 @@
         # user upload queue retrieved from raw JSON.
         console.log 'user upload queue retrieved from storage'
         currentQueue = new Entities.UploadQueue result
+        if currentQueue.length > 0
+          App.execute "nav:marker:set", "queue", "(#{currentQueue.length})"
       ), =>
         console.log 'user upload queue not retrieved from storage'
         currentQueue = new Entities.UploadQueue
@@ -92,7 +100,7 @@
     API.init()
 
   App.commands.setHandler "uploadqueue:item:add", (responseData, errorText, surveyId) ->
-    responses = App.request 'responses:current:valid'
+    responses = App.request 'responses:current:flow'
     API.addItem responseData, errorText, responses, surveyId
 
   App.commands.setHandler "uploadqueue:item:remove", (id) ->
@@ -131,3 +139,8 @@
 
   App.vent.on "credentials:cleared", ->
     API.clear()
+
+  App.vent.on "survey:upload:failure:auth", (responseData, errorText, surveyId) ->
+    if !App.request("credentials:ispassword")
+      # dump to queue and save survey
+      App.execute "uploadqueue:item:add", responseData, "#{errorPrefix} #{errorText}", surveyId

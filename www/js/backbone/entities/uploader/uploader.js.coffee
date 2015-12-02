@@ -10,15 +10,18 @@
       if response.result is "success"
         console.log 'Uploader Success!'
         App.vent.trigger "loading:hide"
+        if context is 'uploadqueue' then App.vent.trigger("uploadtracker:complete")
         App.vent.trigger "#{context}:upload:success", response, itemId
       else
-        console.log 'response.errors[0].code', response.errors[0].code
+        console.log "response.errors[0].code #{response.errors[0].code}"
         type = switch response.errors[0].code
           when '0710','0703','0617','0700' then "campaign"
           when '0100' then "server"
-          when '0600','0307','0302','0304' then "response"
+          when '0600','0307','0302','0304','0314' then "response"
           when '0200','0201','0202' then "auth"
+          else "server"
         console.log 'type', type
+        if context isnt 'uqall' then App.vent.trigger("uploadtracker:complete")
         App.vent.trigger "loading:hide"
         App.vent.trigger "#{context}:upload:failure:#{type}", responseData, response.errors[0].text, itemId
 
@@ -45,10 +48,12 @@
         error: (xhr, ajaxOptions, thrownError) =>
           console.log 'survey upload error'
           # assume all error callbacks here are network relate
+          if context isnt 'uqall' then App.vent.trigger("uploadtracker:complete")
           App.vent.trigger "loading:hide"
           App.vent.trigger "#{context}:upload:failure:network", responseData, xhr.status, itemId
 
     documentUploader: (context, responseData, itemId) ->
+      App.vent.trigger "loading:show", "Uploading ...", instant: true
 
       # add auth credentials to the response before saving.
       # may later move this to the model's custom "sync" method.
@@ -110,6 +115,7 @@
           console.log 'survey upload error'
           # assume all error callbacks here are network relate
           App.vent.trigger "loading:hide"
+          if context isnt 'uqall' then App.vent.trigger("uploadtracker:complete")
           App.vent.trigger "#{context}:upload:failure:network", responseData, xhr.status, itemId
 
     xhrFormData: (responseObj) ->
@@ -129,6 +135,7 @@
 
     videoUploader: (context, responseData, itemId) ->
       # we're currently assuming there is only one video file per upload at this time.
+      App.vent.trigger "loading:show", "Uploading ...", instant: true
 
       # add auth credentials to the response before saving.
       # may later move this to the model's custom "sync" method.
@@ -145,11 +152,14 @@
       else
         firstFile = App.request "uploadqueue:item:firstfile", itemId
         firstUUID = App.request "uploadqueue:item:firstuuid", itemId
-        App.vent.trigger "loading:show", "Uploading..."
 
       console.log "firstFile #{JSON.stringify(firstFile)}"
       options.fileName = firstFile.name
       options.mimeType = firstFile.type
+      # iOS returns null for video file type.
+      # Set the MIME type to mp4 so the server accepts the upload,
+      # since it's assumed that all iOS videos will be of this type.
+      if firstFile.type is null then options.mimeType = "video/mp4"
       options.fileKey = firstUUID
       options.params = @videoParams _.extend(myAuth, responseData)
 
@@ -172,7 +182,9 @@
         # code
         console.log 'survey upload error'
         # assume all error callbacks here are network relate
+        if context isnt 'uqall' then App.vent.trigger("uploadtracker:complete")
         App.vent.trigger "loading:hide"
+
         switch error.code
           when FileTransferError.CONNECTION_ERR
             App.vent.trigger "#{context}:upload:failure:network", responseData, "Connection Issue", itemId
@@ -207,12 +219,21 @@
     else
       uploadType = App.request 'uploadqueue:item:uploadtype', itemId
 
-    console.log 'uploadType', uploadType
+    # on device, no wifi and user preference set to only upload on wifi 
+    cellNetworkTypes = [Connection.CELL, Connection.CELL_2G, Connection.CELL_3G, Connection.CELL_4G] if App.device.isNative
+    if App.device.isNative and navigator.connection.type in cellNetworkTypes and App.request("user:preferences:get", 'wifi_upload_only')
+      console.log "device not on wifi, user preferences requires for upload."
+      App.vent.trigger "#{context}:upload:failure:wifionly", responseData, "Not on WiFi", itemId
+      App.vent.trigger "loading:hide"
 
-    switch uploadType
-      when 'video'
-        API.videoUploader context, responseData, itemId
-      when 'file'
-        API.documentUploader context, responseData, itemId
-      else
-        API.ajaxUploader context, responseData, itemId
+    else # continue with upload in all other cases.
+      console.log 'uploadType', uploadType
+      App.vent.trigger "uploadtracker:active"
+  
+      switch uploadType
+        when 'video'
+          API.videoUploader context, responseData, itemId
+        when 'file'
+          API.documentUploader context, responseData, itemId
+        else
+          API.ajaxUploader context, responseData, itemId

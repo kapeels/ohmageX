@@ -1,6 +1,6 @@
 <form>
   <h3 class="hide-accessible"><%= @displayLabel %></h3>
-  <label for="<%= @id %>" class="inset-block"><%= @promptText %></label>
+  <label for="<%= @id %>" class="markdown-inset-block"><%- @promptTextMarkdown %></label>
   <div class="control-container">
     <textarea name="<%= @id %>"><% if @currentValue: %><%= @currentValue %><% end %></textarea>
   </div>

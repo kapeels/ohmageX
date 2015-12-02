@@ -1,5 +1,35 @@
-.slide-out {
+body[slideout-state="active"] {
+  overflow: hidden;
+}
 
+@mixin slide-out-content() {
+  position: fixed;
+  background: black;
+  background: rgba(0,0,0,0.95);
+  right: 10%;
+  right: calc(-1 * (#{$component-slide-out-width} - 100%));
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1001;
+}
+
+.slide-out-overlay {
+  background-color: rgba(0,0,0,0.3);
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 100%;
+  bottom: 0;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+body[slideout-state="active"] .slide-out-overlay {
+  top: 0;
+}
+
+nav.slide-out {
   display: none;
 
   &[data-state="active"]{
@@ -12,31 +42,37 @@
 
   &[data-state="active"] {
     display: block;
-    position: fixed;
-    background: black;
-    background: rgba(0,0,0,0.95);
-    right: 10%;
-    right: calc(-1 * (#{$component-slide-out-width} - 100%));
-    top: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1001;
-  }
-
-  > .overlay {
-    background-color: rgba(0,0,0,0.3);
-    position: fixed;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    left: 90%;
-    left: calc(-1 * (0% - #{$component-slide-out-width})); // written oddly to make sure if the [data-state] fails, this one fails too
-    z-index: 1000;
-    cursor: pointer;
+    @include slide-out-content();
   }
 
 }
 
-body[slideout-state="active"] {
-  overflow: hidden;
+
+.animated-menu nav.slide-out {
+  display: block;
+  visibility: hidden;
+  @include slide-out-content();
+
+  -webkit-transform: translateX(-100%);
+  transform: translateX(-100%);
+  -webkit-transition: -webkit-transform 0.25s cubic-bezier(.3,.11,.48,.93), visibility 0s 0.25s;
+  transition: transform 0.25s cubic-bezier(.3,.11,.48,.93), visibility 0s 0.25s;
+
+  &[data-state="active"] {
+    visibility: visible;
+    -webkit-transform: translateX(0%);
+    transform: translateX(0%);
+    -webkit-transition: -webkit-transform 0.25s cubic-bezier(.16,.65,.44,.99);
+    transition: transform 0.25s cubic-bezier(.16,.65,.44,.99);
+  }
+
+}
+
+body.animated-menu .slide-out-overlay {
+  opacity: 0;
+}
+body.animated-menu[slideout-state="active"] .slide-out-overlay {
+  opacity: 1;
+  -webkit-transition: opacity 0.25s ease-out;
+  transition: opacity 0.25s ease-out;
 }

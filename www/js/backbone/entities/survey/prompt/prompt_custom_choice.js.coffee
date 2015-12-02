@@ -20,16 +20,18 @@
         console.log 'custom choices not retrieved from storage'
         currentChoices = false
 
-    addChoice: (surveyId, stepId, value) ->
+    addChoice: (surveyId, stepId, value, key) ->
       # expects campaign to be a Model or JSON format.
 
-      if !currentChoices then currentChoices = new Entities.CustomChoices
+      if currentChoices is false then currentChoices = new Entities.CustomChoices
 
       currentChoices.add
         campaign_urn: App.request "survey:saved:urn", surveyId
         surveyId: surveyId
         stepId: stepId
         value: value
+        key: key
+        id: key
 
       @updateLocal( =>
         console.log "custom_choices entity saved in localStorage"
@@ -65,25 +67,28 @@
       if choices.length is 0 then false else choices
 
     getMergedChoices: (surveyId, stepId, original) ->
-      
+
       # map currentChoices to an array that matches the format of ChoiceCollection Models.
-      customArr = currentChoices.chain().filter( (choice) ->
-        return choice.get('surveyId') is surveyId and choice.get('stepId') is stepId
-      ).map( (choice) ->
-        key: _.guid()
-        label: choice.get 'value'
-        parentId: stepId
-        custom: true
-      ).value()
-      console.log 'getMergedChoices surveyId, stepId, customArr', surveyId, stepId, customArr
+      customArr = []
+      if currentChoices isnt false
+        customArr = currentChoices.chain().filter( (choice) ->
+          return choice.get('surveyId') is surveyId and choice.get('stepId') is stepId
+        ).map( (choice) ->
+          id: choice.get 'key'
+          key: choice.get 'key'
+          label: choice.get 'value'
+          parentId: stepId
+          custom: true
+        ).value()
 
-      # merge the currentChoices formatted array with the original ChoiceCollection
-      # into a new collection for output. 
-      result = new Entities.ChoiceCollection _.union(original.toJSON(), customArr)
+      mergedColl = new Entities.ChoiceCollection
+      mergedColl.add original.toJSON()
 
-      # saving the merged collection to a variable before returning it prevents the 
-      # "duplicate custom choice" error that may happen when re-displaying a custom choice
-      result
+      if customArr.length > 0
+        mergedColl.set customArr,
+          remove: false
+
+      mergedColl
 
     updateLocal: (callback) ->
       # update localStorage index custom_choices with the current version of campaignsSaved entity
@@ -99,20 +104,19 @@
     currentChoices
 
   App.reqres.setHandler "prompt:customchoices:merged", (surveyId, stepId, choiceCollection) ->
-    if !currentChoices then return choiceCollection
     API.getMergedChoices surveyId, stepId, choiceCollection
 
-  App.commands.setHandler "prompt:customchoice:add", (surveyId, stepId, value) ->
-    API.addChoice surveyId, stepId, value
+  App.commands.setHandler "prompt:customchoice:add", (surveyId, stepId, value, key) ->
+    API.addChoice surveyId, stepId, value, key
 
   App.commands.setHandler "prompt:customchoice:remove", (surveyId, stepId, value) ->
     API.removeChoice surveyId, stepId, value
 
   App.reqres.setHandler "prompt:customchoice:campaign", (campaign_urn) ->
-    if !!currentChoices then API.getCampaignChoices(campaign_urn) else false
+    if currentChoices isnt false then API.getCampaignChoices(campaign_urn) else false
 
   App.vent.on "campaign:saved:remove", (campaign_urn) ->
-    if currentChoices then API.removeCampaignChoices(campaign_urn)
+    if currentChoices isnt false then API.removeCampaignChoices(campaign_urn)
 
   App.vent.on "credentials:cleared", ->
     API.clear()

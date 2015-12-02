@@ -18,9 +18,17 @@
       controller: API
 
   App.vent.on "campaign:list:navigate:clicked", (model) ->
-    App.navigate "surveys/#{model.get 'id'}", { trigger: true }
+    if App.custom.routes.surveys is "survey"
+      App.navigate "surveys/#{model.get 'id'}", { trigger: true }
+    else
+      App.navigate App.navs.getUrlByName(App.custom.routes.surveys), { trigger: true }
 
   App.vent.on "campaign:list:save:clicked", (model) ->
+    # the campaign:save command handler is in the Surveys entity.
+    # it does not manage the display of the loader so other parts
+    # of the app can use it.
+    App.vent.trigger "loading:show", "Saving #{App.dictionary('page','campaign')}..."
+
     App.execute "campaign:save", model
 
   App.vent.on "campaign:list:unsave:clicked", (model, view, filterType) ->

@@ -1,8 +1,8 @@
 <td class="left">
-    <input type="radio" name="<%= @parentId %>" id="choice-<%= @key %>" value="<%= @key %>" />
+    <input type="radio" name="<%= @parentId %>" id="choice-<%= @parentId %>-<%= @key %>" value="<%= @key %>" />
 </td>
 <td class="content">
-    <label for="choice-<%= @key %>"><%= @label %></label>
+    <label class="canonical" for="choice-<%= @parentId %>-<%= @key %>"><%- @label %></label>
 </td>
 <td class="right"><% if @custom: %><button type="button" class="delete icon">Delete</button><% else: %><!-- 
   # this placeholder label ensures:
@@ -13,4 +13,4 @@
   # - The css renders this with text-indent + overflow hack
   #   usually used for image replacement, so the text can be
   #   be invisible yet interactive
---><label for="choice-<%= @key %>" class="placeholder"><%= @label %></label><% end %></td>
+--><label for="choice-<%= @parentId %>-<%= @key %>" class="placeholder"><%- @label %></label><% end %></td>

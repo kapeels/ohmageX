@@ -1,0 +1,6 @@
+<header>
+  <span class="col col-artifacts">Artifacts</span>
+  <span class="col col-collected">Collected</span>
+  <span class="col col-folder">Folder</span>
+</header>
+<nav class="list"><ul></ul></nav>

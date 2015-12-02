@@ -1,0 +1,15 @@
+<div class='item header'>
+  <h3><%= @bucket %></h3>
+</div>
+<div class="active item">
+  <div class="action">
+    <i class="type-icon fa fa-<%= @list_icon %>"></i>
+  </div>
+  <div class="action">
+    <button type="button" class="icon right-arrow navigate">View</button>
+  </div>
+  <div role="link">
+    <h3><%= @survey_title %></h3>
+    <footer><small><%= @timestamp %></small><% if @list_second_label isnt false: %> <%= @list_second_label %><% end %></footer>
+  </div>
+</div>

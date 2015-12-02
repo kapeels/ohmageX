@@ -6,7 +6,7 @@
     "url": "http://ohmage.org"
   },
   "description": "An open-source participatory sensing technology platform.",
-  "version": "3.0.3",
+  "version": "3.10.25",
   "devDependencies": {
     "bower": "^1.3.12",
     "cordova": "^4.3.0",

@@ -1,0 +1,15 @@
+<div class="item">
+  <div class="action col-artifacts right">
+    <% if @secondSurveyId is false: %>
+      <span class="single-button"><button type="button" class="first-survey icon new-item">New <%= @rowLabel %></button></span>
+    <% else: %>
+      <span class="double-button"><button type="button" class="icon new-instruction second-survey">New <%= @rowLabel %> new-instruction</button> <button type="button" class="icon new-assessment first-survey">New <%= @rowLabel %> Assessment</button></span>
+    <% end %>
+  </div>
+  <div class="action col-collected right">
+    <button type="button" class="response-count"><%= @responseCount %></button>
+  </div>
+  <div role="link">
+    <h3><%= @rowLabel %></h3>
+  </div>
+</div>

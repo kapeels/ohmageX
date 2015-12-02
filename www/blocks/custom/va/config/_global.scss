@@ -1,0 +1,14 @@
+$global-form-control-background-color: #fff;
+$global-form-control-active-background-color: desaturate(#eeeeee, 100%);
+$global-form-control-border-color: #ccc;
+$global-form-control-border-color-dark: darken($global-form-control-border-color, 30%);
+$global-form-control-text-color: #555;
+$global-form-control-box-shadow: inset 0 2px 2px rgba(0,0,0,.075);
+$global-form-control-border-radius: 2px;
+$global-form-control-padding: $global-form-control-padding * $scale-factor; 
+$global-form-control-font-size: $global-form-control-font-size * $scale-factor;
+
+$global-progress-gradient-background-color: #fff;
+$global-progress-gradient-start: desaturate(#09c, 100%);
+$global-progress-gradient-end: desaturate(#09c, 100%);
+$global-progress-color-ie: desaturate(blue, 100%);

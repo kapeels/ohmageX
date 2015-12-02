@@ -10,9 +10,10 @@
   API =
     firstId: (currentFlow) ->
       # Only return the first model that we receive from the condition check.
+      # (hidden prompts don't count)
       # Then return its id.
       result = currentFlow.find((step) ->
-        step.get('condition') isnt false
+        step.get('condition') isnt false and step.get('status') isnt 'hidden'
       )
       throw new Error "All Flow step conditions are false" if typeof result is 'undefined'
       result.get 'id'

@@ -8,10 +8,15 @@
     initialize: (options) ->
       if options.campaign_id
         surveys = App.request "surveys:saved:campaign", options.campaign_id
+      else if options.category
+        surveys = App.request "surveys:saved:category", options.category
       else
         surveys = App.request "surveys:saved"
 
-      selector = App.request "surveys:selector:entities", options.campaign_id
+      if options.category
+        selector = App.request "surveys:selector:category", options.category
+      else
+        selector = App.request "surveys:selector:entities", options.campaign_id
 
       @layout = @getLayoutView selector
 
@@ -26,6 +31,9 @@
         @infobuttonRegion selector
         @selectorRegion selector
         @surveysRegion surveys
+
+      @listenTo @layout, "link:campaigns:clicked", =>
+        App.vent.trigger "surveys:list:link:campaigns:clicked"
 
       @show @layout, loading: false
 

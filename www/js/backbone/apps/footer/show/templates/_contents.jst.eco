@@ -2,7 +2,7 @@
   <strong>Powered by <a href="http://ohmage.org">ohmage</a></strong>
   <br /><small class="text-muted"><em>v.<%= @version %></em></small>
 </p>
-<p class="help-section"><a href="https://web.ohmage.org/ohmage/ohmagex-help.html"><i class='icon help'></i><span>Help</span></a></p>
+<p class="help-section"><a href="<%= @helpURL %>"><i class='icon help'></i><span>Help</span></a></p>
 <p class="copyright">
   <small><em>Copyright &copy; 2012-2015 UC Regents.</em></small>
 </p>

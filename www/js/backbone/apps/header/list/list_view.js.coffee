@@ -1,10 +1,18 @@
 @Ohmage.module "HeaderApp.List", (List, App, Backbone, Marionette, $, _) ->
 
   class List.Nav extends App.Views.ItemView
+    initialize: ->
+      @listenTo @, "raw:click", ->
+        if @model.isChosen()
+          @trigger "chosen:clicked"
+        else
+          @trigger "chosen:check"
+
     tagName: "li"
 
     modelEvents:
       "change:chosen": "changeChosen"
+      "change:marker": "render"
 
     getTemplate: -> 
       if @model.isDivider() then false else "header/list/_nav"
@@ -22,7 +30,7 @@
       @$el.toggleClass "active", value
 
     triggers:
-      "click": "chosen:check"
+      "click": "raw:click"
     serializeData: ->
       data = @model.toJSON()
       data.navLabel = App.dictionary "menu", @model.get('name')
@@ -31,6 +39,10 @@
   class List.Title extends App.Views.ItemView
     tagName: "span"
     template: "header/list/_title"
+
+    collectionEvents: ->
+      "change:marker": "render"
+
     serializeData: ->
       chosenModel = @collection.findWhere(chosen: true)
       data = {}
@@ -40,12 +52,14 @@
         name = chosenModel.get("name")
         data.pageTitle = App.dictionary "menu", name
         data.icon = chosenModel.get("icon")
+        data.marker = chosenModel.get("marker")
       data
 
   class List.Header extends App.Views.CollectionView
     initialize: ->
       @listenTo @collection, "reveal", @render
       @listenTo @, "childview:chosen:check", @chosenCheck
+      @listenTo @, "childview:chosen:clicked", (-> @collection.trigger "chosen:canceled")
     chosenCheck: (args) ->
       myName = args.model.get('name')
       myUrl = args.model.get('url')
@@ -88,6 +102,7 @@
           # and remove all associated classnames
           @$el.removeClass 'profile'
           @$el.removeClass 'campaign'
+          @$el.removeClass 'history'
           @$el.removeClass 'survey'
           @$el.removeClass 'upload'
           @$el.removeClass 'reminder'

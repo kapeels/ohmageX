@@ -1,0 +1,96 @@
+#history-section {
+  div.icon-box {
+    float: right;
+    width: 2rem;
+
+    button.icon {
+      background-position: center;
+      background-size: $list-icon-size;
+      background-repeat: no-repeat;
+      width: 2rem;
+    }
+    button.icon.close {
+      background-color: $modal-close-background-color;
+    }
+  }
+
+  .list-controls {
+    padding: 0 $global-form-control-padding*2;
+    & > div {
+      padding: $global-form-control-padding*2 0;
+      width: 49.5%;
+      display: inline-block;
+    }
+  }
+
+  #list-region > ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    > li .active.item {
+      border-bottom: 1px solid $app-list-border-color;
+      .type-icon {
+        font-size: $app-header-menu-header-icon-size;
+      }
+      &.empty {
+        font-style: italic;
+        color: #777;
+      }
+      .item {
+        position: relative;
+        [role="link"] {
+          > * {
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+
+  #details-region, #responses-region {
+    width: 100%;
+    h3:first-child {
+      margin-top: 0;
+    }
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    padding: (1*$app-main-footer-padding) $app-main-footer-padding;
+    word-wrap: break-word;
+  }
+  #details-region {
+    p:first-child {
+      margin-top: 0;
+    }
+    border-bottom: 1px solid $global-form-control-border-color;
+  }
+  #responses-region {
+    width: 100%;
+    .item:first-child {
+      margin-top: 0;
+    }
+    .item {
+      margin-top: $info-region-header-font-size*2;
+    }
+    header {
+      @include -clearfix;
+      border-bottom: 1px solid $global-form-control-border-color;
+      padding-bottom: $info-region-header-font-size/2;
+      margin-bottom: $info-region-header-font-size/4;
+      font-size: $info-region-header-font-size;
+      i {
+        display: block;
+        float: right;
+        margin-top: -$info-region-header-font-size;
+      }
+      h5 {
+        font-size: $info-region-header-font-size;
+        margin: 0;
+        padding-right: $info-region-header-font-size*1.5;
+      }
+    }
+    ul,p {
+     font-size: $info-region-header-font-size*0.8;
+    }
+  }
+}

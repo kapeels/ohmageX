@@ -10,6 +10,10 @@
       @myView = @selectView navs, selected
 
       if @myView
+        @listenTo @myView, "button:history", (type) ->
+          console.log "button:history in Navbutton Component"
+          App.execute "history:sync"
+
         @listenTo @myView, "button:sync", (type) ->
           console.log "button:sync in Navbutton Component"
           App.execute "campaigns:sync"
@@ -32,6 +36,9 @@
             collection: navs
         when "queue"
           return new Navbutton.Upload
+            collection: navs
+        when "history", "dashboardeqis"
+          return new Navbutton.History
             collection: navs
         when "reminder"
           return new Navbutton.AddReminder

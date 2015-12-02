@@ -1,0 +1,5 @@
+<header>
+  <h5><%= @question %></h5>
+  <i class="fa fa-<%= @icon %>"></i>
+</header>
+<p>This prompt type is <%= @type %>, which is unsupported.</p>

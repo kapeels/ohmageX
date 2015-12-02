@@ -25,17 +25,26 @@
       @choose (@findWhere(name: nav) or @first())
 
     getSelectedName: ->
-      @findWhere(chosen: true).get('name')
+      if @findWhere(chosen: true)
+        @findWhere(chosen: true).get('name')
+      else
+        false
 
     getUrlByName: (myName) ->
       @findWhere(name: myName).get('url')
+
+    setMarker: (name, value) ->
+      if @findWhere(name: name)
+        @findWhere(name: name).set('marker', value)
 
   API =
     reveal: (isLoggedIn) ->
       console.log 'reveal isLoggedIn', isLoggedIn
       if isLoggedIn
         loginItems = [
+          "dashboardeqis"
           "campaign"
+          "history"
           "survey"
           "queue"
           "reminder"
@@ -62,13 +71,15 @@
 
     getNavs: ->
       App.navs = new Entities.NavsCollection [
-        { name: "login", url: "#login", icon: "profile", visible: false }
-        { name: "campaign", url: "#campaigns", icon: "campaign", visible: false }
-        { name: "survey", url: "#surveys", icon: "survey", visible: false }
-        { name: "queue", url: "#uploadqueue", icon: "upload", visible: false }
-        { name: "reminder", url: "#reminders", icon: "reminder", visible: false }
-        { name: "profile", url: "#profile", icon: "profile", visible: false }
-        { name: "logout", url: "#logout", icon: "logout", visible: false }
+        { name: "login", url: "#login", icon: "profile", visible: false, marker: false }
+        { name: "dashboardeqis", url: "#dashboard", icon: "survey", visible: false, marker: false }
+        { name: "campaign", url: "#campaigns", icon: "campaign", visible: false, marker: false }
+        { name: "survey", url: "#surveys", icon: "survey", visible: false, marker: false }
+        { name: "queue", url: "#uploadqueue", icon: "upload", visible: false, marker: false }
+        { name: "history", url: "#history", icon: "history", visible: false, marker: false }
+        { name: "reminder", url: "#reminders", icon: "reminder", visible: false, marker: false }
+        { name: "profile", url: "#profile", icon: "profile", visible: false, marker: false }
+        { name: "logout", url: "#logout", icon: "logout", visible: false, marker: false }
       ]
 
   App.vent.on "credentials:storage:load:success credentials:storage:load:failure", ->

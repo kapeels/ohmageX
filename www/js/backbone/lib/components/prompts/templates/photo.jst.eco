@@ -1,7 +1,7 @@
 <form>
   <h3 class="hide-accessible"><%= @displayLabel %></h3>
   <div class="photo-control">
-    <label for="<%= @id %>" class="inset-block"><%= @promptText %></label>
+    <label for="<%= @id %>" class="markdown-inset-block"><%- @promptTextMarkdown %></label>
     <div class="container">
       <% if @showSingleButton: %>
       <div class="input-activate">

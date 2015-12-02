@@ -1,0 +1,1 @@
+<span class="my-checkbox"><input type="checkbox" name="skip<%= @id %>" id="skip<%= @id %>"></span><span class="my-label"><label for="skip<%= @id %>"><%= @skiplabel %></label></span>

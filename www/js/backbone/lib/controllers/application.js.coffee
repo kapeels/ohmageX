@@ -36,5 +36,8 @@
       if options.loading
         ## show the loading view
         App.execute "show:loading", view, options
+      else if options.modal
+        ## show the view inside the full modal
+        App.execute "show:fullmodal", view, options
       else
         options.region.show view

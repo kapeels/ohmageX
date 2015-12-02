@@ -15,12 +15,13 @@
     App.package_info = options.package_info
 
     # overwrite base config with custom build options
-    defaultUrl = App.navs.getUrlByName App.custom.build.homepage
+    defaultUrl = App.navs.getUrlByName App.custom.routes.homepage
     Routes.dashboard_route = -> defaultUrl
 
   App.addRegions
     loadingRegion: "body > #loading-spinner"
     blockerRegion: "body > #ui-blocker"
+    fullModalRegion: "body > #full-modal"
     headerRegion: "body > header"
     mainRegion:    "body > main"
     footerRegion: "body > footer"
@@ -38,7 +39,7 @@
 
   App.vent.on "nav:choose", (nav) -> App.navs.chooseByName nav
 
-  App.vent.on "loading:show", (message) -> App.loading.loadShow(message)
+  App.vent.on "loading:show", (message, options) -> App.loading.loadShow(message, options)
   App.vent.on "loading:hide", -> App.loading.loadHide()
   App.vent.on "loading:update", (message) -> App.loading.loadUpdate(message)
 

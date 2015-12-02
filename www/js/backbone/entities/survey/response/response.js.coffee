@@ -98,6 +98,7 @@
       myResponses = @createResponses App.request("survey:xml:content", $surveyXML)
       currentResponses = new Entities.ResponseCollection myResponses
       console.log 'currentResponses', currentResponses.toJSON()
+      App.vent.trigger "responses:init:complete", currentResponses
     getValidationProperties: ($xml, type) ->
       if type in ['single_choice', 'single_choice_custom','multi_choice','multi_choice_custom']
         return false
@@ -166,11 +167,12 @@
     getResponses: ->
       throw new Error "responses not initialized, use 'responses:init' to create new Responses" unless currentResponses isnt false
       currentResponses
-    getValidResponses: ->
+    getResponsesWithFlow: ->
       responses = @getResponses()
-      responses.filter (response) ->
-        # valid responses only.
-        if !response.get('response') then false else true
+      responses.each (response) =>
+        response.set 'status', App.request("flow:step", response.get('id')).get('status')
+      # return JSON so responses can be easily added to localStorage
+      responses.toJSON()
     destroyResponses: ->
       currentResponses = false
 
@@ -181,8 +183,8 @@
   App.reqres.setHandler "responses:current", ->
     API.getResponses()
 
-  App.reqres.setHandler "responses:current:valid", ->
-    API.getValidResponses()
+  App.reqres.setHandler "responses:current:flow", ->
+    API.getResponsesWithFlow()
 
   App.reqres.setHandler "responses:uploadtype", ->
     API.getUploadType()

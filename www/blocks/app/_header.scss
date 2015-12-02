@@ -19,7 +19,7 @@ body > header > div  {
 
   button.icon {
     &.hamburger, &.sync, &.upload-queue, &.add {
-      margin-left: 1rem;
+      margin-left: $app-header-font-size/1.75;
       height: $app-header-height;
       background-position: center;
       background-size: $app-header-image-size;
@@ -39,6 +39,7 @@ body > header > div  {
     text-transform: uppercase;
     height: $app-header-height;
     padding: (($app-header-height - $app-header-font-size) / 2);
+    padding-left: $app-header-font-size/2;
     padding-right: 0;
     .icon {
       background-position: center;
@@ -62,8 +63,20 @@ body > header > div  {
     opacity: 0.85;
   }
 
-}
+  .app-menu-trigger.hamburger.icon, #button-region button { outline: none; }
+  #button-region button:active {
+    background-color: lighten($app-header-menu-header-close-background-color, 5%);
+  }
 
-#button-region {
-  float: right;
+  .app-menu-trigger.hamburger.icon:active {
+    background-color: $app-header-menu-header-close-background-color;
+  }
+
+  #button-region {
+    float: right;
+    button {
+      margin-left: 0;
+      padding-left: 0;
+    }
+  }
 }

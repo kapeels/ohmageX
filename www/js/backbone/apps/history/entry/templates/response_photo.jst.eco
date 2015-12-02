@@ -1,0 +1,9 @@
+<header>
+  <h5><%= @prompt_text %></h5>
+  <i class="fa fa-<%= @icon %>"></i>
+</header>
+<% if @media_url isnt false: %>
+  <p><img class="preview-image" style="max-width: 100%" src="<%= @media_url %>" /></p>
+<% else: %>
+  <p><button class="fetch-button" type="button">View Image</button></p>
+<% end %>

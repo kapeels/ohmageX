@@ -1,6 +1,7 @@
 GIT
   remote: https://github.com/WebBlocks/WebBlocks.git
-  revision: 2e871cbebef6fa72c1a4d54a61bd60fc7fe64f62
+  revision: e208bb3afae7ad45d56212f2b1a16a06969a39fe
+  tag: 2.0.4.dev
   specs:
     web_blocks (2.0.4.dev)
       compass
@@ -24,7 +25,7 @@ GEM
       sass (~> 3.2.19)
     execjs (2.2.2)
     extend_method (1.0.0)
-    facets (2.9.3)
+    facets (3.0.0)
     fork (1.0.1)
     fssm (0.2.10)
     ruby-bower (0.0.1)
@@ -40,6 +41,7 @@ PLATFORMS
 
 DEPENDENCIES
   compass
+  execjs (~> 2.2.2)
   sass
   sass-css-importer
   web_blocks!

@@ -6,75 +6,110 @@
   "build": {
     "app_name": "e-QIS",
     "bundle_id": "org.ohmage.x.eqis",
-    "image_folder": "default",
-    "homepage": "campaign",
-    "login_header_image": "ohmageX.png",
+    "image_folder": "eqis",
+    "orientation": "default",
+    "login_header_image": "eQIS-light.png",
     "debug": false
+  },
+  "appearance": {
+    "prompt_horizontal_single_choice": false,
+    "custom_block": "default"
   },
   "dictionary": {
     "page": {
       "login": "login",
+      "dashboardeqis": "dashboard",
       "campaign": "portfolio",
       "survey": "artifact",
       "queue": "upload queue",
+      "history": "history",
       "reminder": "reminder",
       "profile": "profile",
       "logout": "logout"
     },
     "pages": {
       "login": "login",
-      "campaign": "portfolio",
+      "dashboardeqis": "dashboard",
+      "campaign": "portfolios",
       "survey": "artifacts",
       "queue": "upload queue",
+      "history": "history",
       "reminder": "reminders",
       "profile": "profile",
       "logout": "logout"
     },
     "menu": {
       "login": "Login",
+      "dashboardeqis": "Dashboard",
       "campaign": "Portfolio",
       "survey": "Artifacts",
       "queue": "Upload Queue",
+      "history": "History",
       "reminder": "Reminders",
       "profile": "Profile",
       "logout": "Logout"
     }
   },
+  "messages": {
+    "reminder_body": "Please tap to capture your artifacts for today."
+  },
   "menu_items_disabled": {
-    "native": [],
+    "native": [
+      "survey"
+    ],
     "browser": [
+      "survey",
       "profile",
       "reminder",
       "logout"
     ],
     "footer": [
+      "dashboardeqis",
       "campaign",
       "survey",
       "queue",
+      "history",
       "reminder",
       "logout"
     ]
   },
+  "routes": {
+    "homepage": "dashboardeqis",
+    "surveys": "dashboardeqis",
+    "help": "http://wiki.eqis.io/app/eqis"
+  },
   "server_list": {
     "custom": false,
     "servers": [
-      "https://test.mobilizingcs.org"
+      "https://pilots.mobilizelabs.org"
     ]
   },
   "functionality": {
-    "post_survey_reminders_disabled": true
+    "internal_links_enabled": false,
+    "post_survey_reminders_disabled": true,
+    "multi_question_survey_flow": true,
+    "history_auto_refresh": true,
+    "history_eqis_bucketing": {
+      "firstresponse_surveyids": [
+        "2AssessmentArtifacts",
+        "3InstructionArtifacts"
+      ]
+    }
   },
   "prompt_defaults": {
     "doc": {
       "max_bytes": 1000000000
     },
     "photo": {
-      "max_pixels": 800
+      "max_pixels": 1600
     },
     "video": {
       "max_seconds": 180,
       "caution_threshold_bytes": 300000000,
       "assumed_mb_per_minute": 90
     }
+  },
+  "user_preference_defaults": {
+    "wifi_upload_only": false
   }
 }

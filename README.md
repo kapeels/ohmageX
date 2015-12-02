@@ -1,4 +1,4 @@
-# ohmageX v3.0.3
+# ohmageX v3.10.25
 
 [ohmage](http://ohmage.org/) is an open-source, mobile to web platform that records, analyzes, and visualizes data from both prompted experience samples entered by the user, as well as continuous streams of data passively collected from sensors or applications onboard the mobile device. 
 
@@ -32,7 +32,7 @@ export NODE_PATH=$(npm config get prefix)/lib/node_modules
 Compile assets with WebBlocks:
 
 ```
-node_modules/grunt-cli/bin/grunt exec:blocks_build
+node_modules/grunt-cli/bin/grunt webblocks_build
 ```
 
 
@@ -100,9 +100,75 @@ The `mobile_firstrun` task executes in the root folder without issues, and avoid
 
 ## Development using **ohmageX**
 
-- [Development Workflow (wiki)](https://github.com/ucla/ohmage-mwf-dw/wiki/Development-Workflow)
+- [Development Workflow (wiki)](https://github.com/ucla/ohmageX/wiki/Development-Workflow)
 
 ## Version Notes
+
+### 3.10.25 - ohmageX General Release
+
+- Custom features
+  - Multi-question survey flow
+    - multiple questions per page
+      - multiple validation, navigation, condition checks
+      - special cases for skipped prompts
+      - supports device back button
+  - Response History (Android)
+    - history with filters, display single history item
+    - supports download and offline open of documents and videos
+    - supports offline display of images
+    - configurable auto-media fetch
+  - Dashboard page with grouping and displaying latest campaign
+  - Horizontal single-choice layout
+  - Some CSS can be customized per deployment
+  - XML meta properties per campaign, survey, and prompt
+    - randomized integer prompts (using custom XML meta property)
+
+- Media
+  - cache images, documents and videos
+  - cache video before upload
+  - add "clear cache" button to profile
+  - validate attached doc and video prompt files by file extension
+
+- Survey flow
+  - track state of uploads
+  - allow prepopulation of prompt responses
+
+- Prompt Conditional Parser
+  - Fix choice prompt parsing
+  - Fix message condition parsing
+
+- Prompts support Markdown
+  - Parses standard markdown in prompt XML to HTML
+  - Applied to prompt messages, prompt questions, choice prompts
+
+- Android compatibility fixes
+  - Refactor XML parsing with Android 4.4 compatibility hack
+
+- UI enhancements
+  - prevent multiple rapid survey submit events
+  - update survey multi-question views
+  - allow for instant loading spinner display
+  - Fix upload queue choice responses
+  - add trailing surveys notice with configurable internal links
+  - add nav markers, such as "UPLOAD QUEUE (1)"
+  - make selection of the current menu item close the menu
+  - full screen modal with sliding animation
+  - Animate open and close of hamburger menu
+
+- Code enhancements
+  - split prompt selector views into separate files
+  - refactor choice prompts and consolidate code
+  - universalize CSS variables
+  - clean up unused files
+
+- Build enhancements
+  - build automation task enhancements
+  - generates unique Android versions per build
+  - Add configurable orientation per deployment
+
+- Add Wifi-only upload option to user preferences
+
+- Add AGPL license
 
 ### 3.0.3 - Mobilize Android Release
 
@@ -326,3 +392,11 @@ Includes the following functionality:
 > The name "Dragon Well" comes from a variety of Chinese green tea (龍井茶).
 
 - Set up Cordova, Backbone + Marionette, and vendor libraries
+
+## License
+
+The ohmageX project is **open-source** and licensed under the AFFERO GENERAL PUBLIC LICENSE. The full text of the license may be found in the `LICENSE` file.
+
+### "Dual-licensing" note
+
+Due to known policies of Apple Inc. (described [here](https://www.fsf.org/blogs/licensing/more-about-the-app-store-gpl-enforcement)) limiting/revoking access to the store for projects with GPL-based licenses the project owner (UCLA's Educational and Collaborative Technology Group) are opting currently to release app store builds under a proprietary, non-AGPL license.  New contributors will be require to agree to these terms prior to the acceptance of pull requests.

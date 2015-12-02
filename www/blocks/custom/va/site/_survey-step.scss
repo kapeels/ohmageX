@@ -1,0 +1,214 @@
+$survey-navigation-height: $global-form-control-font-size*3.1;
+
+.survey-step {
+
+  $base-inset-font-size: $global-form-control-font-size * 1.1;
+
+  #step-body {
+    clear: both;
+  }
+
+  #progress {
+    $progress-height: 1.3rem;
+    height: 1em;
+    progress {
+      width: 90%;
+    }
+    line-height: $progress-height;
+    .raw-percentage {
+      display: block;
+      float: left;
+      width: 10%;
+      line-height: $progress-height;
+      font-size: 1em;
+      padding-left: 0.5rem;
+    }
+    progress {
+      font-size: $progress-height;
+    }
+  }
+
+
+  .markdown-inset-block {
+    font-size: $base-inset-font-size;
+
+    h1 {
+      font-size: $base-inset-font-size*1.8;
+    }
+    h2 {
+      font-size: $base-inset-font-size*1.5;
+    }
+    h3 {
+      font-size: $base-inset-font-size*1.35;
+    }
+    h4 {
+      font-size: $base-inset-font-size*1.2;
+    }
+    h5 {
+      font-size: $base-inset-font-size*1.1;
+    }
+    h6 {
+      font-size: $base-inset-font-size;
+    }
+  }
+
+  .prompt-list label {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+
+  // photo prompt
+  .photo-control, .video-control, .file-control {
+    .input-activate {
+      position: absolute;
+      width: 100%;
+      height: $global-form-control-padding*3+$list-icon-size;
+      bottom: $global-form-control-padding;
+      text-align: center;
+      button {
+        background-position: center $global-form-control-padding;
+        color: #fff;
+        background-color: rgba(1,1,1,0.9);
+        border: none;
+        width: auto;
+      }
+      button.take-picture { background-image: url('../img/icon/camera.svg'); }
+      button.from-library { background-image: url('../img/icon/search.svg'); }
+      &.two-buttons {
+        bottom: $global-form-control-padding*6;
+      }
+      &.two-buttons button {
+        padding: $list-icon-size+$global-form-control-padding 0 $global-form-control-padding*1.55 0;
+      }
+
+    }
+
+    .preview-image {
+      width: 100%;
+    }
+    .video-name {
+      text-align: center;
+      font-size: $global-form-control-font-size*.85;
+      &:empty {
+        display: none;
+      }
+    }
+  }
+
+  // number prompt
+  .number-control {
+    width: 6rem;
+    button {
+      visibility: hidden;
+    }
+    input:not(:first-child){
+      border: none;
+      background: $global-form-control-border-color-dark;
+      color: white;
+    }
+  }
+
+  .button-pair {
+    > :first-child {
+      padding-right: 8px;
+    }
+    > :last-child {
+      padding-left: 8px;
+    }
+  }
+  .number-range { display: none; }
+
+  // survey navigation buttons
+  #prev-button, #skip-button, #next-button {
+    button {
+      font-size: $global-form-control-font-size*1.1;
+    }
+  }
+  #prev-button, #next-button {
+
+    button {
+      border-radius: 5px;
+      border: 1px solid black;
+      padding-top: $global-form-control-padding;
+      padding-bottom: $global-form-control-padding;
+    }
+  }
+
+  #skip-button {
+    button {
+      border-radius: 5px;
+      background: $survey-step-prev-button-gradient;
+      color: black;
+      border: 1px solid black;
+      padding-top: $global-form-control-padding;
+      padding-bottom: $global-form-control-padding;
+    }
+  }
+
+  #prev-button {
+    div::before {
+      opacity: 1;
+      background-size: $global-form-control-font-size*1.1;
+    }
+    button {
+      background: $survey-step-prev-button-gradient;
+      color: black;
+    }
+  }
+  #next-button {
+    div::before {
+      background-image: url('../img/icon/va/right-triangle-white.svg');
+      opacity: 1;
+      background-size: $global-form-control-font-size*1.1;
+    }
+    button {
+      background: $survey-step-next-button-gradient;
+      color: white;
+    }
+  }
+
+  // changing the button layout
+  $button-width: 200px;
+
+  .inset-block.survey-navigation {
+    border-top: none;
+    & > * {
+      max-width: none;
+    }
+    position: relative;
+    min-height: $survey-navigation-height;
+    .button-pair > * {
+      position: absolute;
+      right: 8px;
+      top: 8px;
+      float: none;
+      width: $button-width;
+    }
+
+    .button-pair > :first-child {
+      left: 8px;
+      right: auto;
+    }
+    #skip-button {
+      width: $button-width;
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      margin-left: -$button-width/2;
+    }
+  }
+
+}
+
+.survey-active {
+// fixed position survey navigation
+
+  .inset-block.survey-navigation {
+    position: fixed;
+    bottom: 0;
+  }
+  #step-body {
+    padding-bottom: $survey-navigation-height;
+  }
+
+}

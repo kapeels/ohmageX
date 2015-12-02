@@ -1,7 +1,7 @@
 <form>
   <h3 class="hide-accessible"><%= @displayLabel %></h3>
   <fieldset>
-    <legend class="inset-block"><%= @promptText %></legend>
+    <legend class="markdown-inset-block"><%- @promptTextMarkdown %></legend>
     <div class="datetime-control">
       <label for="date<%= @id %>">Select Date</label>
       <input name="date<%= @id %>" value="<%= @currentDateValue %>" type="date">

@@ -30,6 +30,9 @@
         return fileUUIDs[0]
       else
         return false
+    updateFileObj: (uuid, fileObj) ->
+      console.log 'survey:files:update new fileObj path', fileObj.localURL
+      currentFiles[uuid] = fileObj
 
   App.commands.setHandler "survey:file:add", (responseValue) ->
     API.addSurveyFile responseValue
@@ -46,6 +49,10 @@
   App.commands.setHandler "survey:files:destroy", ->
     currentFiles = false
     fileUUIDs = false
+
+  App.commands.setHandler "survey:files:update", (uuid, fileObj) ->
+    # update an existing file object by UUID.
+    API.updateFileObj uuid, fileObj
 
   App.vent.on "survey:exit survey:reset", ->
     currentFiles = false

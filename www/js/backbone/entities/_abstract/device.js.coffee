@@ -1,4 +1,4 @@
-@Ohmage.module "Entities", (Entities, App, Backbone, Marionette, $, _) ->
+@Ohmage.module "Entities", ((Entities, App, Backbone, Marionette, $, _, Modernizr) ->
 
   API =
     initDevice: ->
@@ -11,6 +11,7 @@
 
       @setClientString myDevice
 
+      @detectCSS()
       myDevice
 
     setClientString: (myDevice) ->
@@ -29,6 +30,11 @@
       v = (navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/)
       [ parseInt(v[1], 10), parseInt(v[2], 10), parseInt(v[3] or 0, 10) ]
 
+    detectCSS: ->
+      if Modernizr.csstransforms
+        $('body').addClass('animated-menu')
 
   App.reqres.setHandler "device:init", ->
     API.initDevice()
+
+), Modernizr

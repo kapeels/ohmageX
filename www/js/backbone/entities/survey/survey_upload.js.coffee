@@ -48,7 +48,8 @@
         campaign_creation_timestamp: myCampaign.get('creation_timestamp')
         campaign_urn: campaign_urn
 
-      App.execute "uploader:new", 'survey', completeSubmit, surveyId
+      App.execute "filemeta:move:native", =>
+        App.execute "uploader:new", 'survey', completeSubmit, surveyId
 
     getLocation: (responses, surveyId) ->
       # get geolocation
@@ -63,6 +64,9 @@
         App.execute("survey:geolocation:fetch", surveyId)
 
   App.commands.setHandler "survey:upload", (surveyId) ->
+    # Other requests happen before the survey upload
+    # request, but they are all part of the upload process.
+    App.vent.trigger "uploadtracker:active"
     responses = App.request "responses:current"
 
     App.execute 'credentials:preflight:check', =>

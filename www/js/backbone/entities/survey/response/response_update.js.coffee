@@ -8,21 +8,16 @@
   # References the current Response ResponseCollection object, defined in response.js.coffee
   # via the interface "responses:current"
 
-  API = 
+  API =
     updateResponse: (options) ->
       { myResponse, newValue, validate } = options
       console.log 'myResponse set validate', validate
-      myResponse.set {response: newValue }, { validate: validate }
-      console.log 'myResponse', myResponse.toJSON()
+      if newValue
+        myResponse.set {response: newValue }, { validate: validate }
+      # if newValue is false, leave
+      # the response value alone.
 
-  App.vent.on "flow:condition:failed survey:step:skipped", (stepId) ->
-    # all invalid responses are flagged as "false",
-    # and are processed into the equivalents required
-    # by the server before upload, based on their flow status.
-    API.updateResponse
-      myResponse: App.request "response:get", stepId
-      newValue: false
-      validate: false
+      # console.log 'myResponse', myResponse.toJSON()
 
   App.commands.setHandler "response:set", (newValue, stepId) ->
     API.updateResponse

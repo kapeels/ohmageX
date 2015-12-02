@@ -1,0 +1,7 @@
+<header>
+  <h5><%= @question %></h5>
+  <i class="fa fa-<%= @icon %>"></i>
+</header>
+<% if @status is "skipped": %>
+  <p><em>This prompt was skipped.</em></p>
+<% end %>

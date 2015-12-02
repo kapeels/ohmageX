@@ -20,11 +20,13 @@ module.exports = (grunt) ->
       "<%= web_root_folder %>/js/vendor/spin.js"
       "<%= web_root_folder %>/js/vendor/jquery.spin.js"
       "<%= web_root_folder %>/js/vendor/hideShowPassword.js"
+      "<%= web_root_folder %>/js/vendor/markdown.js"
       "<%= web_root_folder %>/js/vendor/backbone-routefilter.js"
       "<%= web_root_folder %>/js/vendor/placeholder_polyfill.jquery.js"
       "<%= web_root_folder %>/js/vendor/ConditionalParser.js"
       "<%= web_root_folder %>/js/vendor/jstz.js"
       "<%= web_root_folder %>/js/vendor/moment.js"
+      "<%= web_root_folder %>/js/vendor/xmlToJSON.js"
       "<%= web_root_folder %>/js/build/templates.js"
       "<%= web_root_folder %>/js/build/mycoffee.js"
     ]
@@ -97,8 +99,8 @@ module.exports = (grunt) ->
         files: ["<%= web_root_folder %>/index.html.tpl"]
         tasks: ["template:dev"]
       css:
-        files: "<%= web_root_folder %>/**/*.sass"
-        tasks: ['compass']
+        files: "<%= web_root_folder %>/**/*.scss"
+        tasks: ['compass:dist']
 
     concat:
       options:
@@ -143,8 +145,16 @@ module.exports = (grunt) ->
             author: "<%= pkg.author %>"
             image_folder: "<%= appConfig.build.image_folder %>"
             app_version: "<%= pkg.version %>"
+            android_version: "#{Math.floor(new Date() / 1000)}"
+            orientation: "<%= appConfig.build.orientation %>"
         files:
           "config.xml": ["config.xml.tpl"]
+      blockfile:
+        options:
+          data:
+            custom_block: "<%= appConfig.appearance.custom_block %>"
+        files:
+          "<%= web_root_folder %>/Blockfile.rb": ["<%= web_root_folder %>/Blockfile.rb.tpl"]
 
     cordovacli:
       options:
@@ -196,6 +206,7 @@ module.exports = (grunt) ->
             "network-information",
             "splashscreen",
             "org.apache.cordova.file-transfer",
+            "https://github.com/wrenr/cordova-plugin-openfilenative.git",
             "https://github.com/ucla/cordova-plugin-local-notifications.git"
           ]
 
@@ -237,17 +248,20 @@ module.exports = (grunt) ->
       blocks_build:
         cmd: "bundle exec blocks build"
         cwd: "<%= web_root_folder %>"
+      blocks_watch:
+        cmd: "bundle exec blocks watch"
+        cwd: "<%= web_root_folder %>"
       mobile_init:
-        cmd: "grunt cordova_init"
+        cmd: "../node_modules/grunt-cli/bin/grunt cordova_init"
         cwd: "<%= cordova_project_folder %>"
       ios_init:
-        cmd: "grunt cordova_ios_init"
+        cmd: "../node_modules/grunt-cli/bin/grunt cordova_ios_init"
         cwd: "<%= cordova_project_folder %>"
       ios_build:
-        cmd: "grunt cordova_build_ios"
+        cmd: "../node_modules/grunt-cli/bin/grunt cordova_build_ios"
         cwd: "<%= cordova_project_folder %>"
       android_build:
-        cmd: "adb uninstall <%= appConfig.build.bundle_id %>;cordova run android"
+        cmd: "adb uninstall <%= appConfig.build.bundle_id %>;../node_modules/cordova/bin/cordova run android"
         cwd: "<%= cordova_project_folder %>"
       android_theme_fix:
         cmd: "sed -i '' 's|android:theme=\"@android:style/Theme.Black.NoTitleBar\"||g' AndroidManifest.xml"
@@ -275,6 +289,7 @@ module.exports = (grunt) ->
 
   grunt.registerTask "default", [
     "template:dev"
+    "template:blockfile"
     "eco"
     "coffee"
     "concat"
@@ -284,6 +299,7 @@ module.exports = (grunt) ->
   ]
   grunt.registerTask "mobile_dev", [
     "template:dev"
+    "template:blockfile"
     "eco"
     "coffee"
     "concat"
@@ -295,6 +311,7 @@ module.exports = (grunt) ->
   ]
   grunt.registerTask "dev", [
     "template:dev"
+    "template:blockfile"
     "eco"
     "coffee"
     "concat"
@@ -311,6 +328,11 @@ module.exports = (grunt) ->
     "cordovacli:add_plugins"
   ]
 
+
+  grunt.registerTask "webblocks_build", [
+    "template:blockfile",
+    "exec:blocks_build"
+  ]
 
   grunt.registerTask "cordova_build_ios", [
     "cordovacli:build_ios"
@@ -355,6 +377,9 @@ module.exports = (grunt) ->
     "copy:hybrid_build"
     "clean:cordova_www"
     "copy:cordova_www"
+    "template:cordova_config"
+    "clean:cordova_config"
+    "copy:cordova_config"
     "exec:ios_build" # must pass it through a custom exec to change cwd
   ]
 
@@ -364,6 +389,19 @@ module.exports = (grunt) ->
     "copy:hybrid_build"
     "clean:cordova_www"
     "copy:cordova_www"
+    "template:cordova_config"
+    "clean:cordova_config"
+    "copy:cordova_config"
     "exec:android_build" # must pass it through a custom exec to change cwd
   ]
 
+  grunt.registerTask "jenkins_build", [
+    "dev"
+    "clean:hybrid_build"
+    "copy:hybrid_build"
+    "clean:cordova_www"
+    "copy:cordova_www"
+    "template:cordova_config"
+    "clean:cordova_config"
+    "copy:cordova_config"
+  ]

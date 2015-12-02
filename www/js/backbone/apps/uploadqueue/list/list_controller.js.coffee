@@ -14,6 +14,9 @@
         @listRegion list
         @noticeRegion()
 
+      @listenTo App.vent, "uploadqueue:item:fullmodal:close", =>
+        @noticeRegion()
+
       @show @layout, loading: false
 
     noticeRegion: ->

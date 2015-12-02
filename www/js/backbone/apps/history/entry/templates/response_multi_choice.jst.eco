@@ -1,0 +1,9 @@
+<header>
+  <h5><%= @question %></h5>
+  <i class="fa fa-<%= @icon %>"></i>
+</header>
+<ul>
+<% for response in @responses: %>
+  <li><%= response %></li>
+<% end %>
+</ul>

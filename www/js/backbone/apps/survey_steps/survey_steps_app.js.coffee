@@ -52,47 +52,46 @@
     new SurveyStepsApp.Router
       controller: API
 
-  App.vent.on "survey:step:skip:clicked", (surveyId, stepId) ->
-    console.log "survey:step:skip:clicked"
-    # navigate to the next item and broadcast a skipped event
-    App.vent.trigger "survey:step:skipped", stepId
-    API.goNext surveyId, stepId
+  App.on "before:start", ->
 
-  App.vent.on "survey:step:prev:clicked", (surveyId, stepId) ->
-    console.log "survey:step:prev:clicked"
-    API.goPrev surveyId, stepId
+    if App.custom.functionality.multi_question_survey_flow is false
 
-  App.vent.on "survey:intro:next:clicked survey:message:next:clicked", (surveyId, stepId) ->
-    console.log "survey:intro:next:clicked survey:message:next:clicked"
-    API.goNext surveyId, stepId
+      App.vent.on "survey:step:skip:clicked", (surveyId, stepId) ->
+        console.log "survey:step:skip:clicked"
+        # navigate to the next item and broadcast a skipped event
+        App.vent.trigger "survey:step:skipped", stepId
+        API.goNext surveyId, stepId
 
-  App.vent.on "survey:beforesubmit:next:clicked", (surveyId, stepId) ->
-    # survey:upload gathers and submits all data
-    # and will fire survey:upload:success.
-    App.commands.execute "survey:upload", surveyId
+      App.vent.on "survey:step:prev:clicked", (surveyId, stepId) ->
+        console.log "survey:step:prev:clicked"
+        API.goPrev surveyId, stepId
 
-  App.vent.on "survey:upload:success survey:upload:failure:ok", (response, surveyId) ->
-    # Go to the next step if the submit succeeds or if they click the OK button on the modal
-    server_id = App.request("survey:saved:server_id", surveyId)
-    API.goNext surveyId, "#{server_id}beforeSurveySubmit"
+      App.vent.on "survey:intro:next:clicked survey:message:next:clicked", (surveyId, stepId) ->
+        console.log "survey:intro:next:clicked survey:message:next:clicked"
+        API.goNext surveyId, stepId
 
-  App.vent.on "survey:aftersubmit:next:clicked", (surveyId, stepId) ->
-    App.vent.trigger "survey:exit", surveyId
+      App.vent.on "survey:beforesubmit:next:clicked", (surveyId, stepId) ->
+        # survey:upload gathers and submits all data
+        # and will fire survey:upload:success.
+        App.commands.execute "survey:upload", surveyId
 
-  App.vent.on "reminders:survey:new", (surveyId) ->
-    App.vent.trigger "survey:reset", surveyId
+      App.vent.on "survey:upload:success survey:upload:failure:ok", (response, surveyId) ->
+        # Go to the next step if the submit succeeds or if they click the OK button on the modal
+        server_id = App.request("survey:saved:server_id", surveyId)
+        API.goNext surveyId, "#{server_id}beforeSurveySubmit"
 
-  App.vent.on "survey:notifications:suppress", (surveyId, notificationIds) ->
-    App.vent.trigger "survey:exit", surveyId
+      App.vent.on "survey:aftersubmit:next:clicked", (surveyId, stepId) ->
+        App.vent.trigger "survey:exit", surveyId
 
-  App.vent.on "response:set:success", (response, surveyId, stepId) ->
-    API.goNext surveyId, stepId
+      App.vent.on "reminders:survey:new", (surveyId) ->
+        App.vent.trigger "survey:reset", surveyId
 
-  App.vent.on "response:set:error", (error) ->
-    console.log "response:set:error", error
-    App.execute "dialog:alert", "#{error.toString()}"
+      App.vent.on "survey:notifications:suppress", (surveyId, notificationIds) ->
+        App.vent.trigger "survey:exit", surveyId
 
-  App.vent.on "survey:upload:failure:auth", (responseData, errorText, surveyId) ->
-    if !App.request("credentials:ispassword")
-      # dump to queue and save survey
-      App.execute "uploadqueue:item:add", responseData, "#{errorPrefix} #{errorText}", surveyId
+      App.vent.on "response:set:success", (response, surveyId, stepId) ->
+        API.goNext surveyId, stepId
+
+      App.vent.on "response:set:error", (error) ->
+        console.log "response:set:error", error
+        App.execute "dialog:alert", "#{error.toString()}"

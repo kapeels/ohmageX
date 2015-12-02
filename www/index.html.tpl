@@ -15,6 +15,7 @@
 <body>
   <div id="loading-spinner"></div>
   <div id="ui-blocker"></div>
+  <div id="full-modal"></div>
   <header role="banner"></header>
   <main role="main"></main>
   <footer role="contentinfo"></footer>

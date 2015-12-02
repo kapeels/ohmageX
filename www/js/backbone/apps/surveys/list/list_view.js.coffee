@@ -75,6 +75,10 @@
       infobuttonRegion: "#infobutton-region"
       selectorRegion: "#selector-region"
       listRegion: "#list-region"
+    triggers:
+      "click .campaigns-link": "link:campaigns:clicked"
     serializeData: ->
       data = @collection.findWhere(chosen: true).toJSON()
+      data.internalLinksEnabled = App.custom.functionality.internal_links_enabled
+      data.campaignsWord = App.dictionary('pages','campaign').capitalizeFirstLetter()
       data

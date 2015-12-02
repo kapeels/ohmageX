@@ -1,0 +1,33 @@
+$modal-close-background-color: desaturate(#b00, 100%);
+$modal-close-background: linear-gradient(to bottom, desaturate(adjust-color($modal-close-background-color, $lightness: 5%, $saturation: -5%),100%) 0%, desaturate(adjust-color($modal-close-background-color, $lightness: -5%, $saturation: 5%), 100%) 100%);
+$modal-close-font-color: #fff;
+
+$modal-close-icon-size: 2.3rem;
+
+$modal-close-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.25);
+
+$modal-activate-background-color: #00aeff;
+$modal-activate-background: linear-gradient(to bottom, desaturate(adjust-color($modal-activate-background-color, $lightness: 5%, $saturation: -5%),100%) 0%, desaturate(adjust-color($modal-activate-background-color, $lightness: -5%, $saturation: 5%),100%) 100%);
+$modal-activate-font-color: #fff;
+
+
+$info-region-header-height: $info-region-header-height * $scale_factor;
+$info-region-header-font-size: $info-region-header-font-size * $scale_factor;
+
+$survey-step-inset-block-background-color: #f8f8f8;
+$survey-step-inset-block-font-color: #111111;
+$survey-step-inset-block-border-color: desaturate(#2d9ce3, 100%);
+
+$list-icon-size: 2rem;
+
+$survey-step-prev-button-background-color: desaturate(#56c68a, 100%);
+$survey-step-next-button-background-color: desaturate(#e76453, 100%);
+$survey-step-skip-button-background-color: desaturate(#dbdbdb, 100%);
+
+$survey-step-number-control-gradient: linear-gradient(to bottom, desaturate(#47c4ff, 100%) 0%, desaturate(#00aeff, 100%) 100%);
+
+$survey-step-prev-gradient-swatch: lighten(#b8b8b8, 5%);
+$survey-step-next-gradient-swatch: darken(#111111, 5%);
+
+$survey-step-prev-button-gradient: linear-gradient(to bottom, lighten($survey-step-prev-gradient-swatch,20%) 10%, $survey-step-prev-gradient-swatch 100%);
+$survey-step-next-button-gradient: linear-gradient(to bottom, lighten($survey-step-next-gradient-swatch,20%) 10%, $survey-step-next-gradient-swatch 100%);

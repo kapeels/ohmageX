@@ -1,4 +1,4 @@
 <a href="<%= @url %>">
 	<i class="icon <%= @icon %>"></i>
-	<%= @navLabel %>
+	<%= @navLabel %><% if @marker isnt false: %>&nbsp;<span class="marker"><%= @marker %></span><% end %>
 </a>

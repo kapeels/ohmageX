@@ -27,9 +27,12 @@
 
       if App.request "flow:type:is:prompt", id
         myResponse = App.request("response:get", id).get 'response'
-        myDefault = responseEntity.get 'default'
+        myDefault = if App.request("flow:prepop:get", id) isnt false
+          App.request("flow:prepop:get", id)
+        else
+          responseEntity.get('default') or false
         validResponse = !!myResponse
-        validDefault = myDefault?
+        validDefault = myDefault isnt false
 
         if validResponse
           currentValue = myResponse
@@ -41,14 +44,17 @@
       responseEntity.set 'currentValue', currentValue
       responseEntity
 
-    getEntity: (currentStep, id) ->
+    getEntity: (currentStep, id, options) ->
+      _.defaults options,
+        setValue: true
+
       myType = currentStep.get 'type'
       $myXML = currentStep.get '$XML'
       # Only set our entity if it hasn't been initialized yet.
       # This way the entity's individual XML is rapidly parsed only when needed.
       if currentStep.get('entity') is false then currentStep.set( 'entity', App.request "prompt:entity", myType, $myXML )
-      @setCurrentValue currentStep.get('entity'), id
+      if options.setValue then @setCurrentValue(currentStep.get('entity'), id) else currentStep.get('entity')
 
-  App.reqres.setHandler "flow:entity", (id) ->
+  App.reqres.setHandler "flow:entity", (id, options = {}) ->
     currentStep = App.request "flow:step", id
-    API.getEntity currentStep, id
+    API.getEntity currentStep, id, options

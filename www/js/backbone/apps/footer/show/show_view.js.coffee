@@ -12,6 +12,7 @@
     serializeData: ->
       data = {}
       data.version = App.version
+      data.helpURL = App.custom.routes.help
       data
     events: ->
       if App.device.isNative

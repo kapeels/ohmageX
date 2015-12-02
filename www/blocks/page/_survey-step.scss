@@ -1,11 +1,36 @@
 .survey-step {
-
   #progress {
     line-height: 0.8;
     progress {
       width: 100%;
     }
+    .raw-percentage {
+      display: none;
+    }
   }
+
+  .step-message {
+    padding: $global-form-control-padding*2;
+    h2:empty {
+      display: none;
+    }
+    p {
+      margin: 0;
+      padding: $global-form-control-padding*2 0;
+    }
+  }
+
+  .inline-error {
+    font-size: $global-form-control-font-size*0.95;
+    background-color: #FFDDEE;
+    color: #B01;
+    padding: $global-form-control-padding;
+    margin: 0;
+    &:empty {
+      display: none;
+    }
+  }
+
 
   fieldset { // used for semantic reasons only
     border: none;
@@ -22,16 +47,20 @@
     max-width: 500px;
   }
 
-  .inset-block {
+  .inset-block, .markdown-inset-block {
     width: 100%;
     overflow: auto;
     display: block;
-    padding: $app-main-footer-padding;
+    font-size: $global-form-control-font-size;
     background-color: $survey-step-inset-block-background-color;
-    font-weight: bold;
     color: $survey-step-inset-block-font-color;
     border-top: 1px solid $survey-step-inset-block-border-color;
     border-bottom: 1px solid $survey-step-inset-block-border-color;
+  }
+
+  .inset-block {
+    font-weight: bold;
+    padding: $app-main-footer-padding;
   }
 
   textarea {
@@ -41,6 +70,8 @@
 
   .control-container {
     margin: $app-main-footer-padding;
+    margin-bottom: 0;
+    padding-bottom: $app-main-footer-padding;
   }
 
   .prompt-list {
@@ -75,15 +106,19 @@
       background-color: $app-background;
     }
 
-    td.content {
+    td.content,td.right {
       background-color: #fff;
     }
     label {
       line-height: 1;
       font-size: $global-form-control-font-size;
       display: inline-block;
-      padding: $global-form-control-padding*2;
+      padding: 0 $global-form-control-padding*2;
       width: 100%;
+      p {
+        margin: 0;
+        padding: $global-form-control-padding*2 0;
+      }
     }
 
     button.delete {
@@ -133,7 +168,7 @@
     button {
       width: 100%;
       text-transform: uppercase;
-      font-size: 0.8rem;
+      font-size: $global-form-control-font-size*0.85;
       padding: $global-form-control-padding*1.5;
     }
   }
@@ -230,16 +265,16 @@
     }
     button {
       background: #00aeff;
-      background: linear-gradient(to bottom, #47c4ff 0%, #00aeff 100%);
+      background: $survey-step-number-control-gradient;
       font-weight: bold;
       color: #fff;
-      font-size: 1.5rem;
-      padding: 0.25rem;
+      font-size: $global-form-control-font-size * 1.66;
+      padding: $global-form-control-padding / 1.9;
     }
     input {
       text-align: center;
-      font-size: 1.5rem;
-      padding: 1rem;
+      font-size: $global-form-control-font-size * 1.66;
+      padding: $global-form-control-padding * 2.1;
     }
     input[type=number]::-webkit-outer-spin-button { margin: 0; }
     button:first-child {
@@ -268,7 +303,7 @@
     }
   }
 
-  .photo-control, .video-control {
+  .photo-control, .video-control, .file-control {
     .container {
       position: relative;
       min-height: 200px;
@@ -338,6 +373,16 @@
       &:empty {
         display: none;
       }
+    }
+  }
+
+  .file-control {
+    .file-header {
+      padding: $global-form-control-padding;
+      font-size: $global-form-control-font-size;
+    }
+    .input-activate button {
+      background-image: none;
     }
   }
 
@@ -422,6 +467,47 @@
         padding: $global-form-control-padding/2;
         height: $number-row-height+$global-form-control-padding;
         width: $number-section-header-width;
+      }
+    }
+  }
+  .inline-skip {
+    padding: $global-form-control-padding;
+    font-size: $global-form-control-font-size;
+    .my-checkbox, .my-label, .my-label label {
+      display: inline-block;
+    }
+    .my-checkbox {
+      margin-right: $global-form-control-padding;
+    }
+    .my-label, .my-label label {
+      width: 75%;
+    }
+  }
+  .step-body-region {
+    position: relative;
+    &.skipped {
+      > div:after {
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 10;
+        position: absolute;
+        background: $survey-step-skip-button-background-color;
+        background: linear-gradient(to bottom, adjust-color($survey-step-skip-button-background-color, $lightness: 5%, $saturation: -5%) 0%, adjust-color($survey-step-skip-button-background-color, $lightness: -5%, $saturation: 5%) 100%);    
+        border-radius: 0;
+        border: 1px solid adjust-color($survey-step-skip-button-background-color, $lightness: -5%, $saturation: 5%);
+        color: $survey-step-skip-button-font-color;
+
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=85)";
+        filter: alpha(opacity=85);
+        opacity: 0.85;
+        text-transform: uppercase;
+        content: 'Skipped';
+        padding-top: $global-form-control-padding;
+        padding-left: $global-form-control-padding;
+        text-align: left;
+        font-size: $global-form-control-font-size*1.1;
       }
     }
   }

@@ -1,0 +1,60 @@
+.survey-step .prompt-list .horizontal-layout {
+
+  // all sizing for this element is derived from $radio-size,
+  // which is proportional to the global form font size.
+
+  $radio-size: 1.25rem;
+  $radio-border-gap: $radio-size * 0.5;
+
+  .input-area {
+    padding-top: $radio-border-gap*2;
+
+    input {
+      display: none;
+    }
+
+    input + label.dummy-styled-radio {
+      display: inline-block !important;
+      border-radius: 50%;
+      border: 1px solid black;
+      background: -webkit-linear-gradient(-45deg, #ffffff 0%, #c2c2c2 100%);
+      background: -moz-linear-gradient(-45deg, #ffffff 0%, #c2c2c2 100%);
+      background: -o-linear-gradient(-45deg, #ffffff 0%, #c2c2c2 100%);
+      background: -ms-linear-gradient(-45deg, #ffffff 0%, #c2c2c2 100%);
+      background: linear-gradient(135deg, #ffffff 0%, #c2c2c2 100%);
+
+      padding: 0;
+
+      width: $radio-size;
+      height: $radio-size;
+
+      position: relative;
+
+      &:before {
+        // this is the second border.
+        // the pseudo el is centered using absolute positioning relative to its parent
+        // and adds a gap to the other border via a negative offset in all directions.
+        content: " ";
+        display: block;
+        border: 1px solid black;
+        position: absolute;
+        border-radius: 50%;
+        top: -($radio-border-gap);
+        left: -($radio-border-gap);
+        right: -($radio-border-gap);
+        bottom: -($radio-border-gap);
+      }
+
+    }
+
+    input:checked + label.dummy-styled-radio {
+      background: -webkit-linear-gradient(-45deg, #024e75 0%, #ffffff 0%, #676767 0%, #000000 100%);
+      background: -moz-linear-gradient(-45deg, #024e75 0%, #ffffff 0%, #676767 0%, #000000 100%);
+      background: -o-linear-gradient(-45deg, #024e75 0%, #ffffff 0%, #676767 0%, #000000 100%);
+      background: -ms-linear-gradient(-45deg, #024e75 0%, #ffffff 0%, #676767 0%, #000000 100%);
+      background: linear-gradient(135deg, #024e75 0%, #ffffff 0%, #676767 0%, #000000 100%);
+    }
+
+  }
+
+}

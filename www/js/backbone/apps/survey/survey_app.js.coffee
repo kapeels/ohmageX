@@ -33,14 +33,25 @@
 
       App.vent.trigger "survey:start", id
 
-      firstId = App.request "flow:id:first"
+      if App.custom.functionality.multi_question_survey_flow is true
+        # navigate to the multi-question flow instead
+        console.log 'navigate to the multi-question flow instead'
+        App.navigate "surveymulti/#{id}/page/1", trigger: true
 
-      App.navigate "survey/#{id}/step/#{firstId}", trigger: true
+      else
+        firstId = App.request "flow:id:first"
+
+        App.navigate "survey/#{id}/step/#{firstId}", trigger: true
 
   App.addInitializer ->
     new SurveyApp.Router
       controller: API
 
   App.vent.on "survey:exit", (surveyId) ->
-    campaign_urn = App.request "survey:saved:urn", surveyId
-    App.navigate "surveys/#{campaign_urn}", { trigger: true }
+    if App.custom.routes.surveys is "survey"
+      # be sure to navigate to the campaign URN if going
+      # back to the surveys list.
+      campaign_urn = App.request "survey:saved:urn", surveyId
+      App.navigate "surveys/#{campaign_urn}", { trigger: true }
+    else
+      App.navigate App.navs.getUrlByName(App.custom.routes.surveys), { trigger: true }

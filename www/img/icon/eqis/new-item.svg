@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="77.8px"
+	 height="36.7px" viewBox="0 0 77.8 36.7" style="enable-background:new 0 0 77.8 36.7;" xml:space="preserve">
+<g id="Layer_1">
+	<g id="Folder_-_Orange">
+		<g id="Plus_-_Grey">
+		</g>
+	</g>
+	<g id="Play">
+	</g>
+</g>
+<g id="icons">
+	<path style="fill:#FFFFFF;stroke:#062A5B;stroke-width:0.5969;stroke-miterlimit:10;" d="M77.3,33.3c0,1.6-1.3,3-3,3H3.5
+		c-1.6,0-3-1.3-3-3V3.4c0-1.6,1.3-3,3-3h70.8c1.6,0,3,1.3,3,3V33.3z"/>
+	<g>
+		<g>
+			<g>
+				<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="34.1582" y1="7.019" x2="45.3634" y2="33.9305">
+					<stop  offset="0" style="stop-color:#FFFFFF"/>
+					<stop  offset="1" style="stop-color:#D4D6D7"/>
+				</linearGradient>
+				<path style="fill:url(#SVGID_1_);" d="M38.9,33.3c-8.3,0-15-6.7-15-15s6.7-15,15-15c8.3,0,15,6.7,15,15S47.1,33.3,38.9,33.3z"/>
+				<g>
+					<path style="fill:#062A5B;" d="M38.9,3.8c8,0,14.6,6.5,14.6,14.6S46.9,33,38.9,33c-8,0-14.6-6.5-14.6-14.6S30.8,3.8,38.9,3.8
+						 M38.9,3c-8.5,0-15.4,6.9-15.4,15.4c0,8.5,6.9,15.4,15.4,15.4c8.5,0,15.4-6.9,15.4-15.4C54.2,9.9,47.4,3,38.9,3L38.9,3z"/>
+				</g>
+			</g>
+		</g>
+		<polygon style="fill:#062A5B;" points="47.5,16.2 41,16.2 41,9.7 36.7,9.7 36.7,16.2 30.3,16.2 30.3,20.5 36.7,20.5 36.7,27 
+			41,27 41,20.5 47.5,20.5 		"/>
+	</g>
+</g>
+</svg>

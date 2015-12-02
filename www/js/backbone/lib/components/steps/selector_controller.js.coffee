@@ -15,6 +15,15 @@
 
       myView = @selectView entity, type
 
+      if type is "message"
+        messageTextMarkdown = App.request "prompt:markdown",
+          originalText: entity.get 'messageText'
+          campaign_urn: App.request "survey:saved:urn", @surveyId
+          surveyId: @surveyId
+          stepId: @stepId
+
+        entity.set 'messageTextMarkdown', messageTextMarkdown
+
       if type is "afterSurveySubmit"
         @listenTo myView, 'new:reminder', =>
           App.vent.trigger "reminders:survey:new", @surveyId

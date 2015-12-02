@@ -95,3 +95,6 @@
   App.vent.on "uqall:upload:failure:network", (responseData, errorText, itemId) ->
     # placeholder for network errors handler.
     API.queueFailureGeneral "Problem with Network:", errorText, itemId
+
+  App.vent.on "uqall:upload:failure:wifionly", (responseData, errorText, itemId) ->
+    API.queueFailureGeneral "Cannot Upload:", "User preferences set to only upload on wifi.", itemId

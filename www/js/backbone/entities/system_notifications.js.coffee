@@ -34,6 +34,7 @@
         console.log "notification onclick event"
         result = JSON.parse notification.data
         console.log "survey/#{result.surveyId}"
+        App.vent.trigger "system:notifications:clicked", notification
         App.navigate "survey/#{result.surveyId}", trigger: true
 
         # clear the notification from the notification center now
@@ -151,7 +152,7 @@
         result =
           id: notificationId
           title: "#{surveyTitle}"
-          text: "Take survey #{surveyTitle}"
+          text: App.custom.messages.reminder_body
           firstAt: firstAt
           data:
             surveyId: surveyId
@@ -197,7 +198,7 @@
         result.push
           id: myId
           title: "#{reminder.get('surveyTitle')}"
-          text: "Take survey #{reminder.get('surveyTitle')}"
+          text: App.custom.messages.reminder_body
           every: 'week'
           firstAt: newDate.toDate()
           data:
@@ -228,9 +229,15 @@
         App.vent.trigger "notifications:update:complete"
 
 
-    clear: ->
-      cordova.plugins.notification.local.cancelAll ->
-        console.log 'All system notifications canceled'
+    clear: (options) ->
+      # options
+      # complete: A callback to fire when cancelAll has finished
+
+      _.defaults options,
+        complete: ->
+          console.log 'All system notifications canceled'
+
+      cordova.plugins.notification.local.cancelAll options.complete
 
   App.vent.on "surveys:saved:load:complete", ->
     if App.device.isNative
@@ -243,6 +250,6 @@
     console.log "system:notifications:turn:on", reminder
     API.turnOn reminder
 
-  App.vent.on "credentials:cleared", ->
+  App.vent.on "reminders:all:clear:complete", (options) ->
     if App.device.isNative
-      API.clear()
+      API.clear options

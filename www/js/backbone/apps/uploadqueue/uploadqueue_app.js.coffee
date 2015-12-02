@@ -14,7 +14,8 @@
       App.vent.trigger "nav:choose", "queue"
       new Uploadqueue.List.Controller
     item: (id) ->
-      App.vent.trigger "nav:choose", "queue"
+      if App.navs.getSelectedName() isnt "queue"
+        App.vent.trigger "nav:choose", "queue"
       new Uploadqueue.Item.Controller
         queue_id: id
     queueFailureGeneral: (responseData, errorPrefix, errorText, itemId) ->
@@ -84,3 +85,14 @@
   App.vent.on "uploadqueue:upload:failure:network", (responseData, errorText, itemId) ->
     # placeholder for network errors handler.
     API.queueFailureGeneral responseData, "", "Network Error", itemId
+
+  App.vent.on "uploadqueue:upload:failure:wifionly", (responseData, errorText, itemId) ->
+    API.queueFailureGeneral responseData, "Cannot Upload:", "User preferences set to only upload on wifi.", itemId
+
+  App.vent.on "uploadqueue:item:fullmodal:close", ->
+    # Since this came from a modal view,
+    # there is the chance that the modal was navigated to DIRECTLY.
+    # if this was the case, the app mainRegion would be empty.
+    # We can detect this and render the uploadqueue list appropriately.
+    options = if typeof App.mainRegion.currentView is "undefined" then {trigger: true} else {}
+    App.navigate "uploadqueue", options

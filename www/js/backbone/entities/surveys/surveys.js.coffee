@@ -18,13 +18,18 @@
         console.log 'options in parse', options
         urn = options.data.campaign_urn_list
         campaignXML = response.data[urn].xml
-        $surveys = @getSurveyXML campaignXML
+        $XML = $( $.parseXML(campaignXML) )
+
+        # we have to execute a command here,
+        # since campaigns are a separate entity and
+        # this is the central place where campaign/survey
+        # XML is extracted.
+        App.execute "campaigns:meta:set", urn, $XML.tagHTML("campaign > #{App.xmlMeta.rootLabel}")
+
+        $surveys = $XML.find 'survey'
         @parseSurveysXML $surveys, urn, campaignXML
     comparator: (item) ->
       item.get('title').capitalizeFirstLetter()
-    getSurveyXML: (rawXML) ->
-      $XML = $( $.parseXML(rawXML) )
-      $XML.find 'survey'
     parseSurveysXML: ($surveysXML, urn, campaignXML) ->
       _.map($surveysXML, (survey) ->
         $survey = $(survey)
@@ -36,6 +41,8 @@
           description: $survey.tagText('description')
           xmlStr: my$XmlToString($survey).trim()
           campaign_urn: urn
+          meta: App.request('xmlmeta:xml:to:json', $survey.tagHTML("> #{App.xmlMeta.rootLabel}"))
+          parent_meta: App.request('campaigns:meta:get', urn)
         }
       )
 
@@ -53,7 +60,6 @@
 
     getSurveys: (campaign_urn) ->
       console.log campaign_urn
-      App.vent.trigger "loading:show", "Saving #{App.dictionary('page','campaign')}..."
       myData =
         client: App.client_string
         output_format: 'long'
@@ -73,21 +79,15 @@
             )
           else
             message = "The following errors prevented the #{App.dictionary('page','campaign')} from downloading: "
-            showAlert = true
             _.every response.errors, (error) =>
               message += error.text
               if error.code in ["0200","0201","0202"]
                 App.vent.trigger "surveys:saved:campaign:fetch:failure:auth", error.text
-                showAlert = false
                 return false
-            App.vent.trigger 'surveys:saved:campaign:fetch:error', options.data.campaign_urn_list
-            if showAlert then App.execute "dialog:alert", message
-          App.vent.trigger "loading:hide"
+            App.vent.trigger 'surveys:saved:campaign:fetch:error', options.data.campaign_urn_list, message
         error: (collection, response, options) =>
           console.log 'surveys fetch error'
-          App.vent.trigger 'surveys:saved:campaign:fetch:error', options.data.campaign_urn_list
-          App.execute "dialog:alert", "Network error fetching #{App.dictionary('page','campaign')}."
-          App.vent.trigger "loading:hide"
+          App.vent.trigger 'surveys:saved:campaign:fetch:error', options.data.campaign_urn_list, "Network error fetching #{App.dictionary('page','campaign')}."
     getCampaignSurveys: (urn) ->
       surveys = currentSurveysSaved.where
         campaign_urn: urn

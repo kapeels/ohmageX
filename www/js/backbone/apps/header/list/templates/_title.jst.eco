@@ -1,1 +1,1 @@
-<i class="<%= @icon %> icon"></i><%= @pageTitle %>
+<i class="<%= @icon %> icon"></i><%= @pageTitle %><% if @marker isnt false: %>&nbsp;<span class="marker"><%= @marker %></span class="marker"><% end %>

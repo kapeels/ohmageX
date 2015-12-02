@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="36.7px"
+	 height="36.7px" viewBox="0 0 36.7 36.7" style="enable-background:new 0 0 36.7 36.7;" xml:space="preserve">
+<g id="Layer_1">
+	<g id="Folder_-_Orange">
+		<g id="Plus_-_Grey">
+		</g>
+	</g>
+	<g id="Play">
+	</g>
+</g>
+<g id="icons">
+	<g>
+		<path style="fill:#FFFFFF;stroke:#062A5B;stroke-width:0.5969;stroke-miterlimit:10;" d="M36.3,33.3c0,1.6-1.3,3-3,3H3.4
+			c-1.6,0-3-1.3-3-3V3.4c0-1.6,1.3-3,3-3h29.8c1.6,0,3,1.3,3,3V33.3z"/>
+		<g>
+			<g>
+				<g>
+					<rect x="4.7" y="8.2" style="fill:#307559;" width="27.4" height="18.3"/>
+					<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="5.6221" y1="17.293" x2="31.1006" y2="17.293">
+						<stop  offset="0" style="stop-color:#FFFFFF"/>
+						<stop  offset="1" style="stop-color:#D4D6D7"/>
+					</linearGradient>
+					<rect x="6.1" y="9.7" style="fill:#307559;stroke:url(#SVGID_1_);stroke-miterlimit:10;" width="24.5" height="15.1"/>
+					<text transform="matrix(1 0 0 1 7.6104 19.8716)" style="fill:#FFFFFF; font-family:'Chalkboard'; font-size:7.8046;">E=MC</text>
+					
+						<text transform="matrix(0.583 0 0 0.583 26.7197 17.2725)" style="fill:#FFFFFF; font-family:'Chalkboard'; font-size:7.8046;">2</text>
+				</g>
+				<g>
+					<rect x="8.5" y="23.1" style="fill:#FFFFFF;" width="4.4" height="1.3"/>
+					<rect x="14.3" y="23.1" style="fill:#FFFFFF;" width="4.4" height="1.3"/>
+				</g>
+			</g>
+			<g>
+				<g>
+					<g>
+						<g>
+							<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="26.4326" y1="22.7773" x2="31.1143" y2="34.0244">
+								<stop  offset="0" style="stop-color:#FFFFFF"/>
+								<stop  offset="1" style="stop-color:#D4D6D7"/>
+							</linearGradient>
+							<path style="fill:url(#SVGID_2_);" d="M28.4,33.8c-3.5,0-6.3-2.8-6.3-6.3s2.8-6.3,6.3-6.3c3.4,0,6.3,2.8,6.3,6.3
+								S31.9,33.8,28.4,33.8z"/>
+							<g>
+								<path style="fill:#062A5B;" d="M28.4,21.3c3.4,0,6.2,2.8,6.2,6.2s-2.8,6.2-6.2,6.2c-3.4,0-6.2-2.8-6.2-6.2
+									S25,21.3,28.4,21.3 M28.4,21.2c-3.5,0-6.3,2.8-6.3,6.3c0,3.5,2.8,6.3,6.3,6.3c3.5,0,6.3-2.8,6.3-6.3
+									C34.7,24,31.9,21.2,28.4,21.2L28.4,21.2z"/>
+							</g>
+						</g>
+					</g>
+					<polygon style="fill:#062A5B;" points="32,26.6 29.3,26.6 29.3,24 27.5,24 27.5,26.6 24.9,26.6 24.9,28.4 27.5,28.4 27.5,31.1 
+						29.3,31.1 29.3,28.4 32,28.4 					"/>
+				</g>
+			</g>
+		</g>
+	</g>
+</g>
+</svg>

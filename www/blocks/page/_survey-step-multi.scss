@@ -1,0 +1,24 @@
+.survey-step.survey-step-multi #step-body > div {
+  // primary container with all of the main items.
+  background-color: darken($survey-step-inset-block-background-color, 10%);
+
+  &.text-container {
+    background-color: white;
+  }
+  .survey-step-item {
+    margin-top: $global-form-control-padding;
+    box-shadow: 0 1px 0 0 darken($survey-step-inset-block-background-color, 25%);
+    background-color: lighten($app-background, 3%);
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &.error {
+      // border-top: 1px solid darken(#FFDDEE, 15%);
+      box-shadow: 0 0 0 1px darken(#FFDDEE, 15%);
+      border-left: 3px solid red;
+    }
+  }
+
+}

@@ -20,8 +20,13 @@ $survey-step-inset-block-border-color: #2d9ce3 !default;
 
 $list-icon-size: 2rem !default;
 
-$survey-step-prev-button-background-color: #e76453;
-$survey-step-next-button-background-color: #56c68a;
-$survey-step-skip-button-background-color: #dbdbdb;
+$survey-step-prev-button-background-color: #e76453 !default;
+$survey-step-next-button-background-color: #56c68a !default;
+$survey-step-skip-button-background-color: #dbdbdb !default;
+
+$survey-step-skip-button-font-color: #666666 !default;
+
+$survey-step-number-control-gradient: linear-gradient(to bottom, #47c4ff 0%, #00aeff 100%);
+
 
 $survey-step-skip-button-font-color: #666666;

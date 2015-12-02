@@ -8,6 +8,7 @@
     getProfile: ->
       new Entities.UserProfile 
         username: App.request('credentials:username')
+        wifi_upload_only: App.request 'user:preferences:get', 'wifi_upload_only'
 
   App.reqres.setHandler "profile:current", ->
     API.getProfile()

@@ -1,0 +1,76 @@
+#dashboard-eqis #campaign-region {
+  .campaign-header {
+    margin: 0;
+    width: 100%;
+    overflow: auto;
+    display: block;
+    padding: $app-main-footer-padding;
+    background-color: $survey-step-inset-block-background-color;
+    font-weight: bold;
+    font-size: $global-form-control-font-size;
+    color: $survey-step-inset-block-font-color;
+    border-top: 1px solid $survey-step-inset-block-border-color;
+    border-bottom: 1px solid $survey-step-inset-block-border-color;
+  }
+}
+#dashboard-eqis #artifacts-region {
+  $col-collected-width: 8rem;
+  $col-artifacts-width: 8rem;
+  header {
+    .col-folder {
+      padding: $app-main-footer-padding;    
+    }  
+    .col-artifacts, .col-collected {
+      padding-top: $app-main-footer-padding;
+    }
+    .col-artifacts {
+      padding-right: $app-main-footer-padding;
+    }
+  }
+  .col {
+    display: block;
+  }
+  .col-artifacts, .col-collected {
+    float: right;
+    margin: 0;
+  }
+  .col-collected {
+    text-align: center;
+    width: $col-collected-width;
+  }
+  .col-artifacts {
+    text-align: right;
+    width: $col-artifacts-width;
+  }
+  .list {
+    [role="link"] {
+      text-transform: uppercase;
+    }
+    .response-count {
+      border: none;
+      background-color: transparent;
+      background-image: url("../img/icon/eqis/folder.svg");
+      background-repeat: no-repeat;
+      background-size: 2.8*$app-main-footer-padding;
+      padding-left: 2*$app-main-footer-padding;
+      padding-right: 2*$app-main-footer-padding;
+      padding-top: 0.7*$app-main-footer-padding;
+      padding-bottom: 0.4*$app-main-footer-padding;
+      background-position: center center;
+    }
+    .col-artifacts,.col-collected {
+      min-height: 2.5*$app-main-footer-padding;
+    }
+    .col-artifacts .new-item {
+      width: 4.2*$app-main-footer-padding;
+      height: 2*$app-main-footer-padding;
+      background-size: 4.2*$app-main-footer-padding 2*$app-main-footer-padding;
+      background-position: center center;
+    }
+    .col-artifacts .new-assessment, .col-artifacts .new-instruction {
+      width: 2*$app-main-footer-padding;
+      height: 2*$app-main-footer-padding;
+      background-size: 2*$app-main-footer-padding;
+    }
+  }
+}

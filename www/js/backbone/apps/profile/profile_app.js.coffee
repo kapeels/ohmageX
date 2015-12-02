@@ -18,6 +18,12 @@
     new ProfileApp.Router
       controller: API
 
+  App.vent.on "profile:clear:cache:clicked", ->
+    # confirmation box is inside the file meta entity,
+    # so it can provide information about the file meta
+    # to the confirmation box.
+    App.execute "filemeta:erase:all"
+
   App.vent.on "profile:password:clicked", ->
     App.vent.trigger "blocker:password:change",
       successListener: ->

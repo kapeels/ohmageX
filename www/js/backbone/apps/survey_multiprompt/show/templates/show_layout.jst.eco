@@ -1,0 +1,14 @@
+<div id="notice-region"></div>
+<div id="progress"></div>
+<div id="step-body"></div>
+<div class="inset-block survey-navigation">
+  <div class="button-pair">
+    <div class="action">
+      <div id="prev-button"></div>
+    </div>
+    <div class="action">
+      <div id="next-button"></div>
+    </div>
+  </div>
+  <div id="skip-button"></div>
+</div>

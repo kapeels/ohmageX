@@ -57,6 +57,7 @@ www-mobile
 /www/js/ohmage*
 /www/js/vendor/modernizr*.min.js
 /www/index.html
+/www/Blockfile.rb
 
 # debug and development files #
 ###############################

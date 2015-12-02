@@ -10,11 +10,29 @@
       @surveyId = surveyId
       @stepId = stepId
 
+      promptMarkdown = App.request "prompt:markdown",
+        originalText: entity.get 'promptText'
+        campaign_urn: App.request "survey:saved:urn", @surveyId
+        surveyId: @surveyId
+        stepId: @stepId
+
+      entity.set 'promptTextMarkdown', promptMarkdown
+
+      if type in ["single_choice", "single_choice_custom", "multi_choice", "multi_choice_custom"]
+
+        promptChoicesMarkdown = App.request "prompt:markdown:choices",
+          collection: entity.get 'properties'
+          campaign_urn: App.request "survey:saved:urn", @surveyId
+          surveyId: @surveyId
+          stepId: @stepId
+
+        entity.set 'promptChoices', promptChoicesMarkdown
+
       @myView = @selectView entity, type
 
-      @listenTo @myView, "customchoice:add:success", (myVal) =>
-        console.log "customchoice:add:success handler", myVal
-        App.execute "prompt:customchoice:add", @surveyId, @stepId, myVal
+      @listenTo @myView, "customchoice:add:success", (myVal, myKey) =>
+        console.log "customchoice:add:success handler", myVal, myKey
+        App.execute "prompt:customchoice:add", @surveyId, @stepId, myVal, myKey
 
       @listenTo @myView, "customchoice:remove", (myVal) =>
         console.log "customchoice:remove handler", myVal
@@ -62,19 +80,19 @@
         when "single_choice"
           return new Prompts.SingleChoice
             model: entity
-            collection: entity.get('properties')
+            collection: entity.get 'promptChoices'
         when "single_choice_custom"
           return new Prompts.SingleChoiceCustom
             model: entity
-            collection: App.request "prompt:customchoices:merged", @surveyId, @stepId, entity.get('properties')
+            collection: App.request "prompt:customchoices:merged", @surveyId, @stepId, entity.get 'promptChoices'
         when "multi_choice"
           return new Prompts.MultiChoice
             model: entity
-            collection: entity.get('properties')
+            collection: entity.get 'promptChoices'
         when "multi_choice_custom"
           return new Prompts.MultiChoiceCustom
             model: entity
-            collection: App.request "prompt:customchoices:merged", @surveyId, @stepId, entity.get('properties')
+            collection: App.request "prompt:customchoices:merged", @surveyId, @stepId, entity.get 'promptChoices'
         when "document"
           return new Prompts.Document
             model: entity
@@ -83,7 +101,7 @@
             model: entity
         else
           return new Prompts.Unsupported
-            model: App.request('prompt:unsupported:entity', type)
+            model: App.request('prompt:unsupported:entity', type, entity.get('id'))
 
   App.reqres.setHandler "prompts:view", (surveyId, stepId, entity, type) ->
     selector = new Prompts.SelectorController

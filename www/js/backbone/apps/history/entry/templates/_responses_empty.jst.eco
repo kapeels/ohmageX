@@ -1,0 +1,1 @@
+There are no responses to display for this <%= @dictionary('page','survey') %>, all responses have been skipped.

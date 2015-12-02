@@ -1,7 +1,7 @@
 var SlideOutComponent = function(ele, context, activationEvent){
 
     var $ele = $(context ? context : 'body').find(ele),
-        $overlay = $ele.children('.overlay'),
+        $overlay = $('body').children('.slide-out-overlay'),
         id = $ele.attr('id'),
         triggerEvent = activationEvent,
         __self__ = this;
@@ -9,7 +9,7 @@ var SlideOutComponent = function(ele, context, activationEvent){
     $ele.addClass('slide-out');
 
     if($overlay.length < 1){
-        $overlay = $('<div class="overlay"></div>').appendTo($ele);
+        $overlay = $('<div class="slide-out-overlay"></div>').appendTo($('body'));
     }
 
     $overlay.on(triggerEvent,function(e){ __self__.toggle(); e.stopPropagation; return false; });

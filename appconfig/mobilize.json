@@ -1,59 +1,84 @@
 {
   "api": {
     "client_base_string": "mobilizex-",
-    "token_redirect": "../web/#login"
+    "token_redirect": "/#login"
   },
   "build": {
     "app_name": "UCLA MobilizingCS",
     "bundle_id": "org.mobilizingcs.mobilize",
     "image_folder": "mobilize",
-    "homepage": "campaign",
+    "orientation": "default",
     "login_header_image": "mobilize.png",
     "debug": false
+  },
+  "appearance": {
+    "prompt_horizontal_single_choice": false,
+    "custom_block": "default"
   },
   "dictionary": {
     "page": {
       "login": "login",
+      "dashboardeqis": "dashboard",
       "campaign": "campaign",
       "survey": "survey",
       "queue": "upload queue",
+      "history": "history",
       "reminder": "reminder",
       "profile": "profile",
       "logout": "logout"
     },
     "pages": {
       "login": "login",
+      "dashboardeqis": "dashboard",
       "campaign": "campaigns",
       "survey": "surveys",
       "queue": "upload queue",
+      "history": "history",
       "reminder": "reminders",
       "profile": "profile",
       "logout": "logout"
     },
     "menu": {
       "login": "Login",
+      "dashboardeqis": "Dashboard",
       "campaign": "Campaigns",
       "survey": "Surveys",
       "queue": "Upload Queue",
+      "history": "History",
       "reminder": "Reminders",
       "profile": "Profile",
       "logout": "Logout"
     }
   },
+  "messages": {
+    "reminder_body": "Tap to capture. Swipe to ignore."
+  },
   "menu_items_disabled": {
-    "native": [],
+    "native": [
+      "dashboardeqis",
+      "history"
+    ],
     "browser": [
+      "dashboardeqis",
+      "history",
       "profile",
       "reminder",
       "logout"
     ],
     "footer": [
+      "dashboardeqis",
       "campaign",
       "survey",
       "queue",
+      "history",
       "reminder",
       "logout"
     ]
+  },
+  "routes": {
+    "homepage": "campaign",
+    "surveys": "survey",
+    "help": "https://web.ohmage.org/ohmage/ohmagex-help.html"
   },
   "server_list": {
     "custom": false,
@@ -63,7 +88,11 @@
     ]
   },
   "functionality": {
-    "post_survey_reminders_disabled": false
+    "internal_links_enabled": true,
+    "post_survey_reminders_disabled": false,
+    "multi_question_survey_flow": true,
+    "history_auto_refresh": false,
+    "history_eqis_bucketing": false
   },
   "prompt_defaults": {
     "doc": {
@@ -77,5 +106,8 @@
       "caution_threshold_bytes": 300000000,
       "assumed_mb_per_minute": 90
     }
+  },
+  "user_preference_defaults": {
+    "wifi_upload_only": false
   }
 }

@@ -1,0 +1,1 @@
+<button type="button" <% if @disabled: %>disabled<% end %>><%= @label %></button>

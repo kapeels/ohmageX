@@ -1,0 +1,26 @@
+.survey-step .prompt-list .horizontal-layout {
+
+  .input-area {
+    text-align: center;
+    input {
+      display: inline-block;
+    }
+  }
+  .label-area {
+    text-align: center;
+  }
+  .custom-area {
+    width: 3rem;
+      &:empty {
+        width: 0;
+      }
+    label.placeholder {
+      width: 3rem;
+      height: 3rem;
+      display: block;
+      overflow: hidden;
+      text-indent: -999px;
+    }
+  }
+
+}

@@ -16,6 +16,7 @@
       skippable: false # Step can't be skipped
       skiplabel: false # Skip label is empty
       status: "pending" # Step hasn't been processed
+      page: false # no page assigned to this step
 
   class Entities.StepCollection extends Entities.Collection
     model: Entities.Step
@@ -32,6 +33,7 @@
       mySurveySubmitSteps = @createSurveySubmitSteps $root
       currentFlow.add mySurveySubmitSteps
       console.log 'Current flow Object', currentFlow.toJSON()
+      App.vent.trigger "flow:init:complete", currentFlow
     getFlow: ->
       throw new Error "flow not initialized, use 'flow:init' to create new Flow" unless currentFlow isnt false
       currentFlow
@@ -63,6 +65,7 @@
           $XML: $child
           skippable: $child.tagText('skippable') is "true"
           skiplabel: mySkipLabel
+          meta: App.request('xmlmeta:xml:to:json', $child.tagHTML(App.xmlMeta.rootLabel))
       )
 
     createSurveySubmitSteps: ($rootXML) ->
