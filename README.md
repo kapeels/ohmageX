@@ -129,6 +129,10 @@ The `mobile_firstrun` task executes in the root folder without issues, and avoid
   - add "clear cache" button to profile
   - validate attached doc and video prompt files by file extension
 
+- Survey flow
+  - track state of uploads
+  - allow prepopulation of prompt responses
+
 ### 3.0.3 - Mobilize Android Release
 
 - Prompt Conditional Parser
