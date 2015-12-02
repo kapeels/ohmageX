@@ -161,6 +161,11 @@ The `mobile_firstrun` task executes in the root folder without issues, and avoid
   - universalize CSS variables
   - clean up unused files
 
+- Build enhancements
+  - build automation task enhancements
+  - generates unique Android versions per build
+  - Add configurable orientation per deployment
+
 ### 3.0.3 - Mobilize Android Release
 
 - Prompt Conditional Parser
