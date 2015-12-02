@@ -104,6 +104,25 @@ The `mobile_firstrun` task executes in the root folder without issues, and avoid
 
 ## Version Notes
 
+### 3.10.25 - ohmageX General Release
+
+- Custom features
+  - Multi-question survey flow
+    - multiple questions per page
+      - multiple validation, navigation, condition checks
+      - special cases for skipped prompts
+      - supports device back button
+  - Response History (Android)
+    - history with filters, display single history item
+    - supports download and offline open of documents and videos
+    - supports offline display of images
+    - configurable auto-media fetch
+  - Dashboard page with grouping and displaying latest campaign
+  - Horizontal single-choice layout
+  - Some CSS can be customized per deployment
+  - XML meta properties per campaign, survey, and prompt
+    - randomized integer prompts (using custom XML meta property)
+
 ### 3.0.3 - Mobilize Android Release
 
 - Prompt Conditional Parser
