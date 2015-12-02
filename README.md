@@ -1,4 +1,4 @@
-# ohmageX v3.0.3
+# ohmageX v3.10.25
 
 [ohmage](http://ohmage.org/) is an open-source, mobile to web platform that records, analyzes, and visualizes data from both prompted experience samples entered by the user, as well as continuous streams of data passively collected from sensors or applications onboard the mobile device. 
 
