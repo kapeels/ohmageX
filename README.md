@@ -123,6 +123,12 @@ The `mobile_firstrun` task executes in the root folder without issues, and avoid
   - XML meta properties per campaign, survey, and prompt
     - randomized integer prompts (using custom XML meta property)
 
+- Media
+  - cache images, documents and videos
+  - cache video before upload
+  - add "clear cache" button to profile
+  - validate attached doc and video prompt files by file extension
+
 ### 3.0.3 - Mobilize Android Release
 
 - Prompt Conditional Parser
