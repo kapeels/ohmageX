@@ -155,6 +155,12 @@ The `mobile_firstrun` task executes in the root folder without issues, and avoid
   - full screen modal with sliding animation
   - Animate open and close of hamburger menu
 
+- Code enhancements
+  - split prompt selector views into separate files
+  - refactor choice prompts and consolidate code
+  - universalize CSS variables
+  - clean up unused files
+
 ### 3.0.3 - Mobilize Android Release
 
 - Prompt Conditional Parser
