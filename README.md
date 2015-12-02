@@ -144,6 +144,17 @@ The `mobile_firstrun` task executes in the root folder without issues, and avoid
 - Android compatibility fixes
   - Refactor XML parsing with Android 4.4 compatibility hack
 
+- UI enhancements
+  - prevent multiple rapid survey submit events
+  - update survey multi-question views
+  - allow for instant loading spinner display
+  - Fix upload queue choice responses
+  - add trailing surveys notice with configurable internal links
+  - add nav markers, such as "UPLOAD QUEUE (1)"
+  - make selection of the current menu item close the menu
+  - full screen modal with sliding animation
+  - Animate open and close of hamburger menu
+
 ### 3.0.3 - Mobilize Android Release
 
 - Prompt Conditional Parser
