@@ -166,6 +166,10 @@ The `mobile_firstrun` task executes in the root folder without issues, and avoid
   - generates unique Android versions per build
   - Add configurable orientation per deployment
 
+- Add Wifi-only upload option to user preferences
+
+- Add AGPL license
+
 ### 3.0.3 - Mobilize Android Release
 
 - Prompt Conditional Parser
