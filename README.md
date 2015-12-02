@@ -133,6 +133,10 @@ The `mobile_firstrun` task executes in the root folder without issues, and avoid
   - track state of uploads
   - allow prepopulation of prompt responses
 
+- Prompt Conditional Parser
+  - Fix choice prompt parsing
+  - Fix message condition parsing
+
 ### 3.0.3 - Mobilize Android Release
 
 - Prompt Conditional Parser
