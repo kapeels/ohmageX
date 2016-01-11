@@ -76,6 +76,15 @@
     campaignsRegion: (campaigns, entries) ->
       campaignsView = @getFilterSelectorView 'campaign_urn', campaigns
 
+      @listenTo campaigns, "change:chosen", (model) =>
+        console.log 'change:chosen listener'
+        # this listener must be in the controller,
+        # any references to @entries inside of the selector
+        # model are unable to trigger events or call methods
+        # on @entries
+        if model.isChosen()
+          if model.get('name') is campaigns.defaultLabel
+            entries.trigger "filter:reset", 'campaign_urn'
 
     listRegion: (entries) ->
       listView = @getListView entries
