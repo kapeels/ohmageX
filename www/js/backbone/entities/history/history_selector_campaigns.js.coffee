@@ -13,6 +13,14 @@
         filterType: 'campaign_urn'
       currentCampaigns.chooseByName currentCampaigns.defaultLabel
 
+    getCampaigns: (entries) ->
+      currentCampaigns = new Entities.UserHistoryCampaignsNav entries,
+        parse: true
+        filterType: 'campaign_urn'
+      currentCampaigns
+
   App.on "before:start", ->
     API.init()
 
+  App.reqres.setHandler "history:selector:campaigns", (entries) ->
+    API.getCampaigns entries
