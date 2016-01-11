@@ -88,6 +88,8 @@
           else
             entries.trigger "filter:set", 'campaign_urn', model.get('name')
 
+      @show campaignsView, region: @layout.campaignsControlRegion
+
 
     listRegion: (entries) ->
       listView = @getListView entries
