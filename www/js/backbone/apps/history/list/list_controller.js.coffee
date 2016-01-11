@@ -85,6 +85,9 @@
         if model.isChosen()
           if model.get('name') is campaigns.defaultLabel
             entries.trigger "filter:reset", 'campaign_urn'
+          else
+            entries.trigger "filter:set", 'campaign_urn', model.get('name')
+
 
     listRegion: (entries) ->
       listView = @getListView entries
