@@ -73,6 +73,9 @@
 
       @show surveysView, region: @layout.surveysControlRegion
 
+    campaignsRegion: (campaigns, entries) ->
+      campaignsView = @getFilterSelectorView 'campaign_urn', campaigns
+
 
     listRegion: (entries) ->
       listView = @getListView entries
