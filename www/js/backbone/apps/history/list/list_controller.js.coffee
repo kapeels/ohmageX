@@ -12,6 +12,7 @@
         bucketsSelector = App.request "history:selector:buckets", App.request("history:entries")
         @buckets_filter = options.buckets_filter
         surveysSelector = App.request "history:selector:surveys", App.request("history:entries")
+        campaignsSelector = App.request "history:selector:campaigns", App.request("history:entries")
 
       @listenTo @layout, "show", =>
         if campaigns.length is 0
@@ -20,6 +21,7 @@
           console.log "showing history layout"
           @bucketsRegion bucketsSelector, entries
           @surveysRegion surveysSelector, entries
+          @campaignsRegion campaignsSelector, entries
           @listRegion entries
 
       if campaigns.length is 0
@@ -72,6 +74,23 @@
             entries.trigger "filter:set", 'survey_title', model.get('name')
 
       @show surveysView, region: @layout.surveysControlRegion
+
+    campaignsRegion: (campaigns, entries) ->
+      campaignsView = @getFilterSelectorView 'campaign_urn', campaigns
+
+      @listenTo campaigns, "change:chosen", (model) =>
+        console.log 'change:chosen listener'
+        # this listener must be in the controller,
+        # any references to @entries inside of the selector
+        # model are unable to trigger events or call methods
+        # on @entries
+        if model.isChosen()
+          if model.get('name') is campaigns.defaultLabel
+            entries.trigger "filter:reset", 'campaign_urn'
+          else
+            entries.trigger "filter:set", 'campaign_urn', model.get('name')
+
+      @show campaignsView, region: @layout.campaignsControlRegion
 
 
     listRegion: (entries) ->

@@ -2,5 +2,6 @@
 <div class="list-controls">
   <div>Folders:<div id="buckets-control-region"></div></div>
   <div><%= @dictionary('pages','survey').capitalizeFirstLetter() %>:<div id="surveys-control-region"></div></div>  
+  <div><%= @dictionary('pages','campaign').capitalizeFirstLetter() %>:<div id="campaigns-control-region"></div></div>  
 </div>
 <nav class="list-headers" id="list-region"></nav>
