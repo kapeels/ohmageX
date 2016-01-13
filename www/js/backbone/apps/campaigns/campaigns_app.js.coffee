@@ -18,10 +18,11 @@
       controller: API
 
   App.vent.on "campaign:list:navigate:clicked", (model) ->
-    if App.custom.routes.surveys is "survey"
-      App.navigate "surveys/#{model.get 'id'}", { trigger: true }
-    else
-      App.navigate App.navs.getUrlByName(App.custom.routes.surveys), { trigger: true }
+    switch (App.custom.routes.surveys)
+      when "survey"
+        App.navigate "surveys/#{model.get 'id'}", { trigger: true }
+      else
+        App.navigate App.navs.getUrlByName(App.custom.routes.surveys), { trigger: true }
 
   App.vent.on "campaign:list:save:clicked", (model) ->
     # the campaign:save command handler is in the Surveys entity.
