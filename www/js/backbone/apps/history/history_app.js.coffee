@@ -25,6 +25,13 @@
         buckets_filter: bucket
         campaigns_filter: false
 
+    campaign: (campaign) ->
+      App.vent.trigger "nav:choose", "history"
+      console.log 'HistoryApp campaign'
+      new HistoryApp.List.Controller
+        buckets_filter: false
+        campaigns_filter: campaign
+
 
     entry: (id) ->
       if App.navs.getSelectedName() isnt "history"
