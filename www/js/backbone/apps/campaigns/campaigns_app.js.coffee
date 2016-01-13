@@ -18,10 +18,19 @@
       controller: API
 
   App.vent.on "campaign:list:navigate:clicked", (model) ->
-    if App.custom.routes.surveys is "survey"
-      App.navigate "surveys/#{model.get 'id'}", { trigger: true }
-    else
-      App.navigate App.navs.getUrlByName(App.custom.routes.surveys), { trigger: true }
+    switch (App.custom.routes.surveys)
+      when "survey"
+        App.navigate "surveys/#{model.get 'id'}", { trigger: true }
+      when "dashboardeqis"
+        campaign_urn = model.get('id')
+        if campaign_urn is App.request("campaigns:latest").get('id')
+          # navigate to the dashboard for the latest campaign
+          App.navigate App.navs.getUrlByName(App.custom.routes.surveys), { trigger: true }
+        else
+          # navigate to the history, filtered by that campaign
+          App.navigate "history/campaign/#{campaign_urn}", { trigger: true }
+      else
+        App.navigate App.navs.getUrlByName(App.custom.routes.surveys), { trigger: true }
 
   App.vent.on "campaign:list:save:clicked", (model) ->
     # the campaign:save command handler is in the Surveys entity.
