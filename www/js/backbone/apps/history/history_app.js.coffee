@@ -9,6 +9,7 @@
       "history": "list"
       "history/group/:group": "bucket"
       "history/entry/:id": "entry"
+      "history/campaign/:id": "campaign"
 
   API =
     list: ->
