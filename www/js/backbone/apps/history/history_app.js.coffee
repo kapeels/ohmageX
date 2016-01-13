@@ -9,6 +9,7 @@
       "history": "list"
       "history/group/:group": "bucket"
       "history/entry/:id": "entry"
+      "history/campaign/:id": "campaign"
 
   API =
     list: ->
@@ -16,12 +17,22 @@
       console.log 'HistoryApp list'
       new HistoryApp.List.Controller
         buckets_filter: false
+        campaigns_filter: false
 
     bucket: (bucket) ->
       App.vent.trigger "nav:choose", "history"
       console.log 'HistoryApp bucket'
       new HistoryApp.List.Controller
         buckets_filter: bucket
+        campaigns_filter: false
+
+    campaign: (campaign) ->
+      App.vent.trigger "nav:choose", "history"
+      console.log 'HistoryApp campaign'
+      new HistoryApp.List.Controller
+        buckets_filter: false
+        campaigns_filter: campaign
+
 
     entry: (id) ->
       if App.navs.getSelectedName() isnt "history"

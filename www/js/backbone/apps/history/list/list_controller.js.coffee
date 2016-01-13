@@ -13,6 +13,7 @@
         @buckets_filter = options.buckets_filter
         surveysSelector = App.request "history:selector:surveys", App.request("history:entries")
         campaignsSelector = App.request "history:selector:campaigns", App.request("history:entries")
+        @campaigns_filter = options.campaigns_filter
 
       @listenTo @layout, "show", =>
         if campaigns.length is 0
@@ -89,6 +90,8 @@
             entries.trigger "filter:reset", 'campaign_urn'
           else
             entries.trigger "filter:set", 'campaign_urn', model.get('name')
+
+      if @campaigns_filter then campaigns.chooseByName(@campaigns_filter)
 
       @show campaignsView, region: @layout.campaignsControlRegion
 
