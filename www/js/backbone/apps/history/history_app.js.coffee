@@ -16,12 +16,15 @@
       console.log 'HistoryApp list'
       new HistoryApp.List.Controller
         buckets_filter: false
+        campaigns_filter: false
 
     bucket: (bucket) ->
       App.vent.trigger "nav:choose", "history"
       console.log 'HistoryApp bucket'
       new HistoryApp.List.Controller
         buckets_filter: bucket
+        campaigns_filter: false
+
 
     entry: (id) ->
       if App.navs.getSelectedName() isnt "history"
