@@ -90,6 +90,8 @@
           else
             entries.trigger "filter:set", 'campaign_urn', model.get('name')
 
+      if @campaigns_filter then campaigns.chooseByName(@campaigns_filter)
+
       @show campaignsView, region: @layout.campaignsControlRegion
 
 
