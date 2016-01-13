@@ -13,6 +13,7 @@
         @buckets_filter = options.buckets_filter
         surveysSelector = App.request "history:selector:surveys", App.request("history:entries")
         campaignsSelector = App.request "history:selector:campaigns", App.request("history:entries")
+        @campaigns_filter = options.campaigns_filter
 
       @listenTo @layout, "show", =>
         if campaigns.length is 0
