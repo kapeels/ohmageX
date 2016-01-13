@@ -320,7 +320,7 @@
   App.vent.on "credentials:cleared", ->
     API.clear()
 
-  App.vent.on "uploadqueue:remove:success survey:exit survey:reset", ->
+  App.vent.on "uploadqueue:remove:success survey:exit survey:reset surveys:saved:campaign:fetch:success", ->
     if App.custom.functionality.history_auto_refresh
       campaign_urns = App.request 'campaigns:saved:urns'
 
