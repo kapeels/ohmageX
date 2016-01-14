@@ -10,13 +10,13 @@
     init: ->
       currentCampaigns = new Entities.UserHistoryCampaignsNav [],
         parse: true
-        filterType: 'campaign_urn'
+        filterType: 'campaign_name'
       currentCampaigns.chooseByName currentCampaigns.defaultLabel
 
     getCampaigns: (entries) ->
       currentCampaigns = new Entities.UserHistoryCampaignsNav entries,
         parse: true
-        filterType: 'campaign_urn'
+        filterType: 'campaign_name'
       currentCampaigns
 
   App.on "before:start", ->

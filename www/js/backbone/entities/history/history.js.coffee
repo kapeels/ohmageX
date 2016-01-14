@@ -131,6 +131,7 @@
           timezone: value.timezone
           utc_timestamp: value.utc_timestamp
           campaign_urn: options.campaign.id
+          campaign_name: options.campaign.get('name')
           survey_id: value.survey_id
           survey_title: value.survey_title
           location:
