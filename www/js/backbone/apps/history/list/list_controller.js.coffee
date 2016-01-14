@@ -77,7 +77,7 @@
       @show surveysView, region: @layout.surveysControlRegion
 
     campaignsRegion: (campaigns, entries) ->
-      campaignsView = @getFilterSelectorView 'campaign_urn', campaigns
+      campaignsView = @getFilterSelectorView 'campaign_name', campaigns
 
       @listenTo campaigns, "change:chosen", (model) =>
         console.log 'change:chosen listener'
