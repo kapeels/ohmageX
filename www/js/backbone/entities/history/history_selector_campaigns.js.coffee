@@ -16,7 +16,7 @@
     getCampaigns: (entries) ->
       currentCampaigns = new Entities.UserHistoryCampaignsNav entries,
         parse: true
-        filterType: 'campaign_urn'
+        filterType: 'campaign_name'
       currentCampaigns
 
   App.on "before:start", ->
