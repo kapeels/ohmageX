@@ -26,7 +26,7 @@
         buckets_filter: bucket
         campaigns_filter: false
 
-    campaign: (campaign) ->
+    campaign: (campaign_urn) ->
       App.vent.trigger "nav:choose", "history"
       console.log 'HistoryApp campaign'
       new HistoryApp.List.Controller
