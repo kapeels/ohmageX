@@ -89,7 +89,7 @@
           if model.get('name') is campaigns.defaultLabel
             entries.trigger "filter:reset", 'campaign_name'
           else
-            entries.trigger "filter:set", 'campaign_urn', model.get('name')
+            entries.trigger "filter:set", 'campaign_name', model.get('name')
 
       if @campaigns_filter then campaigns.chooseByName(@campaigns_filter)
 
