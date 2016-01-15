@@ -15,9 +15,10 @@
     list: ->
       App.vent.trigger "nav:choose", "history"
       console.log 'HistoryApp list'
+      myCampaignFilter = false
       new HistoryApp.List.Controller
         buckets_filter: false
-        campaigns_filter: false
+        campaigns_filter: myCampaignFilter
 
     bucket: (bucket) ->
       App.vent.trigger "nav:choose", "history"
