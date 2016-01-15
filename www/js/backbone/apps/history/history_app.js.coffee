@@ -15,9 +15,14 @@
     list: ->
       App.vent.trigger "nav:choose", "history"
       console.log 'HistoryApp list'
+      myCampaignFilter = false
+      if App.custom.functionality.history_eqis_bucketing isnt false and 
+        App.request('campaigns:latest') isnt false
+          # eQIS auto filter by the latest campaign by default
+          myCampaignFilter = App.request('campaigns:latest').get('name')
       new HistoryApp.List.Controller
         buckets_filter: false
-        campaigns_filter: false
+        campaigns_filter: myCampaignFilter
 
     bucket: (bucket) ->
       App.vent.trigger "nav:choose", "history"
