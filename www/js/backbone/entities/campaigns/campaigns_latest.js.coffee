@@ -7,7 +7,7 @@
     getLatest: (campaigns) ->
       # Get maximum campaign creation timestamp
       # by coverting the date to an epoch
-      if campaigns is false then return false
+      if campaigns is false or campaigns.length is 0 then return false
       campaigns.max (campaign) -> moment(campaign.get('creation_timestamp')).valueOf()
 
   App.reqres.setHandler "campaigns:latest", ->
