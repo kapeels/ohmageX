@@ -9,7 +9,7 @@
     <button type="button" class="icon right-arrow navigate">View</button>
   </div>
   <div role="link">
-    <h3><%= @survey_title %></h3>
-    <footer><small><%= @timestamp %></small><% if @list_second_label isnt false: %> <%= @list_second_label %><% end %></footer>
+    <h3><%= @survey_title %> <small><%= @campaign_name %></small></h3>
+    <footer><small><%= @timestamp %></small><% if @list_second_label isnt false: %> <small><%= @list_second_label %></small><% end %></footer>
   </div>
 </div>
