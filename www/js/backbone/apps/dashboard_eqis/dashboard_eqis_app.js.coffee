@@ -19,7 +19,7 @@
       controller: API
 
   App.vent.on "dashboardeqis:responsecount:clicked", (bucket) ->
-    App.navigate "history/group/#{bucket}", trigger: true
+    App.navigate "history/grouplatest/#{bucket}", trigger: true
 
   App.vent.on "dashboardeqis:newsurvey:clicked", (campaign_urn, surveyId, newPrepopIndex, newPrepopStep) ->
     if newPrepopIndex isnt false
