@@ -8,6 +8,8 @@
     appRoutes:
       "history": "list"
       "history/group/:group": "bucket"
+      "history/grouplatest/:group": "latestbucket"
+
       "history/entry/:id": "entry"
       "history/campaign/:id": "campaign"
 
