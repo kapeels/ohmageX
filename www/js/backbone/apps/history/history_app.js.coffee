@@ -8,6 +8,8 @@
     appRoutes:
       "history": "list"
       "history/group/:group": "bucket"
+      "history/grouplatest/:group": "latestbucket"
+
       "history/entry/:id": "entry"
       "history/campaign/:id": "campaign"
 
@@ -30,6 +32,19 @@
       new HistoryApp.List.Controller
         buckets_filter: bucket
         campaigns_filter: false
+
+    latestbucket: (bucket) ->
+      App.vent.trigger "nav:choose", "history"
+      console.log 'HistoryApp bucket'
+      myCampaignFilter = false
+      if App.custom.functionality.history_eqis_bucketing isnt false and 
+        App.request('campaigns:latest') isnt false
+          # eQIS auto filter by the latest campaign by default
+          myCampaignFilter = App.request('campaigns:latest').get('name')
+
+      new HistoryApp.List.Controller
+        buckets_filter: bucket
+        campaigns_filter: myCampaignFilter
 
     campaign: (campaign_urn) ->
       App.vent.trigger "nav:choose", "history"
