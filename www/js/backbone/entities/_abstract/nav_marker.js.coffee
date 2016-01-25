@@ -6,3 +6,6 @@
 
   App.commands.setHandler "nav:marker:set", (name, value) ->
     App.navs.setMarker(name, value)
+
+  App.vent.on "uploadqueue:cleared", ->
+    App.navs.setMarker "queue", false
