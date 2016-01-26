@@ -1,3 +1,5 @@
 body {
   background: $app-background;
 }
+
+label > * { pointer-events: none; }
