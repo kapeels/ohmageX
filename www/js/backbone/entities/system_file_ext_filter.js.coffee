@@ -7,7 +7,7 @@
   extWhitelist = [
     'gif','jpg','jpeg','png', # images
     'txt', # text
-    'mpg','mpeg','mpe','mp4','avi','3gp','3gpp','3g2', # video
+    'm4v','mov','mpg','mpeg','mpe','mp4','avi','3gp','3gpp','3g2', # video
     'doc','docx', # Word doc
     'pdf', # pdf
     'ppt','pptx', # Powerpoint
@@ -16,7 +16,7 @@
   ]
 
   extVideos = [
-    'mpg','mpeg','mpe','mp4','avi','3gp','3gpp','3g2' # video
+    'm4v','mov','mpg','mpeg','mpe','mp4','avi','3gp','3gpp','3g2' # video
   ]
 
   extImages = [
