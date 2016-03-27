@@ -31,6 +31,9 @@
         survey_launch_context: App.request "survey:launchcontext"
         responses: submitResponses
 
+      if App.request('surveyedit:enabled')
+        submitSurveys.survey_key = App.request('surveyedit:id')
+
       if location
         # if the location status is unavailable,
         # it is an error to send a location object.
