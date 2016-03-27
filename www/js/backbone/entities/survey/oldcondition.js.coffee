@@ -21,7 +21,7 @@
         oldParserResponses
       )
 
-      console.log 'oldParserResponses', @mergeMessagePrompts oldParserResponses
+      # console.log 'oldParserResponses', @mergeMessagePrompts oldParserResponses
 
       trimCondition = rawCondition.replace(/\)\s*(and|or)\s*\(/i, ") $1 (")
       trimCondition = trimCondition.replace(/\s*(==|!=|<=|=>|>|<)\s*/i, " $1 ")
