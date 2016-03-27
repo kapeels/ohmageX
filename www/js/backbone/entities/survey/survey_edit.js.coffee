@@ -30,6 +30,9 @@
     if options.prepop_responses isnt false then API.prepopulate(options.prepop_responses)
 
     App.navigate "survey/#{entry.get('campaign_urn')}:#{entry.get('survey_id')}", trigger: true
+
+    App.vent.trigger "fullmodal:close"
+
   App.reqres.setHandler "surveyedit:enabled", ->
     !!currentEditId
 
