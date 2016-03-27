@@ -16,6 +16,8 @@
         if response.prompt_response in ["NOT_DISPLAYED", "SKIPPED"] then return false
 
 
+        # TODO: for video, document, photo prompt types,
+        # add to queue for file caching
       ).filter((result) -> !!result).value()
 
       results
