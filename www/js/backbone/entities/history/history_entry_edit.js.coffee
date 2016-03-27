@@ -12,6 +12,10 @@
 
       # The .filter() removes the false keys.
       results = _.chain(responses).map( (response) ->
+        # exclude not_displayed or skipped entries from prepopulating
+        if response.prompt_response in ["NOT_DISPLAYED", "SKIPPED"] then return false
+
+
       ).filter((result) -> !!result).value()
 
       results
