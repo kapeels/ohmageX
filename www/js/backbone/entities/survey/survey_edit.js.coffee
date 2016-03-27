@@ -10,6 +10,10 @@
       # stepId: # Id of survey step to prepopulate
       # value: # value of survey step to prepopulate
 
+      # this assumes that all responses are formatted
+      # for their prompts as required by the flow_entity
+      # currentValueType of 'default'
+
   App.reqres.setHandler "surveyedit:enabled", ->
     !!currentEditId
 
