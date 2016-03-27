@@ -22,7 +22,7 @@
       currentTime = moment().valueOf()
       currentTZ = _.jstz()
 
-      submitSurveys = 
+      submitSurveys =
         survey_key: _.guid()
         time: currentTime
         timezone: currentTZ
