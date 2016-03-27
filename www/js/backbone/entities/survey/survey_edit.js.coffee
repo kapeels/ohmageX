@@ -7,3 +7,5 @@
   App.reqres.setHandler "surveyedit:enabled", ->
     !!currentEditId
 
+  App.reqres.setHandler "surveyedit:id", -> currentEditId
+
