@@ -12,7 +12,7 @@
       responses.each((response) =>
         myId = response.get 'id'
 
-        myResponse = App.request "response:value:parsed", 
+        myResponse = App.request "response:value:parsed",
           conditionValue: true
           stepId: myId
           addUploadUUIDs: false
