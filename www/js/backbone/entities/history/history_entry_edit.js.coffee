@@ -23,6 +23,7 @@
           when "photo", "document", "video" then false # skip media
           else response.prompt_response
 
+        if myValue is false then return false
       ).filter((result) -> !!result).value()
 
       results
