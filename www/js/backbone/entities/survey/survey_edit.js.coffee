@@ -27,6 +27,8 @@
     currentEditId = options.survey_response_id
     entry = App.request("history:entry", options.survey_response_id)
 
+    if options.prepop_responses isnt false then API.prepopulate(options.prepop_responses)
+
   App.reqres.setHandler "surveyedit:enabled", ->
     !!currentEditId
 
