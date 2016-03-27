@@ -51,6 +51,10 @@
         campaign_creation_timestamp: myCampaign.get('creation_timestamp')
         campaign_urn: campaign_urn
 
+      if App.request('surveyedit:enabled')
+        completeSubmit.update = true
+
+
       App.execute "filemeta:move:native", =>
         App.execute "uploader:new", 'survey', completeSubmit, surveyId
 
