@@ -2,3 +2,5 @@
 
   # This sets up the survey for editing.
 
+  currentEditId = false
+
