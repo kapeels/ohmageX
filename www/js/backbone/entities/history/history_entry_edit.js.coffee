@@ -19,6 +19,7 @@
         # TODO: for video, document, photo prompt types,
         # add to queue for file caching
         myValue = switch response.prompt_type
+          when "multi_choice", "multi_choice_custom" then JSON.stringify(response.prompt_response)
           else response.prompt_response
 
       ).filter((result) -> !!result).value()
