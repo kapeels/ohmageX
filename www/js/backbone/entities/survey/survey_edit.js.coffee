@@ -17,6 +17,7 @@
       # also does NOT prepopulate hidden prompts, since
       # those ignore the flow:prepop currentValue entirely.
 
+      throw new Error "survey:edit prepopulate() responses not array, type #{typeof responses}" unless _.isArray(responses)
   App.reqres.setHandler "surveyedit:enabled", ->
     !!currentEditId
 
