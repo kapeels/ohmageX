@@ -24,6 +24,11 @@
           else response.prompt_response
 
         if myValue is false then return false
+
+        return {
+          stepId: response.id
+          value: myValue
+        }
       ).filter((result) -> !!result).value()
 
       results
