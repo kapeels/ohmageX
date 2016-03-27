@@ -5,6 +5,14 @@
 
 
   API =
+    processResponses: (surveyId, responses) ->
+
+      # no file queue yet, just call the survey edit directly
+      # this is the event that would fire when the queue resolves.
+      App.execute "survey:edit",
+        survey_response_id: surveyId
+        prepop_responses: prepop_responses
+
     mapToPrepop: (responses) ->
       # returns an array of objects in following format:
       # stepId: # Id of survey step to prepopulate
