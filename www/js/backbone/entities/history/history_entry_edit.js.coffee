@@ -31,6 +31,9 @@
         }
       ).filter((result) -> !!result).value()
 
+      # returns false if there are no valid responses.
+      if results.length is 0 then return false
+
       results
 
   App.commands.setHandler "history:entry:edit", (entry) ->
