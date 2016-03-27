@@ -20,6 +20,7 @@
         # add to queue for file caching
         myValue = switch response.prompt_type
           when "multi_choice", "multi_choice_custom" then JSON.stringify(response.prompt_response)
+          when "photo", "document", "video" then false # skip media
           else response.prompt_response
 
       ).filter((result) -> !!result).value()
