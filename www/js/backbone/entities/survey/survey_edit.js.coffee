@@ -14,6 +14,9 @@
       # for their prompts as required by the flow_entity
       # currentValueType of 'default'
 
+      # also does NOT prepopulate hidden prompts, since
+      # those ignore the flow:prepop currentValue entirely.
+
   App.reqres.setHandler "surveyedit:enabled", ->
     !!currentEditId
 
