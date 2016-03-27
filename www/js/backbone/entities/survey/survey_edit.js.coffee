@@ -9,3 +9,5 @@
 
   App.reqres.setHandler "surveyedit:id", -> currentEditId
 
+  App.vent.on "survey:exit survey:reset credentials:cleared", ->
+    currentEditId = false
