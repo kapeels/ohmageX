@@ -3,6 +3,7 @@
   # This handles passing history entry edit info to
   # the survey_edit handler.
 
+  entriesFilesQueue = false
 
   API =
     processResponses: (surveyId, responses) ->
