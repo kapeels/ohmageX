@@ -25,6 +25,8 @@
 
   App.commands.setHandler "survey:edit", (options) ->
     currentEditId = options.survey_response_id
+    entry = App.request("history:entry", options.survey_response_id)
+
   App.reqres.setHandler "surveyedit:enabled", ->
     !!currentEditId
 
