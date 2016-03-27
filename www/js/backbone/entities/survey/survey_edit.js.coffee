@@ -23,6 +23,8 @@
         App.execute "flow:prepop:add", response.stepId, response.value
 
 
+  App.commands.setHandler "survey:edit", (options) ->
+    currentEditId = options.survey_response_id
   App.reqres.setHandler "surveyedit:enabled", ->
     !!currentEditId
 
