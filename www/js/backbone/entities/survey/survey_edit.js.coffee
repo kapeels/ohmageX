@@ -18,6 +18,11 @@
       # those ignore the flow:prepop currentValue entirely.
 
       throw new Error "survey:edit prepopulate() responses not array, type #{typeof responses}" unless _.isArray(responses)
+
+      _.each responses, (response) =>
+        App.execute "flow:prepop:add", response.stepId, response.value
+
+
   App.reqres.setHandler "surveyedit:enabled", ->
     !!currentEditId
 
