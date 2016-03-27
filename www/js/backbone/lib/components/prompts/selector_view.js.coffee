@@ -15,7 +15,7 @@
 
     serializeData: ->
       data = @model.toJSON()
-      console.log 'serializeData data', data
+      # console.log 'serializeData data', data
       if !data.currentValue
         data.currentValue = ''
       data

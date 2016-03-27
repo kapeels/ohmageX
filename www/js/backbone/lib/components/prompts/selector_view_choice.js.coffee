@@ -39,6 +39,32 @@
 
     childViewContainer: ".prompt-list"
 
+
+    getChosenElement: (myChosenValue) ->
+      # SURVEY EDIT - Note
+      #
+      # This method gets around a limitation of prompt defaults.
+      # It's used to prepopulate a custom choice based on its label
+      # if the checkbox value isn't correct.
+      # This creates a possible conflict. If a custom choice prompt
+      # contains a number like "1", for example,
+      # it will select the FIRST item in the list, since there
+      # is no way to distinguish between a custom "1" and a key of "1"
+      # in the history.
+      $result = @$el.find("input[value=\"#{myChosenValue}\"]")
+
+      if !$result.length
+        # unable to find matching value, let's try matching to the label
+        $myLabel = @$el.find("label.canonical > p:contains(\"#{myChosenValue}\")")
+
+        if $myLabel.length
+          # there was a matching LABEL! grab its id
+          resultId = '#'+$myLabel.parent().prop('for')
+
+          $result = @$el.find(resultId)
+
+      $result
+
     selectChosen: (currentValue) ->
       # activate a choice selection based on the currentValueType.
       myChosenValue = switch @model.get('currentValueType')
@@ -51,7 +77,7 @@
           # Just use the raw value.
           currentValue
 
-      @$el.find("input[value='#{myChosenValue}']").prop('checked', true)
+      @getChosenElement(myChosenValue).prop('checked', true)
 
     onRender: ->
       currentValue = @model.get('currentValue')
@@ -107,7 +133,7 @@
           if !Array.isArray(valueParsed)
             # It's not an array, it's a single value.
             # Just set the value immediately.
-            @$el.find("input[value='#{valueParsed}']").prop('checked', true)
+            @getChosenElement(valueParsed).prop('checked', true)
             # We're done here! leave result as an empty array so we
             # don't iterate over it later.
           else
@@ -119,7 +145,7 @@
 
       _.each(chosenArr, (chosenValue) =>
         console.log 'chosenValue', chosenValue
-        @$el.find("input[value='#{chosenValue}']").prop('checked', true)
+        @getChosenElement(chosenValue).prop('checked', true)
       )
 
     getResponseMeta: ->

@@ -28,7 +28,7 @@
         id: stepId
         value: value
 
-  App.vent.on "survey:exit survey:reset", ->
+  App.vent.on "survey:exit survey:reset credentials:cleared", ->
     API.clear()
 
   App.reqres.setHandler "flow:prepop:is:empty", ->

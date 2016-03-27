@@ -12,7 +12,7 @@
       responses.each((response) =>
         myId = response.get 'id'
 
-        myResponse = App.request "response:value:parsed", 
+        myResponse = App.request "response:value:parsed",
           conditionValue: true
           stepId: myId
           addUploadUUIDs: false
@@ -21,7 +21,7 @@
         oldParserResponses
       )
 
-      console.log 'oldParserResponses', @mergeMessagePrompts oldParserResponses
+      # console.log 'oldParserResponses', @mergeMessagePrompts oldParserResponses
 
       trimCondition = rawCondition.replace(/\)\s*(and|or)\s*\(/i, ") $1 (")
       trimCondition = trimCondition.replace(/\s*(==|!=|<=|=>|>|<)\s*/i, " $1 ")

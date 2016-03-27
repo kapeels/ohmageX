@@ -22,7 +22,7 @@
       currentTime = moment().valueOf()
       currentTZ = _.jstz()
 
-      submitSurveys = 
+      submitSurveys =
         survey_key: _.guid()
         time: currentTime
         timezone: currentTZ
@@ -30,6 +30,9 @@
         survey_id: App.request "survey:saved:server_id", surveyId
         survey_launch_context: App.request "survey:launchcontext"
         responses: submitResponses
+
+      if App.request('surveyedit:enabled')
+        submitSurveys.survey_key = App.request('surveyedit:id')
 
       if location
         # if the location status is unavailable,
@@ -47,6 +50,10 @@
         surveys: JSON.stringify([submitSurveys])
         campaign_creation_timestamp: myCampaign.get('creation_timestamp')
         campaign_urn: campaign_urn
+
+      if App.request('surveyedit:enabled')
+        completeSubmit.update = true
+
 
       App.execute "filemeta:move:native", =>
         App.execute "uploader:new", 'survey', completeSubmit, surveyId
