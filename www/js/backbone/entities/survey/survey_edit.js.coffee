@@ -4,6 +4,12 @@
 
   currentEditId = false
 
+  API =
+    prepopulate: (responses) ->
+      # expects responses to be array of objs in format:
+      # stepId: # Id of survey step to prepopulate
+      # value: # value of survey step to prepopulate
+
   App.reqres.setHandler "surveyedit:enabled", ->
     !!currentEditId
 
