@@ -18,6 +18,9 @@
 
         # TODO: for video, document, photo prompt types,
         # add to queue for file caching
+        myValue = switch response.prompt_type
+          else response.prompt_response
+
       ).filter((result) -> !!result).value()
 
       results
