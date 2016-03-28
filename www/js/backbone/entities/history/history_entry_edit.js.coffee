@@ -65,3 +65,8 @@
     editMediaQueue = false
     currentPrepopResponses = false
 
+  App.vent.on "history:edit:queue:all:success", ->
+    App.vent.trigger "loading:hide"
+
+    App.execute "survey:edit",
+      prepop_responses: currentPrepopResponses.toJSON()
