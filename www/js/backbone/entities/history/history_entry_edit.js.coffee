@@ -116,6 +116,13 @@
     App.execute "surveyedit:enable", entry.get('id')
 
     API.processResponses entry.get('responses')
+
+
+  App.vent.on "filemeta:fetch:auto:success", (uuid, context, fileEntry = false) ->
+
+    if App.request "surveyedit:enabled"
+      API.updatePrepopFileResponse uuid, context, fileEntry
+
   App.vent.on "survey:start history:edit:queue:all:error", ->
     App.vent.trigger "loading:hide"
 
