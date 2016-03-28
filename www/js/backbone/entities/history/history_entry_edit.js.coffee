@@ -11,9 +11,6 @@
     processResponses: (surveyId, responses) ->
 
       # reset the entries files queue
-      App.execute "survey:edit",
-        survey_response_id: surveyId
-        prepop_responses: prepop_responses
 
     mapToPrepop: (responses) ->
       # returns an array of objects in following format:
