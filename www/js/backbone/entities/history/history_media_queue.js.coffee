@@ -40,5 +40,5 @@
   App.vent.on "filemeta:fetch:auto:success", (itemId) ->
     currentQueue.get(itemId).set 'fetched', true
 
-  App.vent.on "history:fetch:start", ->
+  App.vent.on "history:fetch:start surveyedit:start", ->
     API.init()
