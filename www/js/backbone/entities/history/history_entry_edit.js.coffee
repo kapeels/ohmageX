@@ -111,6 +111,10 @@
               videoName: fileName
 
   App.commands.setHandler "history:entry:edit", (entry) ->
+    # set edit flag immediately so the entire app is aware
+    # that we're in edit mode
+    App.execute "surveyedit:enable", entry.get('id')
+
     API.processResponses entry.get('responses')
   App.vent.on "survey:start history:edit:queue:all:error", ->
     App.vent.trigger "loading:hide"
