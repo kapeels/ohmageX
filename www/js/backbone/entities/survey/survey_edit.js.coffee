@@ -24,8 +24,7 @@
 
 
   App.commands.setHandler "survey:edit", (options) ->
-    currentEditId = options.survey_response_id
-    entry = App.request("history:entry", options.survey_response_id)
+    entry = App.request("history:entry", currentEditId)
 
     if options.prepop_responses isnt false then API.prepopulate(options.prepop_responses)
 
