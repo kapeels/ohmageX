@@ -25,3 +25,6 @@
             # Check if our value is a base64. If it's not, we know it's a default file URL
             if myResponse.substring(0,10) isnt "data:image"
               removeIds.push(myId)
+          else
+            if myResponse is myPrepopUUID then removeIds.push myId
+
