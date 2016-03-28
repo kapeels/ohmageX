@@ -65,7 +65,7 @@
       # list_icon_type - bases the icon on the contents of the history item
       metaProperties = {}
 
-      if App.custom.functionality.history_eqis_bucketing isnt false and 
+      if App.custom.functionality.history_eqis_bucketing isnt false and
           results.survey_id in App.custom.functionality.history_eqis_bucketing.firstresponse_surveyids
 
         # set the meta property for second list label

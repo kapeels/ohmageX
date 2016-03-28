@@ -24,19 +24,20 @@
 
 
   App.commands.setHandler "survey:edit", (options) ->
-    currentEditId = options.survey_response_id
-    entry = App.request("history:entry", options.survey_response_id)
+    entry = App.request("history:entry", currentEditId)
 
     if options.prepop_responses isnt false then API.prepopulate(options.prepop_responses)
 
     App.navigate "survey/#{entry.get('campaign_urn')}:#{entry.get('survey_id')}", trigger: true
 
-    App.vent.trigger "fullmodal:close"
-
   App.reqres.setHandler "surveyedit:enabled", ->
     !!currentEditId
 
+  App.commands.setHandler "surveyedit:enable", (response_id) ->
+    currentEditId = response_id
+    App.vent.trigger "surveyedit:start", currentEditId
+
   App.reqres.setHandler "surveyedit:id", -> currentEditId
 
-  App.vent.on "survey:exit survey:reset credentials:cleared", ->
+  App.vent.on "history:edit:queue:all:error survey:exit survey:reset credentials:cleared", ->
     currentEditId = false

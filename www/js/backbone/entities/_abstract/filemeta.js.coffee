@@ -83,7 +83,7 @@
               # It exists - the file doesn't have to be
               # downloaded at all! Just trigger success to resolve
               # this queue item.
-              App.vent.trigger "filemeta:fetch:auto:success", uuid, context
+              App.vent.trigger "filemeta:fetch:auto:success", uuid, context, fileEntry
         error: (message) =>
           console.log 'error reading file: ', message
           @deleteReference uuid
@@ -106,8 +106,24 @@
                 console.log 'dialog canceled'
               )
             else
-              # it's automatic, attempt to download with no prompts
-              @downloadMedia uuid, context
+              # it's automatic
+
+              if App.request("surveyedit:enabled") and App.request("system:file:uuid:is:video", uuid)
+                  # DEPENDENCY
+                  # on encoded file extension - see system_file_ext_encoder
+                  # for more details
+                  # Required to make this method portable - when auto-downloading
+                  # videos we MUST prompt the user first.
+
+                  App.execute "dialog:confirm", "A video for this response must be downloaded to this device before editing. Download the video? It may be large and take a long time to download.", (=>
+                    @downloadMedia uuid, context
+                  ), (=>
+                    # they canceled, so trigger an error on this queue item.
+                    App.vent.trigger "filemeta:fetch:auto:error", uuid, context
+                  )
+              else
+                # attempt to download non-videos with no prompts
+                @downloadMedia uuid, context
 
 
     downloadMedia: (uuid, context) ->
@@ -125,7 +141,7 @@
                 App.execute "system:file:uuid:open", uuid, file.type
             else
               # resolve the queue item, download succeeded
-              App.vent.trigger "filemeta:fetch:auto:success", uuid, context
+              App.vent.trigger "filemeta:fetch:auto:success", uuid, context, fileEntry
 
           # add a file meta entry in all cases
           @addFileMeta

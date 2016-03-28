@@ -85,6 +85,8 @@
   App.on "before:start", ->
     if App.device.isNative then API.init()
 
+  App.reqres.setHandler "system:file:path", (uuid) -> API.getFullPath(uuid)
+
   App.commands.setHandler "system:file:uuid:read", (options) ->
     # parameters:
     # uuid

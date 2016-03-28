@@ -60,9 +60,16 @@
       if errorCount is 0
         # success, show success notice
         # App.execute "dialog:alert", "All History images and documents fetched successfully."
+
+        if App.request("surveyedit:enabled") then App.vent.trigger("history:edit:queue:all:success")
+
       else
         # some failed, use errorCount
-        App.execute "dialog:alert", "Unable to fetch #{errorCount} out of #{myLength} images or documents in the History."
+        if App.request "surveyedit:enabled"
+          App.vent.trigger "history:edit:queue:all:error", errorCount, myLength
+        else
+          # not editing, show an error
+          App.execute "dialog:alert", "Unable to fetch #{errorCount} out of #{myLength} images or documents in the History."
 
     queueFailure: (itemId, context) ->
       # the queue events - whether error or success -
@@ -82,6 +89,10 @@
   App.vent.on "history:entries:fetch:storage:success", ->
     if App.custom.functionality.history_auto_refresh and App.request("history:media:queue:length") > 0
       API.downloadAll App.request("history:media:queue")
+
+  App.commands.setHandler "history:media:queue:download", (loadMessage = false) ->
+    if loadMessage isnt false then App.vent.trigger("loading:show", loadMessage)
+    API.downloadAll App.request("history:media:queue")
 
   App.vent.on "filemeta:fetch:auto:success", (itemId) ->
     API.queueSuccess itemId
