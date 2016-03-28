@@ -83,7 +83,7 @@
               # It exists - the file doesn't have to be
               # downloaded at all! Just trigger success to resolve
               # this queue item.
-              App.vent.trigger "filemeta:fetch:auto:success", uuid, context
+              App.vent.trigger "filemeta:fetch:auto:success", uuid, context, fileEntry
         error: (message) =>
           console.log 'error reading file: ', message
           @deleteReference uuid
@@ -125,7 +125,7 @@
                 App.execute "system:file:uuid:open", uuid, file.type
             else
               # resolve the queue item, download succeeded
-              App.vent.trigger "filemeta:fetch:auto:success", uuid, context
+              App.vent.trigger "filemeta:fetch:auto:success", uuid, context, fileEntry
 
           # add a file meta entry in all cases
           @addFileMeta
