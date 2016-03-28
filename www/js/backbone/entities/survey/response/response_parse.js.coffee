@@ -81,6 +81,7 @@
 
           # The value of a file is its UUID before uploading.
           # these will later get attached to the response object as separate properties.
+          if returnUUIDs then return responseValue.UUID
 
           # we only want to add and create File UUIDs in special
           # circumstances, such as survey upload.
