@@ -131,7 +131,7 @@
         $child = $(child)
         myType = $child.tagText('promptType')
         isResponseType = $child.prop('tagName') is 'prompt'
-        if isResponseType 
+        if isResponseType
           return {
             id: $child.tagText('id')
             type: myType
