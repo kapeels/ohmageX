@@ -1,5 +1,5 @@
 <header>
-  <h5><%= @question %></h5>
+  <h5><%= @prompt_text %></h5>
   <i class="fa fa-<%= @icon %>"></i>
 </header>
 <ul>
