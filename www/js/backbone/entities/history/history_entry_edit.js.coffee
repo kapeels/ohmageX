@@ -89,28 +89,20 @@
         if context is 'auto:image'
           myResponse.set 'value', fileEntry.toURL()
         else
+          # pass both doc and video filenames.
+          # No conflicts, they should both work.
+          # FileObj is not passed, because
+          # unchanged uuids should be diffed and skipped
+          # from uploading.
+
           fileURI = App.request("system:file:path",uuid)
           fileName = fileURI.split('/').pop()
-          fileEntry.file (file) =>
-            # pass both doc and video params.
-            # no conflicts, they should both work.
 
-            # NOTE: this assumes that the fileObj passed
-            # from the cordova file system is VALID when
-            # used for an HTML5 uploader. Video and doc
-            # both come from the same file source.
-            # Normally in the doc prompt, fileObj comes from
-            # an HTML5 file input. The uploader entity
-            # detects a doc upload and uses HTML5 to upload
-            # it. Cordova video uses the cordova native uploader.
+          myResponse.set 'value',
+            fileName: fileName
+            UUID: uuid # just use the UUID from the file
+            videoName: fileName
 
-            myResponse.set 'value',
-              fileObj: file
-              fileName: fileName
-              UUID: uuid # just use the UUID from the file
-              fileSize: file.size
-              source: "library"
-              videoName: fileName
 
 
   App.commands.setHandler "history:entry:edit", (entry) ->
