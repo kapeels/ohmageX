@@ -16,3 +16,6 @@
           addUploadUUIDs: false
           returnUUIDs: true
 
+        if myResponse not in [false, 'SKIPPED', 'NOT_DISPLAYED'] and response.get('type') in ['photo', 'document', 'video']
+          # only check submitted media prompts with valid responses,
+
