@@ -51,5 +51,12 @@
   App.reqres.setHandler "system:file:name:is:image", (filename) ->
     API.checkImageExt filename
 
+  App.reqres.setHandler "system:file:uuid:is:video", (uuid) ->
+    uuidExt = App.request "system:file:uuid:ext", uuid
+    # truncate `.` from the front
+    uuidExt = uuidExt.slice 1
+
+    uuidExt in extVideos
+
   App.vent.on "system:file:ext:invalid", (fileName) ->
     App.execute "dialog:alert", "The selected file \"#{fileName}\" does not contain a valid file extension. Please select another file."
