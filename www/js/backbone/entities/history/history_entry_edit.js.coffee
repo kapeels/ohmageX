@@ -118,8 +118,7 @@
     if App.request "surveyedit:enabled"
       API.updatePrepopFileResponse uuid, context, fileEntry
 
-  App.vent.on "survey:start history:edit:queue:all:error", ->
-    App.vent.trigger "loading:hide"
+  App.vent.on "survey:exit survey:reset history:edit:queue:all:error", ->
 
     editMediaQueue = false
     currentPrepopResponses = false
