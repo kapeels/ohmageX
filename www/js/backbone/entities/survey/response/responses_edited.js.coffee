@@ -16,11 +16,13 @@
           stepId: myId
           addUploadUUIDs: false
           returnUUIDs: true
+        matchingPrepopResponse = prepop_responses.findWhere(stepId: myId)
 
-        if myResponse not in [false, 'SKIPPED', 'NOT_DISPLAYED'] and response.get('type') in ['photo', 'document', 'video']
-          # only check submitted media prompts with valid responses,
+        if myResponse not in [false, 'SKIPPED', 'NOT_DISPLAYED'] and response.get('type') in ['photo', 'document', 'video'] and typeof matchingPrepopResponse isnt "undefined"
+          # only check submitted media prompts with valid responses, and only check when there's a matching
+          # prepop response.
 
-          myPrepopUUID = prepop_responses.findWhere(stepId: myId).get('uuid')
+          myPrepopUUID = matchingPrepopResponse.get('uuid')
 
           console.log "****** myPrepopUUID", myPrepopUUID
 
