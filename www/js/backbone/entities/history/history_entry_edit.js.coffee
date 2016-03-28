@@ -59,3 +59,9 @@
 
   App.commands.setHandler "history:entry:edit", (entry) ->
     API.processResponses entry.get('id'), entry.get('responses')
+  App.vent.on "survey:start history:edit:queue:all:error", ->
+    App.vent.trigger "loading:hide"
+
+    editMediaQueue = false
+    currentPrepopResponses = false
+
