@@ -30,7 +30,15 @@
         # add to queue for file caching
         myValue = switch response.prompt_type
           when "multi_choice", "multi_choice_custom" then JSON.stringify(response.prompt_response)
-          when "photo", "document", "video" then false # skip media
+          when "photo", "document", "video"
+            # add to queue for edit auto-download
+            editMediaQueue.push
+              context: if response.prompt_type is 'photo' then 'image' else 'media'
+              id: response.prompt_response
+
+            # set its value to the media uuid
+            # so it can be linked back up with the queue
+            response.prompt_response
           else response.prompt_response
 
         if myValue is false then return false
