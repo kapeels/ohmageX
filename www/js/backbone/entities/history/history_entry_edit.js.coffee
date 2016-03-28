@@ -76,7 +76,7 @@
       # the file auto-download queue, we can extract the
       # properties needed from fileEntry.
 
-      myResponse = currentPrepopResponses.where(value: uuid)
+      myResponse = currentPrepopResponses.findWhere(value: uuid)
 
       if fileEntry is false or !App.device.isNative
         # remove from pre-populating completely
