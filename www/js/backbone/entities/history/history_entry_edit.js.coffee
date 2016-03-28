@@ -5,6 +5,7 @@
 
   editMediaQueue = false
 
+  currentPrepopResponses = false
 
   API =
     processResponses: (surveyId, responses) ->
