@@ -86,6 +86,20 @@
 
         if context is 'auto:image'
           myResponse.set 'value', fileEntry.toURL()
+        else
+          fileURI = App.request("system:file:path",uuid)
+          fileName = fileURI.split('/').pop()
+          fileEntry.file (file) =>
+            # pass both doc and video params.
+            # no conflicts, they should both work.
+            myResponse.set 'value',
+              fileObj: file
+              fileName: fileName
+              UUID: uuid # just use the UUID from the file
+              fileSize: file.size
+              source: "library"
+              videoName: fileName
+
   App.commands.setHandler "history:entry:edit", (entry) ->
     API.processResponses entry.get('id'), entry.get('responses')
   App.vent.on "survey:start history:edit:queue:all:error", ->
