@@ -21,3 +21,7 @@
 
           myPrepopUUID = prepop_responses.findWhere(stepId: myId).get('uuid')
 
+          if response.get('type') is 'photo'
+            # Check if our value is a base64. If it's not, we know it's a default file URL
+            if myResponse.substring(0,10) isnt "data:image"
+              removeIds.push(myId)
