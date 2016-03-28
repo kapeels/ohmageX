@@ -51,8 +51,9 @@
 
       # returns false if there are no valid responses.
       if results.length is 0 then return false
+      new Entities.Collection results
 
-      results
+
 
   App.commands.setHandler "history:entry:edit", (entry) ->
     API.processResponses entry.get('id'), entry.get('responses')
