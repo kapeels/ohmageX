@@ -112,6 +112,9 @@
 
     API.processResponses entry.get('responses')
 
+  App.reqres.setHandler "history:edit:prepop:responses", ->
+    currentPrepopResponses
+
 
   App.vent.on "filemeta:fetch:auto:success", (uuid, context, fileEntry = false) ->
 
