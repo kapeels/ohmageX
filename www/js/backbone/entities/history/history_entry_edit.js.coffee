@@ -8,7 +8,7 @@
   currentPrepopResponses = false
 
   API =
-    processResponses: (surveyId, responses) ->
+    processResponses: (responses) ->
 
       # reset the entries files queue
 
