@@ -11,6 +11,11 @@
     processResponses: (responses) ->
 
       # reset the entries files queue
+      editMediaQueue = []
+      currentPrepopResponses = false
+
+      currentPrepopResponses = API.mapToPrepop responses
+
 
     mapToPrepop: (responses) ->
       # returns an array of objects in following format:
