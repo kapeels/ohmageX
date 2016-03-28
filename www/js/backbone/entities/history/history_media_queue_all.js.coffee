@@ -65,7 +65,11 @@
 
       else
         # some failed, use errorCount
-        App.execute "dialog:alert", "Unable to fetch #{errorCount} out of #{myLength} images or documents in the History."
+        if App.request "surveyedit:enabled"
+          App.vent.trigger "history:edit:queue:all:error", errorCount, myLength
+        else
+          # not editing, show an error
+          App.execute "dialog:alert", "Unable to fetch #{errorCount} out of #{myLength} images or documents in the History."
 
     queueFailure: (itemId, context) ->
       # the queue events - whether error or success -
