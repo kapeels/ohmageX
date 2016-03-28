@@ -83,6 +83,10 @@
     if App.custom.functionality.history_auto_refresh and App.request("history:media:queue:length") > 0
       API.downloadAll App.request("history:media:queue")
 
+  App.commands.setHandler "history:media:queue:download", (loadMessage = false) ->
+    if loadMessage isnt false then App.vent.trigger("loading:show", loadMessage)
+    API.downloadAll App.request("history:media:queue")
+
   App.vent.on "filemeta:fetch:auto:success", (itemId) ->
     API.queueSuccess itemId
 
