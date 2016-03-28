@@ -66,7 +66,15 @@
       if results.length is 0 then return false
       new Entities.Collection results
 
+    updatePrepopFileResponse: (uuid, context, fileEntry) ->
+      # this method converts a file-based prepop response
+      # from a uuid to an actual format that is needed for
+      # prepopulating an image, doc, or video prompt.
+      # since we have access to the file info when processing
+      # the file auto-download queue, we can extract the
+      # properties needed from fileEntry.
 
+      myResponse = currentPrepopResponses.where(value: uuid)
 
   App.commands.setHandler "history:entry:edit", (entry) ->
     API.processResponses entry.get('id'), entry.get('responses')
