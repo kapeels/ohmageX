@@ -34,6 +34,10 @@
   App.reqres.setHandler "surveyedit:enabled", ->
     !!currentEditId
 
+  App.commands.setHandler "surveyedit:enable", (response_id) ->
+    currentEditId = response_id
+    App.vent.trigger "surveyedit:start", currentEditId
+
   App.reqres.setHandler "surveyedit:id", -> currentEditId
 
   App.vent.on "survey:exit survey:reset credentials:cleared", ->
