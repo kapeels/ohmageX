@@ -92,6 +92,16 @@
           fileEntry.file (file) =>
             # pass both doc and video params.
             # no conflicts, they should both work.
+
+            # NOTE: this assumes that the fileObj passed
+            # from the cordova file system is VALID when
+            # used for an HTML5 uploader. Video and doc
+            # both come from the same file source.
+            # Normally in the doc prompt, fileObj comes from
+            # an HTML5 file input. The uploader entity
+            # detects a doc upload and uses HTML5 to upload
+            # it. Cordova video uses the cordova native uploader.
+
             myResponse.set 'value',
               fileObj: file
               fileName: fileName
