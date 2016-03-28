@@ -24,10 +24,8 @@
         App.execute "history:media:queue:add", editMediaQueue
         App.execute "history:media:queue:download", "Fetching required files for editing..."
       else
-        App.vent.trigger 'history:edit:queue:all:success'
         # no items to queue, just get the responses going.
-        App.execute "survey:edit",
-          prepop_responses: currentPrepopResponses.toJSON()
+        App.vent.trigger 'history:edit:queue:all:success'
 
     mapToPrepop: (responses) ->
       # returns an array of objects in following format:
