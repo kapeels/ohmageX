@@ -8,3 +8,11 @@
       # removes the responses that haven't changed.
       # Only filters photo, document, and video prompts.
 
+      responses.each (response) =>
+        myId = response.get('id')
+        myResponse = App.request "response:value:parsed",
+          conditionValue: false
+          stepId: myId
+          addUploadUUIDs: false
+          returnUUIDs: true
+
