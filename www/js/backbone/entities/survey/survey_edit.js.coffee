@@ -40,5 +40,5 @@
 
   App.reqres.setHandler "surveyedit:id", -> currentEditId
 
-  App.vent.on "survey:exit survey:reset credentials:cleared", ->
+  App.vent.on "history:edit:queue:all:error survey:exit survey:reset credentials:cleared", ->
     currentEditId = false
