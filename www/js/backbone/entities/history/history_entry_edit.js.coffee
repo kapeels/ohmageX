@@ -111,7 +111,7 @@
               videoName: fileName
 
   App.commands.setHandler "history:entry:edit", (entry) ->
-    API.processResponses entry.get('id'), entry.get('responses')
+    API.processResponses entry.get('responses')
   App.vent.on "survey:start history:edit:queue:all:error", ->
     App.vent.trigger "loading:hide"
 
