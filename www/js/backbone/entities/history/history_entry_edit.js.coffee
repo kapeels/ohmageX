@@ -60,6 +60,7 @@
         return {
           stepId: response.id
           value: myValue
+          uuid: if response.prompt_type in ["photo", "document", "video"] then myValue
         }
       ).filter((result) -> !!result).value()
 
