@@ -17,6 +17,11 @@
     uploadSurvey: (options) ->
       { currentResponses, location, surveyId } = options
 
+      if App.request("surveyedit:enabled")
+        App.execute "responses:overwrite", App.request('responses:edited')
+        currentResponses = App.request('responses:current')
+
+
       submitResponses = @prepResponseUpload currentResponses
 
       currentTime = moment().valueOf()
