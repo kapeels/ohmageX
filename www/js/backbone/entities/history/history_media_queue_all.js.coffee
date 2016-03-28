@@ -60,6 +60,9 @@
       if errorCount is 0
         # success, show success notice
         # App.execute "dialog:alert", "All History images and documents fetched successfully."
+
+        if App.request("surveyedit:enabled") then App.vent.trigger("history:edit:queue:all:success")
+
       else
         # some failed, use errorCount
         App.execute "dialog:alert", "Unable to fetch #{errorCount} out of #{myLength} images or documents in the History."
