@@ -16,6 +16,12 @@
 
       currentPrepopResponses = API.mapToPrepop responses
 
+      if editMediaQueue.length > 0
+        # We have items to queue up for auto-download.
+        # Edit mode is enabled, so this queue should
+        # request confirmation before downloading videos.
+        App.execute "history:media:queue:add", editMediaQueue
+        App.execute "history:media:queue:download", "Fetching required files for editing..."
 
     mapToPrepop: (responses) ->
       # returns an array of objects in following format:
