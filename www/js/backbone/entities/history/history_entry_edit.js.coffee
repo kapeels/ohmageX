@@ -82,6 +82,10 @@
         # or in browser mode
         currentPrepopResponses.remove myResponse
 
+      else
+
+        if context is 'auto:image'
+          myResponse.set 'value', fileEntry.toURL()
   App.commands.setHandler "history:entry:edit", (entry) ->
     API.processResponses entry.get('id'), entry.get('responses')
   App.vent.on "survey:start history:edit:queue:all:error", ->
