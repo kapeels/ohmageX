@@ -22,13 +22,21 @@
 
           myPrepopUUID = prepop_responses.findWhere(stepId: myId).get('uuid')
 
+          console.log "****** myPrepopUUID", myPrepopUUID
+
           if response.get('type') is 'photo'
             # Check if our value is a base64. If it's not, we know it's a default file URL
             if myResponse.substring(0,10) isnt "data:image"
               removeIds.push(myId)
+              console.log "***** it's a prepop photo"
+            console.log "****** myResponse", myResponse
           else
+            console.log "****** myId", myId
+
+            console.log "****** myResponse", myResponse
             if myResponse is myPrepopUUID then removeIds.push myId
 
+      console.log "****** removeIds", removeIds
 
       # remove all of our matching removeIds
       _.each removeIds, (removeId) => responses.remove responses.get(removeId)
