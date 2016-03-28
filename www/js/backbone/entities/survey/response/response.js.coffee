@@ -183,6 +183,9 @@
   App.reqres.setHandler "responses:current", ->
     API.getResponses()
 
+  App.commands.setHandler "responses:overwrite", (newResponses) ->
+    currentResponses = newResponses
+
   App.reqres.setHandler "responses:current:flow", ->
     API.getResponsesWithFlow()
 
