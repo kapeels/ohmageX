@@ -31,10 +31,11 @@
     parseValueByType: (options) ->
       _.defaults options,
         conditionValue: false
+        returnUUIDs: false
         # condition value returns a value optimized for conditional parsing
         # instead of the survey upload value.
 
-      { responseValue, type, addUploadUUIDs, conditionValue } = options
+      { responseValue, type, addUploadUUIDs, conditionValue, returnUUIDs } = options
 
       switch type
         when 'single_choice'
@@ -105,7 +106,7 @@
           return responseValue
 
     parseValue: (options) ->
-      { stepId, myResponse, addUploadUUIDs, conditionValue } = options
+      { stepId, myResponse, addUploadUUIDs, conditionValue, returnUUIDs } = options
 
       if App.request("flow:status", stepId) is 'complete'
         return @parseValueByType
@@ -113,6 +114,7 @@
           type: myResponse.get 'type'
           addUploadUUIDs: addUploadUUIDs
           conditionValue: conditionValue
+          returnUUIDs: returnUUIDs
       else
         return @parseInvalidToValue App.request("flow:status", stepId), myResponse.get('response'), options.stepId
 
