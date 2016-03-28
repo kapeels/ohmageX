@@ -8,6 +8,7 @@
       # removes the responses that haven't changed.
       # Only filters photo, document, and video prompts.
 
+      removeIds = []
       responses.each (response) =>
         myId = response.get('id')
         myResponse = App.request "response:value:parsed",
@@ -27,4 +28,8 @@
               removeIds.push(myId)
           else
             if myResponse is myPrepopUUID then removeIds.push myId
+
+
+      # remove all of our matching removeIds
+      _.each removeIds, (removeId) => responses.remove responses.get(removeId)
 
