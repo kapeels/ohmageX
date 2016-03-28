@@ -76,6 +76,12 @@
 
       myResponse = currentPrepopResponses.where(value: uuid)
 
+      if fileEntry is false or !App.device.isNative
+        # remove from pre-populating completely
+        # if no valid file entry is provided
+        # or in browser mode
+        currentPrepopResponses.remove myResponse
+
   App.commands.setHandler "history:entry:edit", (entry) ->
     API.processResponses entry.get('id'), entry.get('responses')
   App.vent.on "survey:start history:edit:queue:all:error", ->
