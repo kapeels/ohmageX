@@ -16,6 +16,7 @@
 
       currentPrepopResponses = API.mapToPrepop responses
 
+      console.log "****** currentPrepopResponses.toJSON()", currentPrepopResponses.toJSON()
       if editMediaQueue.length > 0
         # We have items to queue up for auto-download.
         # Edit mode is enabled, so this queue should
@@ -64,6 +65,7 @@
 
       # returns false if there are no valid responses.
       if results.length is 0 then return false
+      console.log "****** results", results
       new Entities.Collection results
 
     updatePrepopFileResponse: (uuid, context, fileEntry) ->
@@ -109,6 +111,7 @@
               fileSize: file.size
               source: "library"
               videoName: fileName
+
 
   App.commands.setHandler "history:entry:edit", (entry) ->
     # set edit flag immediately so the entire app is aware
