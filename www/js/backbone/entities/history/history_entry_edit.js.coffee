@@ -9,20 +9,6 @@
     processResponses: (surveyId, responses) ->
 
       # reset the entries files queue
-      entriesFilesQueue = false
-
-      prepop_responses = API.mapToPrepop responses
-
-      # document/video response - file must be converted to an HTML5 fileObj
-      # photo - file must be converted to base64
-      #
-      # queue entries:
-      # uuid: response.prompt_response
-      # type: response.prompt_type - used to switch between converting to fileObj or base64 (photo)
-      # stepId: response.id
-
-      # no file queue yet, just call the survey edit directly
-      # this is the event that would fire when the queue resolves.
       App.execute "survey:edit",
         survey_response_id: surveyId
         prepop_responses: prepop_responses
