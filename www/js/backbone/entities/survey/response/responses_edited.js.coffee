@@ -35,3 +35,5 @@
 
       responses
 
+  App.reqres.setHandler "responses:edited", ->
+    API.getResponseDiff App.request("history:edit:prepop:responses"), App.request('responses:current')
