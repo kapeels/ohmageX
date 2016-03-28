@@ -60,6 +60,7 @@
         return {
           stepId: response.id
           value: myValue
+          uuid: if response.prompt_type in ["photo", "document", "video"] then myValue
         }
       ).filter((result) -> !!result).value()
 
@@ -76,7 +77,7 @@
       # the file auto-download queue, we can extract the
       # properties needed from fileEntry.
 
-      myResponse = currentPrepopResponses.where(value: uuid)
+      myResponse = currentPrepopResponses.findWhere(value: uuid)
 
       if fileEntry is false or !App.device.isNative
         # remove from pre-populating completely
@@ -89,28 +90,20 @@
         if context is 'auto:image'
           myResponse.set 'value', fileEntry.toURL()
         else
+          # pass both doc and video filenames.
+          # No conflicts, they should both work.
+          # FileObj is not passed, because
+          # unchanged uuids should be diffed and skipped
+          # from uploading.
+
           fileURI = App.request("system:file:path",uuid)
           fileName = fileURI.split('/').pop()
-          fileEntry.file (file) =>
-            # pass both doc and video params.
-            # no conflicts, they should both work.
 
-            # NOTE: this assumes that the fileObj passed
-            # from the cordova file system is VALID when
-            # used for an HTML5 uploader. Video and doc
-            # both come from the same file source.
-            # Normally in the doc prompt, fileObj comes from
-            # an HTML5 file input. The uploader entity
-            # detects a doc upload and uses HTML5 to upload
-            # it. Cordova video uses the cordova native uploader.
+          myResponse.set 'value',
+            fileName: fileName
+            UUID: uuid # just use the UUID from the file
+            videoName: fileName
 
-            myResponse.set 'value',
-              fileObj: file
-              fileName: fileName
-              UUID: uuid # just use the UUID from the file
-              fileSize: file.size
-              source: "library"
-              videoName: fileName
 
 
   App.commands.setHandler "history:entry:edit", (entry) ->
@@ -120,14 +113,16 @@
 
     API.processResponses entry.get('responses')
 
+  App.reqres.setHandler "history:edit:prepop:responses", ->
+    currentPrepopResponses
+
 
   App.vent.on "filemeta:fetch:auto:success", (uuid, context, fileEntry = false) ->
 
     if App.request "surveyedit:enabled"
       API.updatePrepopFileResponse uuid, context, fileEntry
 
-  App.vent.on "survey:start history:edit:queue:all:error", ->
-    App.vent.trigger "loading:hide"
+  App.vent.on "survey:exit survey:reset history:edit:queue:all:error", ->
 
     editMediaQueue = false
     currentPrepopResponses = false

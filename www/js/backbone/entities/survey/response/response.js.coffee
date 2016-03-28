@@ -131,7 +131,7 @@
         $child = $(child)
         myType = $child.tagText('promptType')
         isResponseType = $child.prop('tagName') is 'prompt'
-        if isResponseType 
+        if isResponseType
           return {
             id: $child.tagText('id')
             type: myType
@@ -182,6 +182,9 @@
 
   App.reqres.setHandler "responses:current", ->
     API.getResponses()
+
+  App.commands.setHandler "responses:overwrite", (newResponses) ->
+    currentResponses = newResponses
 
   App.reqres.setHandler "responses:current:flow", ->
     API.getResponsesWithFlow()

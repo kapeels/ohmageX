@@ -8,7 +8,7 @@
   # References the current Response ResponseCollection object, defined in response.js.coffee
   # via the interface "responses:current"
 
-  API = 
+  API =
     parseInvalidToValue: (myStatus, responseValue, stepId) ->
       # convert invalid responses (such as false or incomplete)
       # into equivalents required by the server,
@@ -31,10 +31,11 @@
     parseValueByType: (options) ->
       _.defaults options,
         conditionValue: false
+        returnUUIDs: false
         # condition value returns a value optimized for conditional parsing
         # instead of the survey upload value.
 
-      { responseValue, type, addUploadUUIDs, conditionValue } = options
+      { responseValue, type, addUploadUUIDs, conditionValue, returnUUIDs } = options
 
       switch type
         when 'single_choice'
@@ -68,6 +69,7 @@
 
           # we only want to add and create Image UUIDs in special
           # circumstances, such as survey upload.
+
           if !addUploadUUIDs then return responseValue
 
           App.execute "survey:images:add", responseValue
@@ -79,6 +81,7 @@
 
           # The value of a file is its UUID before uploading.
           # these will later get attached to the response object as separate properties.
+          if returnUUIDs then return responseValue.UUID
 
           # we only want to add and create File UUIDs in special
           # circumstances, such as survey upload.
@@ -92,6 +95,7 @@
 
           # The value of a file is its UUID before uploading.
           # these will later get attached to the response object as separate properties.
+          if returnUUIDs then return responseValue.UUID
 
           # we only want to add and create File UUIDs in special
           # circumstances, such as survey upload.
@@ -104,7 +108,7 @@
           return responseValue
 
     parseValue: (options) ->
-      { stepId, myResponse, addUploadUUIDs, conditionValue } = options
+      { stepId, myResponse, addUploadUUIDs, conditionValue, returnUUIDs } = options
 
       if App.request("flow:status", stepId) is 'complete'
         return @parseValueByType
@@ -112,6 +116,7 @@
           type: myResponse.get 'type'
           addUploadUUIDs: addUploadUUIDs
           conditionValue: conditionValue
+          returnUUIDs: returnUUIDs
       else
         return @parseInvalidToValue App.request("flow:status", stepId), myResponse.get('response'), options.stepId
 
