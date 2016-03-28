@@ -10,6 +10,9 @@
       @listenTo App.vent, 'history:entry:remove:success', (entry) =>
         if entry.get('id') is @entry_id then App.vent.trigger("fullmodal:close")
 
+      @listenTo App.vent, "history:edit:queue:all:success", ->
+        App.vent.trigger "fullmodal:close"
+
       entry = App.request "history:entry", @entry_id
 
       @layout = @getLayoutView entry
