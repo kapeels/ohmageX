@@ -8,7 +8,7 @@
   # References the current Response ResponseCollection object, defined in response.js.coffee
   # via the interface "responses:current"
 
-  API = 
+  API =
     parseInvalidToValue: (myStatus, responseValue, stepId) ->
       # convert invalid responses (such as false or incomplete)
       # into equivalents required by the server,
@@ -68,6 +68,7 @@
 
           # we only want to add and create Image UUIDs in special
           # circumstances, such as survey upload.
+
           if !addUploadUUIDs then return responseValue
 
           App.execute "survey:images:add", responseValue
