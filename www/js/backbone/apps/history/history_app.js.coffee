@@ -76,7 +76,8 @@
     App.execute "notice:show",
       data:
         title: "Edit this Response"
-        description: "Changes to this #{App.dictionary('page','survey')} response will be saved after finishing Submit and pressing the Done button. Exiting before Submit finishes will cancel editing and discard any changes. Select OK to start editing."
+        description: "Changes will be saved only after the #{App.dictionary('page','survey')} is (re)submitted. Exiting before submitting the #{App.dictionary('page','survey')} will discard any changes. Select OK to start editing."
+
         showCancel: true
       okListener: =>
         App.execute "history:entry:edit", model
