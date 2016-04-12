@@ -4,13 +4,13 @@
     <!-- <p><%= @survey.description %></p> -->
     <p><%= @campaign.name %></p>
     <footer>
-      <% if @locationExists: %>
-        <small class="location"><strong>Location:</strong> <span><strong>lat</strong> <%= @location.latitude %></span>, <span><strong>long</strong> <%= @location.longitude %></span></small><br />
-      <% end %>
       <div class="icon-box">
         <button type="button" class="edit-pencil icon">Edit</button>
         <button type="button" class="delete icon">Discard</button>
       </div>
+      <% if @locationExists: %>
+        <small class="location"><strong>Location:</strong> <span><strong>lat</strong> <%= @location.latitude %></span>, <span><strong>long</strong> <%= @location.longitude %></span></small><br />
+      <% end %>
       <small>Timestamp: <%= @prettyTimestamp %></small><br />
     </footer>
   </div>
