@@ -118,7 +118,7 @@
   class Entry.Details extends App.Views.ItemView
     template: "history/entry/details"
     triggers:
-      "click button.edit": "edit:clicked"
+      "click button.edit-pencil": "edit:clicked"
       "click button.delete": "delete:clicked"
     serializeData: ->
       data = @model.toJSON()
