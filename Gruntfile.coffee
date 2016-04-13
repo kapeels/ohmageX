@@ -192,9 +192,9 @@ module.exports = (grunt) ->
         options:
           command: "plugin"
           action: "add"
-          plugins: [ 
-            "camera", 
-            "console", 
+          plugins: [
+            "camera",
+            "console",
             "device",
             "device-orientation",
             "dialogs",
@@ -286,7 +286,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks "grunt-contrib-uglify"
   grunt.loadNpmTasks "grunt-contrib-copy"
   grunt.loadNpmTasks "grunt-exec"
-  
+
   # Here grunt-template is used to allow grunt to generate alternate index.html for different environments.
   grunt.loadNpmTasks "grunt-template"
 
