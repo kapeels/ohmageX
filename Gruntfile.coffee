@@ -263,6 +263,9 @@ module.exports = (grunt) ->
       android_build:
         cmd: "adb uninstall <%= appConfig.build.bundle_id %>;../node_modules/cordova/bin/cordova run android"
         cwd: "<%= cordova_project_folder %>"
+      android_release:
+        cmd: "../node_modules/cordova/bin/cordova build android --release"
+        cwd: "<%= cordova_project_folder %>"
       android_theme_fix:
         cmd: "sed -i '' 's|android:theme=\"@android:style/Theme.Black.NoTitleBar\"||g' AndroidManifest.xml"
         cwd: "<%= cordova_project_folder %>/platforms/android"
