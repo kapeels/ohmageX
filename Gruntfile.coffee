@@ -398,6 +398,20 @@ module.exports = (grunt) ->
     "exec:android_build" # must pass it through a custom exec to change cwd
   ]
 
+  grunt.registerTask "android_www_release", [
+    "webblocks_build"
+    "dev"
+    "clean:hybrid_build"
+    "copy:hybrid_build"
+    "clean:cordova_www"
+    "copy:cordova_www"
+    "template:cordova_config"
+    "clean:cordova_config"
+    "copy:cordova_config"
+    "exec:android_release"
+  ]
+
+
   grunt.registerTask "jenkins_build", [
     "dev"
     "clean:hybrid_build"
