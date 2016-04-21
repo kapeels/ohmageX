@@ -3,6 +3,9 @@
     "client_base_string": "mobilizex-",
     "token_redirect": "/#login"
   },
+  "auth": {
+    "keycloak_enabled": false
+  },
   "build": {
     "app_name": "UCLA MobilizingCS",
     "bundle_id": "org.mobilizingcs.mobilize",

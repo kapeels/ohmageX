@@ -3,6 +3,9 @@
     "client_base_string": "ohmagex-",
     "token_redirect": "../web/#login"
   },
+  "auth": {
+    "keycloak_enabled": false
+  },
   "build": {
     "app_name": "ohmageX",
     "bundle_id": "org.ohmage.x.ohmage",
