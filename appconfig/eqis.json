@@ -3,6 +3,9 @@
     "client_base_string": "eqisx-",
     "token_redirect": "../web/#login"
   },
+  "auth": {
+    "keycloak_enabled": false
+  },
   "build": {
     "app_name": "e-QIS",
     "bundle_id": "org.ohmage.x.eqis",
