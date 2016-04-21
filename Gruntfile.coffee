@@ -231,6 +231,7 @@ module.exports = (grunt) ->
           { expand: true, cwd: 'www/', src: ['js/vendor/**'], dest: "<%= hybrid_build_folder %>" }
           { expand: true, cwd: 'www/', src: ["js/<%= pkg.name %>.js"], dest: "<%= hybrid_build_folder %>/" }
           { expand: true, cwd: 'www/', src: ['index.html'], dest: "<%= hybrid_build_folder %>/" }
+          { expand: true, cwd: 'www/', src: ['keycloak.json'], dest: "<%= hybrid_build_folder %>/" }
         ]
       cordova_www:
         files: [
