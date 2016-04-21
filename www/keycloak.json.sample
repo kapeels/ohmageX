@@ -1,0 +1,8 @@
+{
+  "realm": "replace-these-placeholders",
+  "realm-public-key": "key",
+  "auth-server-url": "https://rename-this-file-to-keycloak.json/auth",
+  "ssl-required": "external",
+  "resource": "cordova",
+  "public-client": true
+}
