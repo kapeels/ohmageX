@@ -63,6 +63,9 @@ www-mobile
 ###############################
 /appconfig/*-dev.json
 
+# auth files #
+##############
+/www/keycloak.json
 
 # editor and local reference files #
 ####################################
