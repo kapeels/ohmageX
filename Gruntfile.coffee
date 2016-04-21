@@ -12,6 +12,7 @@ module.exports = (grunt) ->
     ]
     my_build_files: [
       "<%= web_root_folder %>/.blocks/build/blocks.js"
+      "<%= web_root_folder %>/js/vendor/keycloak.js"
       "<%= web_root_folder %>/js/vendor/underscore.js"
       "<%= web_root_folder %>/js/vendor/backbone.js"
       "<%= web_root_folder %>/js/vendor/fastclick.js"
