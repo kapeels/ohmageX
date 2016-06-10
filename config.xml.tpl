@@ -70,4 +70,6 @@
         </feature>
     </platform>
     <access origin="*" />
+    <allow-intent href="*" />
+    <allow-navigation href="*" />
 </widget>
