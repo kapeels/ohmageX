@@ -17,7 +17,10 @@
       console.log "openLink to #{targetHref}"
 
       if App.device.isNative
-        window.open targetHref, '_system'
+        console.log 'targetHref' + targetHref
+        targetLocation = if device.platform is "Android" then '_system' else '_blank'
+        console.log 'targetLocation', targetLocation
+        cordova.InAppBrowser.open targetHref, targetLocation, '' #, 'toolbar=no'
       else
         window.open targetHref, '_blank'
 
@@ -74,7 +77,7 @@
       # all the selected values and return that.
       notificationIds = _.map @$el.find('input:checked'), (myInput) ->
         return $(myInput).val()
-      if notificationIds.length > 0 
+      if notificationIds.length > 0
         @collection.trigger("suppress", notificationIds)
         @trigger "suppress:notifications", notificationIds
     className: "text-container"
