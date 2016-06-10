@@ -84,9 +84,9 @@
     "help": "https://web.ohmage.org/ohmage/ohmagex-help.html"
   },
   "server_list": {
-    "custom": false,
+    "custom": true,
     "servers": [
-      "https://lausd.mobilizingcs.org",
+      "https://mobilize.lausd.net",
       "https://sandbox.mobilizingcs.org"
     ]
   },
