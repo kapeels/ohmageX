@@ -37,7 +37,7 @@ qaSummary () {
 
   echo -e "QA Summary\n\n"
   echo "***********"
-  echo -e "$LatestXCARoot iOS Build\n\n"
+  echo -e "$LatestXCARoot iOS Build\nProvisioning Profile: $ProvProfName\nScheme: $SchemeName\n\n"
   echo -e "Latest Build. The current fixes are ready for testing. Please review. \n\n"
 
   echo -e "Most Recent Commits\n"
