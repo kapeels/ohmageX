@@ -272,6 +272,9 @@ module.exports = (grunt) ->
       android_theme_fix:
         cmd: "sed -i '' 's|android:theme=\"@android:style/Theme.Black.NoTitleBar\"||g' AndroidManifest.xml"
         cwd: "<%= cordova_project_folder %>/platforms/android"
+      android_gradle_fix:
+        cmd: "sed -i '' 's|privateHelpers.extractIntFromManifest(\"versionCode\") + \"0\"|privateHelpers.extractIntFromManifest(\"versionCode\")|g' build.gradle"
+        cwd: "<%= cordova_project_folder %>/platforms/android"
 
   grunt.loadNpmTasks "grunt-contrib-clean"
   grunt.loadNpmTasks "grunt-contrib-coffee"
