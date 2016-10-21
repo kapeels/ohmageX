@@ -26,5 +26,14 @@
     "grunt-exec": "^0.4.6",
     "grunt-template": "^0.2.3",
     "grunt-template-module": "^0.3.2"
+  },
+  "scripts": {
+    "init-mobile": "./node_modules/grunt-cli/bin/grunt mobile_firstrun",
+    "build-styles": "./node_modules/grunt-cli/bin/grunt webblocks_build",
+    "build-ios": "./node_modules/grunt-cli/bin/grunt ios_www_build",
+    "build-android": "./node_modules/grunt-cli/bin/grunt android_www_build",
+    "release-android": "./node_modules/grunt-cli/bin/grunt android_www_release",
+    "debug-watch": "./node_modules/grunt-cli/bin/grunt",
+    "debug-dev": "./node_modules/grunt-cli/bin/grunt dev"
   }
 }
