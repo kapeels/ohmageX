@@ -401,6 +401,7 @@ module.exports = (grunt) ->
     "template:cordova_config"
     "clean:cordova_config"
     "copy:cordova_config"
+    "exec:android_gradle_fix" # fix build gradle error in android
     "exec:android_build" # must pass it through a custom exec to change cwd
   ]
 
