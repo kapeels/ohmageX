@@ -58,10 +58,12 @@
   },
   "menu_items_disabled": {
     "native": [
-      "dashboardeqis"
+      "dashboardeqis",
+      "history"
     ],
     "browser": [
       "dashboardeqis",
+      "history",
       "profile",
       "reminder",
       "logout"
@@ -90,7 +92,7 @@
   },
   "functionality": {
     "internal_links_enabled": false,
-    "post_survey_reminders_disabled": false,
+    "post_survey_reminders_disabled": true,
     "multi_question_survey_flow": false,
     "history_auto_refresh": false,
     "history_eqis_bucketing": false
