@@ -194,7 +194,8 @@ module.exports = (grunt) ->
           command: "plugin"
           action: "add"
           plugins: [
-            "camera",
+            # "camera", once the camera plugin is fixed you can un comment this see issue #198 in the camera repo
+            "https://github.com/ucla/cordova-plugin-camera.git",
             "console",
             "device",
             "device-orientation",
@@ -208,6 +209,7 @@ module.exports = (grunt) ->
             "splashscreen",
             "org.apache.cordova.file-transfer",
             "cordova-plugin-whitelist",
+            "cordova-plugin-video-editor",
             "https://github.com/wrenr/cordova-plugin-openfilenative.git",
             "https://github.com/ucla/cordova-plugin-local-notifications.git"
           ]
